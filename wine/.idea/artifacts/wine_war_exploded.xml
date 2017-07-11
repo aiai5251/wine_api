@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="wine:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/wine_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="wine_api" />
+          <element id="module-output" name="wine" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-4.3.9.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-4.3.9.RELEASE" />
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+          <element id="library" level="project" name="commons-dbcp:commons-dbcp:1.2.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="wine/web/Web" />
+    </root>
+  </artifact>
+</component>
