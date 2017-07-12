@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminDao {
     /// 新增（注册）管理员
-    AdminBean registeAdmin(@Param("phone") String phone, @Param("password") String password);
+    AdminBean signInAdmin(@Param("phone") String phone, @Param("password") String password);
     /// 通过账号、密码获取管理员信息
     AdminBean getAdmin(@Param("phone") String phone, @Param("password") String password);
     /// 通过用户Id获取管理员信息

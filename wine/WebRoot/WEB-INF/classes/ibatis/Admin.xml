@@ -9,7 +9,7 @@
     </resultMap>
 
     <!--新增（注册）-->
-    <insert id="signInAdmin">
+    <insert id="registeAdmin">
         INSERT INTO admin_list(phone, password) VALUES(#{phone}, #{password})
     </insert>
     <!--登录（获取管理员信息）-->
