@@ -30,9 +30,19 @@
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <!-- MyBatis 映射文件路径配置 -->
-        <property name="mapperLocations" value="classpath:/ibatis/*.xml" />
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:/ibatis/wine/*.xml</value>
+                <value>classpath:/ibatis/admin/*.xml</value>
+            </list>
+        </property>
         <!-- MyBatis 类型关联包路径配置 -->
-        <property name="typeAliasesPackage" value="com.chimu.wine.bean" />
+        <!--<property name="typeAliasesPackage">-->
+            <!--<array>-->
+                <!--<value>com.chimu.wine.bean</value>-->
+                <!--<value>com.chimu.admin.bean</value>-->
+            <!--</array>-->
+        <!--</property>-->
     </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->

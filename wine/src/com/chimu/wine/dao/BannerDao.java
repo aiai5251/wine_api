@@ -6,11 +6,14 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface BannerDao {
-    List<BannerBean> banner_list_select();
+    List<BannerBean> getBannerList();
 
-//    通过id，查找当前的banner数据
-    BannerBean byId(@Param("id")Integer id);
+//  通过id，查找当前的banner数据
+    BannerBean getBannerWithId(@Param("id")Integer id);
 
-//    添加一个banner
-    int add(BannerBean bannerBean);
+//  添加一个banner
+    int addBanner(BannerBean bannerBean);
+
+//  修改一个banner
+    BannerBean modifyBanner(BannerBean bannerBean);
 }

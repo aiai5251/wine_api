@@ -2,7 +2,6 @@ package com.chimu.wine.service;
 
 import com.chimu.wine.bean.BannerBean;
 import com.chimu.wine.dao.BannerDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,24 +10,24 @@ import java.util.List;
 public class BannerService {
     private BannerDao bannerDao;
 
-//    public List<BannerBean> getBannerList() {
-////        List<BannerBean> banners = bannerDao.banner_list_select();
-////        System.out.print(banners);
-////        return banners;
-//        return nil;
-//    }
-
-    @Autowired()
-    public void setBannerDao(BannerDao bannerDao) {
+    public BannerService(BannerDao bannerDao) {
         this.bannerDao = bannerDao;
     }
 
+//    @Autowired()
+//    public void setBannerDao(BannerDao bannerDao) {
+//        this.bannerDao = bannerDao;
+//    }
+
     public int add(BannerBean bannerBean){
-        return bannerDao.add(bannerBean);
+        return bannerDao.addBanner(bannerBean);
     }
 
-    public BannerBean byId(Integer id) {
-        System.out.print("asassa = " + id);
-        return bannerDao.byId(id);
+    public List<BannerBean> getBannerList() {
+        return bannerDao.getBannerList();
+    }
+
+    public BannerBean getBannerWithId(Integer id) {
+        return bannerDao.getBannerWithId(id);
     }
 }
