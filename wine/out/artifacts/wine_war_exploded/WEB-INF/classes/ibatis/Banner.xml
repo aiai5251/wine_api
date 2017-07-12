@@ -16,8 +16,7 @@
         SELECT id, title, url, imgurl FROM main_banner WHERE id = #{id}
     </select>
 
-    <insert id="add" parameterMap="BaseResultMap">
-        <selectKey keyProperty="id" order="AFTER">select @@identity id</selectKey>
+    <insert id="add" parameterMap="BaseResultMap" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO main_banner(title, url, imgurl) VALUES (#{title}, #{url}, #{imgurl})
     </insert>
 

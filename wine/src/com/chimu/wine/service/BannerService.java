@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("bannerServices")
+@Service
 public class BannerService {
     private BannerDao bannerDao;
 
@@ -18,7 +18,7 @@ public class BannerService {
 //        return nil;
 //    }
 
-    @Autowired(required = false)
+    @Autowired()
     public void setBannerDao(BannerDao bannerDao) {
         this.bannerDao = bannerDao;
     }
