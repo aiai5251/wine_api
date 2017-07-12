@@ -19,10 +19,10 @@ import java.util.Map;
 @RequestMapping(value = "/wine")
 public class BannerAction extends BaseAction {
 
-
-//    private BannerService bannerService;
     @Autowired(required = false)
-    private BannerDao bannerDao;
+    private BannerService bannerService;
+
+//    private BannerDao bannerDao;
 
     @RequestMapping(value = "/banner")
     @ResponseBody
@@ -41,9 +41,20 @@ public class BannerAction extends BaseAction {
     protected  Map<String, Object> bannerAdd(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
-        String bannerId = request.getParameter("id");
-        System.out.print(bannerId);
-        map.put("id", bannerId);
+        String bannerImageUrl = request.getParameter("url");
+        String bannerTitle = request.getParameter("title");
+        String bannerUrl = request.getParameter("url");
+
+        BannerBean bannerBean = new BannerBean();
+        bannerBean.setImgurl(bannerImageUrl);
+        bannerBean.setUrl(bannerUrl);
+        bannerBean.setTitle(bannerTitle);
+        Integer iid = bannerService.add(bannerBean);
+        System.out.print(iid);
+
+        map.put("banner", bannerBean);
+        map.put("status", 1);
+        map.put("infoMsg", "获取成功");
         return map;
     }
 }
