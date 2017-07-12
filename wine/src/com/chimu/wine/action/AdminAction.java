@@ -3,6 +3,7 @@ package com.chimu.wine.action;
 import com.alibaba.fastjson.JSON;
 import com.chimu.wine.bean.AdminBean;
 import com.chimu.wine.service.AdminService;
+import com.chimu.wine.utils.CMString;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,13 +30,13 @@ public class AdminAction extends BaseAction {
         String password = request.getParameter("password");
 
         Map<String, Object> map = new HashMap<String, Object>();
-        if (phone != null && password != null) {
+        if (CMString.isValid(phone) && CMString.isValid(password)) {
             // 设置response
             super.configResponse(response);
             // 获取管理员信息
             adminService = new AdminService();
             AdminBean adminBean = adminService.getAdmin(phone, password);
-            if (adminBean != null && adminBean.getPhone().length() > 0) {
+            if (adminBean != null && CMString.isValid(adminBean.getPhone())) {
                 map.put("status", 1);
                 map.put("infoMsg", "登录成功");
                 map.put("data", JSON.toJSON(adminBean));
