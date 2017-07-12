@@ -29,7 +29,7 @@ public class AdminAction extends BaseAction {
         String password = request.getParameter("password");
 
         Map<String, Object> map = new HashMap<String, Object>();
-        if (phone.length() > 0 && password.length() > 0) {
+        if (phone != null && password != null) {
             // 设置response
             super.configResponse(response);
             // 获取管理员信息
