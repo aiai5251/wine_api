@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="com.chimu.wine" />
+    <context:component-scan base-package="com.chimu.wine, com.chimu.admin" />
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${dataSource.mysql.driverClassName}" />
@@ -47,7 +47,7 @@
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.chimu.wine.dao" />
+        <property name="basePackage" value="com.chimu.wine.dao, com.chimu.admin.dao" />
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
     </bean>
 
