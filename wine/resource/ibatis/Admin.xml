@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.chimu.wine.dao.AdminDao" >
+    <resultMap id="BaseResultMap" type="com.chimu.wine.bean.AdminBean" >
+        <result column="userId" property="userId" jdbcType="INTEGER" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--新增（注册）-->
+    <insert id="registeAdmin">
+        INSERT INTO admin_list(phone, password) VALUES(#{phone}, #{password})
+    </insert>
+    <!--登录（获取管理员信息）-->
+    <select id="getAdmin" resultMap="BaseResultMap">
+        SELECT * FROM admin_list WHERE phone=#{phone} AND password=#{password}
+    </select>
+    <!--通过用户Id获取管理员信息-->
+    <select id="getAdminByUserId" resultMap="BaseResultMap">
+        SELECT * FROM admin_list WHERE userId=#{userId}
+    </select>
+    <!--通过用户Id删除管理员-->
+    <delete id="deleteAdmin">
+        DELETE FROM admin_list WHERE userId=#{userId}
+    </delete>
+
+</mapper>
