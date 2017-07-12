@@ -22,4 +22,12 @@ public class BannerService {
     public void setBannerDao(BannerDao bannerDao) {
         this.bannerDao = bannerDao;
     }
+
+    public int add(BannerBean bannerBean){
+        return bannerDao.add(bannerBean);
+    }
+
+    public BannerBean byId(Integer id) {
+        return bannerDao.byId(id);
+    }
 }

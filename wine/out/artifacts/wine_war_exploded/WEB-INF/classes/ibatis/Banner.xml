@@ -9,7 +9,21 @@
     </resultMap>
 
     <select id="banner_list_select" resultMap="BaseResultMap">
-        select * from main_banner desc limit 5
+        SELECT * FROM main_banner
     </select>
 
+    <select id="byId">
+        SELECT id, title, url, imgurl FROM main_banner WHERE id = #{id}
+    </select>
+
+    <insert id="add" parameterMap="BaseResultMap">
+        <selectKey keyProperty="id" order="AFTER">select @@identity id</selectKey>
+        INSERT INTO main_banner(title, url, imgurl) VALUES (#{title}, #{url}, #{imgurl})
+    </insert>
+
+    <update id="modify" >
+        UPDATE main_banner SET title = #{title}, url = #{url}, imgurl = #{imgurl} WHERE id = #{id}
+    </update>
 </mapper>
+
+
