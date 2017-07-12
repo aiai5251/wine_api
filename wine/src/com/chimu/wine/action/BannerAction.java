@@ -24,18 +24,26 @@ public class BannerAction extends BaseAction {
     @Autowired(required = false)
     private BannerDao bannerDao;
 
-    public Map<String, Object> Init(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception{
-        return super.Init(request, response, model);
-    }
-
     @RequestMapping(value = "/banner")
     @ResponseBody
     protected Map<String, Object> Action(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+        super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
 
-        List<BannerBean> bannerList = bannerDao.banner_list_select();
-        System.out.print(bannerList);
+//        List<BannerBean> bannerList = bannerDao.banner_list_select();
+//        System.out.print(bannerList);
         map.put("banners", "121");
+        return map;
+    }
+
+    @RequestMapping(value = "/banner_add")
+    @ResponseBody
+    protected  Map<String, Object> bannerAdd(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String bannerId = request.getParameter("id");
+        System.out.print(bannerId);
+        map.put("id", bannerId);
         return map;
     }
 }
