@@ -1,7 +1,9 @@
 package com.chimu.wine.dao;
 
-/**
- * Created by didi on 2017/7/10.
- */
-public class BannerDao {
+import com.chimu.wine.bean.BannerBean;
+
+import java.util.List;
+
+public interface BannerDao {
+    List<BannerBean> banner_list_select();
 }

@@ -9,7 +9,7 @@
     </resultMap>
 
     <select id="banner_list_select" resultMap="BaseResultMap">
-        select * from main_banner order by id desc limit 5
+        select * from main_banner desc limit 5
     </select>
 
 </mapper>

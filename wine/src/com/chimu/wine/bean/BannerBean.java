@@ -2,9 +2,6 @@ package com.chimu.wine.bean;
 
 import java.util.Date;
 
-/**
- * Created by didi on 2017/7/10.
- */
 public class BannerBean {
     private int id;
     private String imgurl;  //图片地址
