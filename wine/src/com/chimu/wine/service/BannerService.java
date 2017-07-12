@@ -28,6 +28,7 @@ public class BannerService {
     }
 
     public BannerBean byId(Integer id) {
+        System.out.print("asassa = " + id);
         return bannerDao.byId(id);
     }
 }

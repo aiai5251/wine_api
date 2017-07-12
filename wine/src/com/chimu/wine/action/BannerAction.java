@@ -41,16 +41,18 @@ public class BannerAction extends BaseAction {
     protected  Map<String, Object> bannerAdd(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
-        String bannerImageUrl = request.getParameter("url");
-        String bannerTitle = request.getParameter("title");
-        String bannerUrl = request.getParameter("url");
+//        String bannerImageUrl = request.getParameter("url");
+//        String bannerTitle = request.getParameter("title");
+//        String bannerUrl = request.getParameter("url");
+        BannerBean bannerBean = bannerService.byId(Integer.parseInt("1"));
+        System.out.print(bannerBean.getId());
 
-        BannerBean bannerBean = new BannerBean();
-        bannerBean.setImgurl(bannerImageUrl);
-        bannerBean.setUrl(bannerUrl);
-        bannerBean.setTitle(bannerTitle);
-        Integer iid = bannerService.add(bannerBean);
-        System.out.print(iid);
+//        bannerBean = new BannerBean();
+//        bannerBean.setImgurl(bannerImageUrl);
+//        bannerBean.setUrl(bannerUrl);
+//        bannerBean.setTitle(bannerTitle);
+//        Integer iid = bannerService.add(bannerBean);
+//        System.out.print(iid);
 
         map.put("banner", bannerBean);
         map.put("status", 1);
