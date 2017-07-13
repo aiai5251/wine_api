@@ -20,8 +20,9 @@
     </column>
     <column id="10" parent="7" name="phone">
       <Position>2</Position>
-      <DataType>int(13)|0</DataType>
+      <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
     <column id="11" parent="7" name="password">
       <Position>3</Position>
