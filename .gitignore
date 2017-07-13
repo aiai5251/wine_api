@@ -1,9 +1,12 @@
-wine/.idea/*
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+.captures
 
-wine/.idea/workspace.xml
-
-/wine/.idea/*
-
-/wine/.idea/workspace.xml
-
+# Java class files
 *.class
+
+# OSX files
+.DS_Store
+
+
