@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdminAction extends BaseAction {
 
-    @Autowired()
+    @Autowired
     private AdminService adminService;
 
     /// 登录
@@ -38,7 +38,6 @@ public class AdminAction extends BaseAction {
             // 设置response
 
             // 获取管理员信息
-//            adminService = new AdminService();
             AdminBean adminBean = adminService.getAdmin(phone, password);
             if (adminBean != null && CMString.isValid(adminBean.getPhone())) {
                 map.put("status", 1);
