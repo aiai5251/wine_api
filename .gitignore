@@ -1,3 +1,9 @@
+wine/.idea/*
+
+wine/.idea/workspace.xml
+
 /wine/.idea/*
+
+/wine/.idea/workspace.xml
 
 *.class
