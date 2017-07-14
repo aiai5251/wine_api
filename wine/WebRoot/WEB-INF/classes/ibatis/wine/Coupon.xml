@@ -7,57 +7,57 @@
     <!--<resultMap id="mainCouponMap" type="MainCouponEntity"></resultMap>-->
     
     <!-- 表所有字段 -->
-    <sql id="allColumns">
-        ID, PRICE, PID, TITLE, UID, 
-        BUILD_TIME, END_TIME, MAX_PRICE
-    </sql>
-    
-    <!-- 根据条件查询数据 -->
-    <select id="findMainCouponByCondition" resultMap="Coupon" parameterType="Coupon">
-        SELECT
-        <include refid="allColumns" />
-        FROM MAIN_COUPON WHERE 1 = 1
-        <if test="price != null and price != ''">
-            AND PRICE LIKE CONCAT('%',#{price},'%')
-        </if>
-        <if test="pid != null and pid != ''">
-            AND PID LIKE CONCAT('%',#{pid},'%')
-        </if>
-    </select>
-    
-    <!-- 插入数据 -->
-    <insert id="insertMainCoupon" parameterType="Coupon">
-        INSERT INTO MAIN_COUPON (<include refid="allColumns" />)
-        VALUES (
-            #{id},
-            #{price},
-            #{pid},
-            #{title},
-            #{uid},
-            #{buildTime},
-            #{endTime},
-            #{maxPrice}
-        )
-    </insert>
-    
-    <!-- 修改数据 -->
-    <update id="updateMainCoupon" parameterType="Coupon">
-        UPDATE MAIN_COUPON SET
-            PRICE = #{price},
-            PID = #{pid},
-            TITLE = #{title},
-            UID = #{uid},
-            BUILD_TIME = #{buildTime},
-            END_TIME = #{endTime},
-            MAX_PRICE = #{maxPrice}
-        WHERE ID = #{id}
-    </update>
-    
-    <!-- 根据主键批量删除数据 -->
-    <delete id="deleteMainCouponByIds" parameterType="list">
-        DELETE FROM MAIN_COUPON WHERE ID IN
-        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
+    <!--<sql id="allColumns">-->
+        <!--ID, PRICE, PID, TITLE, UID, -->
+        <!--BUILD_TIME, END_TIME, MAX_PRICE-->
+    <!--</sql>-->
+    <!---->
+    <!--&lt;!&ndash; 根据条件查询数据 &ndash;&gt;-->
+    <!--<select id="findMainCouponByCondition" resultMap="Coupon" parameterType="Coupon">-->
+        <!--SELECT-->
+        <!--<include refid="allColumns" />-->
+        <!--FROM MAIN_COUPON WHERE 1 = 1-->
+        <!--<if test="price != null and price != ''">-->
+            <!--AND PRICE LIKE CONCAT('%',#{price},'%')-->
+        <!--</if>-->
+        <!--<if test="pid != null and pid != ''">-->
+            <!--AND PID LIKE CONCAT('%',#{pid},'%')-->
+        <!--</if>-->
+    <!--</select>-->
+    <!---->
+    <!--&lt;!&ndash; 插入数据 &ndash;&gt;-->
+    <!--<insert id="insertMainCoupon" parameterType="Coupon">-->
+        <!--INSERT INTO MAIN_COUPON (<include refid="allColumns" />)-->
+        <!--VALUES (-->
+            <!--#{id},-->
+            <!--#{price},-->
+            <!--#{pid},-->
+            <!--#{title},-->
+            <!--#{uid},-->
+            <!--#{buildTime},-->
+            <!--#{endTime},-->
+            <!--#{maxPrice}-->
+        <!--)-->
+    <!--</insert>-->
+    <!---->
+    <!--&lt;!&ndash; 修改数据 &ndash;&gt;-->
+    <!--<update id="updateMainCoupon" parameterType="Coupon">-->
+        <!--UPDATE MAIN_COUPON SET-->
+            <!--PRICE = #{price},-->
+            <!--PID = #{pid},-->
+            <!--TITLE = #{title},-->
+            <!--UID = #{uid},-->
+            <!--BUILD_TIME = #{buildTime},-->
+            <!--END_TIME = #{endTime},-->
+            <!--MAX_PRICE = #{maxPrice}-->
+        <!--WHERE ID = #{id}-->
+    <!--</update>-->
+    <!---->
+    <!--&lt;!&ndash; 根据主键批量删除数据 &ndash;&gt;-->
+    <!--<delete id="deleteMainCouponByIds" parameterType="list">-->
+        <!--DELETE FROM MAIN_COUPON WHERE ID IN-->
+        <!--<foreach collection="list" index="index" item="id" open="(" separator="," close=")">-->
+            <!--#{id}-->
+        <!--</foreach>-->
+    <!--</delete>-->
 </mapper>

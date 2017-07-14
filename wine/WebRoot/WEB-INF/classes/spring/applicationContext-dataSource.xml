@@ -37,12 +37,8 @@
             </list>
         </property>
         <!-- MyBatis 类型关联包路径配置 -->
-        <!--<property name="typeAliasesPackage">-->
-            <!--<array>-->
-                <!--<value>com.chimu.wine.bean</value>-->
-                <!--<value>com.chimu.admin.bean</value>-->
-            <!--</array>-->
-        <!--</property>-->
+        <property name="typeAliasesPackage" value="com.chimu.wine.bean, com.chimu.admin.bean">
+        </property>
     </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
