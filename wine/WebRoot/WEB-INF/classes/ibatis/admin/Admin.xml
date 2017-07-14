@@ -3,26 +3,26 @@
 
 <mapper namespace="com.chimu.admin.dao.AdminDao" >
     <resultMap id="BaseResultMap" type="com.chimu.admin.bean.AdminBean" >
-        <result column="userId" property="userId" jdbcType="INTEGER" />
+        <result column="id" property="id" jdbcType="INTEGER" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="VARCHAR" />
     </resultMap>
 
     <!--新增（注册）-->
     <insert id="signInAdmin">
-        INSERT INTO admin_list(phone, password) VALUES(#{phone}, #{password})
+        INSERT INTO admin_member(phone, password) VALUES(#{phone}, #{password})
     </insert>
     <!--登录（获取管理员信息）-->
     <select id="getAdmin" resultMap="BaseResultMap">
-        SELECT * FROM admin_list WHERE phone=#{phone} AND password=#{password}
+        SELECT * FROM admin_member WHERE phone=#{phone} AND password=#{password}
     </select>
     <!--通过用户Id获取管理员信息-->
     <select id="getAdminByUserId" resultMap="BaseResultMap">
-        SELECT * FROM admin_list WHERE userId=#{userId}
+        SELECT * FROM admin_member WHERE id=#{id}
     </select>
     <!--通过用户Id删除管理员-->
     <delete id="deleteAdmin">
-        DELETE FROM admin_list WHERE userId=#{userId}
+        DELETE FROM admin_member WHERE id=#{id}
     </delete>
 
 </mapper>

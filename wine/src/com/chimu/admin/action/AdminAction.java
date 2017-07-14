@@ -39,7 +39,7 @@ public class AdminAction extends BaseAction {
         Map<String, Object> map = new HashMap<>();
         if (CMString.isValid(phone) && CMString.isValid(password)) {
             // 获取管理员信息
-            AdminBean adminBean = adminService.getAdmin(phone, password);
+            AdminBean adminBean = adminService.getAdmin(phone, CMString.MD5(password));
             if (adminBean != null && CMString.isValid(adminBean.getPhone())) {
                 map.put("status", 1);
                 map.put("infoMsg", "登录成功");
@@ -58,7 +58,7 @@ public class AdminAction extends BaseAction {
     }
 
     /// 注册
-    @RequestMapping(value = "/signIn"/*, method = RequestMethod.POST*/)
+    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> signIn(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
@@ -68,13 +68,13 @@ public class AdminAction extends BaseAction {
 
         Map<String, Object> map = new HashMap<>();
         if (CMString.isValid(phone) && CMString.isValid(password)) {
-            AdminBean adminBean = adminService.getAdmin(phone, password);
+            AdminBean adminBean = adminService.getAdmin(phone, CMString.MD5(password));
             if (adminBean != null && CMString.isValid(adminBean.getPhone())) {
                 map.put("status", 0);
                 map.put("infoMsg", "该用户已存在，不能重复注册");
                 map.put("data", JSON.toJSON(new HashMap<>()));
             } else {
-                int result = adminService.signInAdmin(phone, password);
+                int result = adminService.signInAdmin(phone, CMString.MD5(password));
                 if (result == 1) {
                     map.put("status", 1);
                     map.put("infoMsg", "恭喜您，注册成功");

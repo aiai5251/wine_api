@@ -10,7 +10,7 @@
     <schema id="4" parent="1" name="mysql"/>
     <schema id="5" parent="1" name="performance_schema"/>
     <schema id="6" parent="1" name="sys"/>
-    <table id="7" parent="2" name="admin_list"/>
+    <table id="7" parent="2" name="admin_member"/>
     <table id="8" parent="2" name="main_banner"/>
     <column id="9" parent="7" name="id">
       <Position>1</Position>
@@ -26,7 +26,7 @@
     </column>
     <column id="11" parent="7" name="password">
       <Position>3</Position>
-      <DataType>varchar(20)|0</DataType>
+      <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
