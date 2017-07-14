@@ -27,6 +27,7 @@ public class CMString {
         return "";
     }
 
+    /// MD5加密
     public static String MD5(String str) {
         if (!CMString.isValid(str)) {
             return "";

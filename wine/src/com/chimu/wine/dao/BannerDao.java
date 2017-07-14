@@ -8,12 +8,12 @@ import java.util.List;
 public interface BannerDao {
     List<BannerBean> getBannerList();
 
-//  通过id，查找当前的banner数据
-    BannerBean getBannerWithId(@Param("id")Integer id);
+    //  通过id，查找当前的banner数据
+    BannerBean getBannerWithId(@Param("id") Integer id);
 
-//  添加一个banner
+    //  添加一个banner
     int addBanner(BannerBean bannerBean);
 
-//  修改一个banner
+    //  修改一个banner
     BannerBean modifyBanner(BannerBean bannerBean);
 }
