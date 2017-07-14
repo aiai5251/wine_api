@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- MAIN_ORDER_PROUCT -->
+<mapper namespace="com.chimu.wine.dao.OrderProductDao">
+    <!-- 结果映射 -->
+    <!--<resultMap id="mainOrderProuctMap" type="MainOrderProuctEntity"></resultMap>-->
+    
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        ORDER_NUM, PID, TITLE, COUNT, DISCOUNT, 
+        IMAGE, STYLE
+    </sql>
+    
+    <!-- 根据条件查询数据 -->
+    <select id="findMainOrderProductByCondition" resultMap="OrderProduct" parameterType="OrderProduct">
+        SELECT
+        <include refid="allColumns" />
+        FROM MAIN_ORDER_PROUCT WHERE 1 = 1
+        <if test="pid != null and pid != ''">
+            AND PID LIKE CONCAT('%',#{pid},'%')
+        </if>
+        <if test="title != null and title != ''">
+            AND TITLE LIKE CONCAT('%',#{title},'%')
+        </if>
+    </select>
+    
+    <!-- 插入数据 -->
+    <insert id="insertMainOrderProduct" parameterType="OrderProduct">
+        INSERT INTO MAIN_ORDER_PROUCT (<include refid="allColumns" />)
+        VALUES (
+            #{orderNum},
+            #{pid},
+            #{title},
+            #{count},
+            #{discount},
+            #{image},
+            #{style}
+        )
+    </insert>
+    
+    <!-- 修改数据 -->
+    <update id="updateMainOrderProduct" parameterType="OrderProduct">
+        UPDATE MAIN_ORDER_PROUCT SET
+            ORDER_NUM = #{orderNum},
+            PID = #{pid},
+            TITLE = #{title},
+            COUNT = #{count},
+            DISCOUNT = #{discount},
+            IMAGE = #{image},
+            STYLE = #{style}
+        WHERE  = #{}
+    </update>
+    
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteMainOrderProductByIds" parameterType="list">
+        DELETE FROM MAIN_ORDER_PROUCT WHERE  IN
+        <foreach collection="list" index="index" item="" open="(" separator="," close=")">
+            #{}
+        </foreach>
+    </delete>
+</mapper>

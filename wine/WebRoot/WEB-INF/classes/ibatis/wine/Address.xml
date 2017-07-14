@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- MAIN_ADDRESS -->
+<mapper namespace="com.chimu.wine.dao.addressDao">
+    <!-- 结果映射 -->
+    <!--<resultMap id="mainAddressMap" type="MainAddressEntity"></resultMap>-->
+    
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        id, NAME, TEL, DEFULT, UID
+    </sql>
+    
+    <!-- 根据条件查询数据 -->
+    <select id="findMainAddressByCondition" resultMap="Address" parameterType="Address">
+        SELECT
+        <include refid="allColumns" />
+        FROM MAIN_ADDRESS WHERE 1 = 1
+        <if test="name != null and name != ''">
+            AND NAME LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="tel != null and tel != ''">
+            AND TEL LIKE CONCAT('%',#{tel},'%')
+        </if>
+    </select>
+    
+    <!-- 插入数据 -->
+    <insert id="insertMainAddress" parameterType="Address">
+        INSERT INTO MAIN_ADDRESS (<include refid="allColumns" />)
+        VALUES (
+            #{id},
+            #{name},
+            #{tel},
+            #{defult},
+            #{uid}
+        )
+    </insert>
+    
+    <!-- 修改数据 -->
+    <update id="updateMainAddress" parameterType="Address">
+        UPDATE MAIN_ADDRESS SET
+            NAME = #{name},
+            TEL = #{tel},
+            DEFULT = #{defult},
+            UID = #{uid}
+        WHERE ID = #{id}
+    </update>
+    
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteMainAddressByIds" parameterType="list">
+        DELETE FROM MAIN_ADDRESS WHERE ID IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
