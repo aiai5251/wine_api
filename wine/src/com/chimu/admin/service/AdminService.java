@@ -25,12 +25,12 @@ public class AdminService {
     }
 
     /// 通过用户Id获取管理员信息
-    public AdminBean getAdminByUserId(int userId) {
-        return adminDao.getAdminByUserId(userId);
+    public AdminBean getAdminByUserId(int id) {
+        return adminDao.getAdminByUserId(id);
     }
 
     /// 通过用户Id删除管理员
-    public int deleteAdmin(int userId) {
-        return adminDao.deleteAdmin(userId);
+    public int deleteAdmin(int id) {
+        return adminDao.deleteAdmin(id);
     }
 }
