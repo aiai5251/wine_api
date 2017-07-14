@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chimu.wine.dao.BannerDao" >
+    <resultMap id="BaseResultMap" type="com.chimu.wine.bean.ProductBean">
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="submessage" property="submessage" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="FLOAT" />
+        <result column="volume" property="volume" jdbcType="INTEGER" />
+        <result column="images" property="images" jdbcType="VARCHAR" />
+        <result column="origprice" property="origprice" jdbcType="VARCHAR" />
+        <result column="sales" property="sales" jdbcType="VARCHAR" />
+        <result column="count" property="count" jdbcType="VARCHAR" />
+        <result column="freight_money" property="freight_money" jdbcType="VARCHAR" />
+        <result column="description_images" property="description_images" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="point" property="point" jdbcType="VARCHAR" />
+        <result column="sales" property="sales" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="getProductList" resultMap="BaseResultMap">
+        SELECT * FROM main_product
+    </select>
+
+    <select id="getProductWithId" resultMap="BaseResultMap">
+        SELECT * FROM main_product WHERE id = #{id}
+    </select>
+
+</mapper>
+
+
