@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-    Welcome to use the TableGo Tools.
-    
-    http://vipbooks.iteye.com
-    http://blog.csdn.net/vipbooks
-    http://www.cnblogs.com/vipbooks
-    
-    Author:bianj
-    Email:edinsker@163.com
-    Version:5.0.0
--->
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- MAIN_MARK -->
-<mapper namespace="perfect_note.mainMark">
+<mapper namespace="com.chimu.wine.dao.MarkDao">
     <!-- 结果映射 -->
-    <resultMap id="mainMarkMap" type="MainMarkEntity"></resultMap>
+    <!--<resultMap id="mainMarkMap" type="MainMarkEntity"></resultMap>-->
     
     <!-- 表所有字段 -->
     <sql id="allColumns">
@@ -24,7 +12,7 @@
     </sql>
     
     <!-- 根据条件查询数据 -->
-    <select id="findMainMarkByCondition" resultMap="mainMarkMap" parameterType="map">
+    <select id="findMainMarkByCondition" resultMap="Mark" parameterType="Mark">
         SELECT
         <include refid="allColumns" />
         FROM MAIN_MARK WHERE 1 = 1
@@ -37,7 +25,7 @@
     </select>
     
     <!-- 插入数据 -->
-    <insert id="insertMainMark" parameterType="map">
+    <insert id="insertMainMark" parameterType="Mark">
         INSERT INTO MAIN_MARK (<include refid="allColumns" />)
         VALUES (
             #{id},
@@ -48,7 +36,7 @@
     </insert>
     
     <!-- 修改数据 -->
-    <update id="updateMainMark" parameterType="map">
+    <update id="updateMainMark" parameterType="Mark">
         UPDATE MAIN_MARK SET
             PID = #{pid},
             NAME = #{name},

@@ -16,7 +16,7 @@ package com.chimu.wine.bean;/*
  * @author bianj
  * @version 1.0.0 2017-07-14
  */
-public class ShopcartBean {
+public class ShopCartBean {
     /** 版本号 */
     private static final long serialVersionUID = 6676807925904432034L;
 

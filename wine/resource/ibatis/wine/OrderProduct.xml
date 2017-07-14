@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-    Welcome to use the TableGo Tools.
-    
-    http://vipbooks.iteye.com
-    http://blog.csdn.net/vipbooks
-    http://www.cnblogs.com/vipbooks
-    
-    Author:bianj
-    Email:edinsker@163.com
-    Version:5.0.0
--->
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- MAIN_ORDER_PROUCT -->
-<mapper namespace="perfect_note.mainOrderProuct">
+<mapper namespace="com.chimu.wine.dao.OrderProductDao">
     <!-- 结果映射 -->
-    <resultMap id="mainOrderProuctMap" type="MainOrderProuctEntity"></resultMap>
+    <!--<resultMap id="mainOrderProuctMap" type="MainOrderProuctEntity"></resultMap>-->
     
     <!-- 表所有字段 -->
     <sql id="allColumns">
@@ -25,7 +13,7 @@
     </sql>
     
     <!-- 根据条件查询数据 -->
-    <select id="findMainOrderProuctByCondition" resultMap="mainOrderProuctMap" parameterType="map">
+    <select id="findMainOrderProductByCondition" resultMap="OrderProduct" parameterType="OrderProduct">
         SELECT
         <include refid="allColumns" />
         FROM MAIN_ORDER_PROUCT WHERE 1 = 1
@@ -38,7 +26,7 @@
     </select>
     
     <!-- 插入数据 -->
-    <insert id="insertMainOrderProuct" parameterType="map">
+    <insert id="insertMainOrderProduct" parameterType="OrderProduct">
         INSERT INTO MAIN_ORDER_PROUCT (<include refid="allColumns" />)
         VALUES (
             #{orderNum},
@@ -52,7 +40,7 @@
     </insert>
     
     <!-- 修改数据 -->
-    <update id="updateMainOrderProuct" parameterType="map">
+    <update id="updateMainOrderProduct" parameterType="OrderProduct">
         UPDATE MAIN_ORDER_PROUCT SET
             ORDER_NUM = #{orderNum},
             PID = #{pid},
@@ -65,7 +53,7 @@
     </update>
     
     <!-- 根据主键批量删除数据 -->
-    <delete id="deleteMainOrderProuctByIds" parameterType="list">
+    <delete id="deleteMainOrderProductByIds" parameterType="list">
         DELETE FROM MAIN_ORDER_PROUCT WHERE  IN
         <foreach collection="list" index="index" item="" open="(" separator="," close=")">
             #{}

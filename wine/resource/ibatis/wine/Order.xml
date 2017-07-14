@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-    Welcome to use the TableGo Tools.
-    
-    http://vipbooks.iteye.com
-    http://blog.csdn.net/vipbooks
-    http://www.cnblogs.com/vipbooks
-    
-    Author:bianj
-    Email:edinsker@163.com
-    Version:5.0.0
--->
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- MAIN_ORDER -->
-<mapper namespace="perfect_note.mainOrder">
+<mapper namespace="com.chimu.wine.dao.OrderDao">
     <!-- 结果映射 -->
-    <resultMap id="mainOrderMap" type="MainOrderEntity"></resultMap>
+    <!--<resultMap id="mainOrderMap" type="MainOrderEntity"></resultMap>-->
     
     <!-- 表所有字段 -->
     <sql id="allColumns">
@@ -26,7 +14,7 @@
     </sql>
     
     <!-- 根据条件查询数据 -->
-    <select id="findMainOrderByCondition" resultMap="mainOrderMap" parameterType="map">
+    <select id="findMainOrderByCondition" resultMap="Order" parameterType="Order">
         SELECT
         <include refid="allColumns" />
         FROM MAIN_ORDER WHERE 1 = 1
@@ -39,7 +27,7 @@
     </select>
     
     <!-- 插入数据 -->
-    <insert id="insertMainOrder" parameterType="map">
+    <insert id="insertMainOrder" parameterType="Order">
         INSERT INTO MAIN_ORDER (<include refid="allColumns" />)
         VALUES (
             #{id},
@@ -58,7 +46,7 @@
     </insert>
     
     <!-- 修改数据 -->
-    <update id="updateMainOrder" parameterType="map">
+    <update id="updateMainOrder" parameterType="Order">
         UPDATE MAIN_ORDER SET
             UID = #{uid},
             ORDER_NUM = #{orderNum},
