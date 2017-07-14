@@ -1,24 +1,6 @@
-package com.chimu.wine.bean;/*
- * Welcome to use the TableGo Tools.
- * 
- * http://vipbooks.iteye.com
- * http://blog.csdn.net/vipbooks
- * http://www.cnblogs.com/vipbooks
- * 
- * Author:bianj
- * Email:edinsker@163.com
- * Version:5.0.0
- */
+package com.chimu.wine.bean;
 
-/**
- * MAIN_ORDER
- * 
- * @author bianj
- * @version 1.0.0 2017-07-14
- */
 public class OrderBean {
-    /** 版本号 */
-    private static final long serialVersionUID = 298734314944518548L;
 
     /** ?? id */
     private Integer id;
