@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +25,7 @@ public class BannerAction extends BaseAction {
 
     @RequestMapping(value = "/banner")
     @ResponseBody
-    protected Map<String, Object> showBannerList(HttpServletResponse response) {
+    public Map<String, Object> showBannerList(HttpServletResponse response) {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
         List<BannerBean> bannerList = bannerService.getBannerList();
@@ -36,29 +38,31 @@ public class BannerAction extends BaseAction {
 
     @RequestMapping(value = "/banner_add")
     @ResponseBody
-    protected  Map<String, Object> bannerAdd(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> bannerAdd(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
-        String bannerImageUrl = request.getParameter("url");
         String bannerTitle = request.getParameter("title");
         String bannerUrl = request.getParameter("url");
 
-        BannerBean bannerBean = new BannerBean();
-        bannerBean.setImgurl(bannerImageUrl);
-        bannerBean.setUrl(bannerUrl);
-        bannerBean.setTitle(bannerTitle);
-        Integer iid = bannerService.add(bannerBean);
-        System.out.print(iid);
+        MultipartFile file = null;
+        try {
+            file = ((MultipartHttpServletRequest)request).getFile("file");
+        } catch(Exception ignored) {}
 
-        map.put("banner", bannerBean);
-        map.put("status", 1);
-        map.put("infoMsg", "获取成功");
-        return map;
+        if (file != null && !file.isEmpty()) {
+            BannerBean bannerBean = new BannerBean();
+            bannerBean.setTitle(bannerTitle);
+            bannerBean.setUrl(bannerUrl);
+            bannerService.add(bannerBean, file);
+            map.put("banner", bannerBean);
+            return super.configResponseMap(map, 1);
+        }
+        return super.configResponseMap(map,0);
     }
 
     @RequestMapping(value = "/banner_modify")
     @ResponseBody
-    protected  Map<String, Object> bannerModify(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> bannerModify(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
         return super.configResponseMap(map, 1);

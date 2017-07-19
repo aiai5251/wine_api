@@ -1,7 +1,9 @@
 package com.chimu.wine.dao;
 
-/**
- * Created by didi on 2017/7/14.
- */
-public class OrderDao {
+import com.chimu.wine.bean.OrderBean;
+
+public interface OrderDao {
+    void addOrder(OrderBean orderBean);
+    OrderBean getOrderById(Integer id);
+    void modifyOrder(OrderBean orderBean);
 }

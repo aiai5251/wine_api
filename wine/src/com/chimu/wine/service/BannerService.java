@@ -1,26 +1,51 @@
 package com.chimu.wine.service;
 
+import com.chimu.utils.tools.CMString;
+import com.chimu.utils.tools.FileGlobal;
 import com.chimu.wine.bean.BannerBean;
+import com.chimu.wine.bean.ImageBean;
 import com.chimu.wine.dao.BannerDao;
+import com.chimu.wine.dao.ImageDao;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BannerService {
     private BannerDao bannerDao;
-
     public BannerService(BannerDao bannerDao) {
         this.bannerDao = bannerDao;
     }
 
-//    @Autowired()
-//    public void setBannerDao(BannerDao bannerDao) {
-//        this.bannerDao = bannerDao;
-//    }
+    public void add(BannerBean bannerBean, MultipartFile file) throws Exception {
+        String imageUrl = FileGlobal.AddFile(file, "wine", "http://localhost:9090");
+        if (CMString.isValid(imageUrl)) {
+            bannerBean.setImgurl(imageUrl);
+        }
+        bannerDao.addBanner(bannerBean);
 
-    public int add(BannerBean bannerBean){
-        return bannerDao.addBanner(bannerBean);
+//        String url;
+//        ImageBean imageBean;
+//        MultipartFile file;
+//        List<ImageBean> images = new ArrayList<>();
+//        if (files != null && files.size() > 0) {
+//            for (int i = 0; i < files.size(); i++) {
+//                file = files.get(i);
+//                if (file != null && !file.isEmpty()) {
+//                    Thread.sleep(1);
+//                    url = FileGlobal.AddFile(file, "http://localhost:9090", "banner");
+//                    imageBean = new ImageBean();
+//                    imageBean.setUrl(url);
+//                    imageBean.setBanner_id(bannerBean.getId());
+//                    imageDao.addImage(imageBean);
+//                    images.add(imageBean);
+//                }
+//            }
+//        }
+
+
     }
 
     public List<BannerBean> getBannerList() {

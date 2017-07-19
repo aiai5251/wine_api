@@ -1,11 +1,13 @@
 package com.chimu.wine.bean;
 
+import java.util.Date;
+
 public class CashBean {
 
     private Integer id;
     private Integer uid;
     private Float money;
-    private String date;
+    private Date date;
 
     public Integer getId() {
         return this.id;
@@ -29,10 +31,11 @@ public class CashBean {
         this.money = money;
     }
 
-    public String getDate() {
-        return this.date;
+
+    public Date getDate() {
+        return date;
     }
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

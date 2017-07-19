@@ -1,72 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- MAIN_ORDER -->
 <mapper namespace="com.chimu.wine.dao.OrderDao">
-    <!-- 结果映射 -->
-    <!--<resultMap id="mainOrderMap" type="MainOrderEntity"></resultMap>-->
-    
-    <!-- 表所有字段 -->
-    <!--<sql id="allColumns">-->
-        <!--ID, UID, ORDER_NUM, ORDER_STATUS, REMARK, -->
-        <!--ORDER_TIME, ORDER_SUMPRICE, ACTUALPAY, ADDRESS_ID, IS_STATUS, -->
-        <!--PID, COUNT-->
-    <!--</sql>-->
-    <!---->
-    <!--&lt;!&ndash; 根据条件查询数据 &ndash;&gt;-->
-    <!--<select id="findMainOrderByCondition" resultMap="Order" parameterType="Order">-->
-        <!--SELECT-->
-        <!--<include refid="allColumns" />-->
-        <!--FROM MAIN_ORDER WHERE 1 = 1-->
-        <!--<if test="uid != null and uid != ''">-->
-            <!--AND UID LIKE CONCAT('%',#{uid},'%')-->
-        <!--</if>-->
-        <!--<if test="orderNum != null and orderNum != ''">-->
-            <!--AND ORDER_NUM LIKE CONCAT('%',#{orderNum},'%')-->
-        <!--</if>-->
-    <!--</select>-->
-    <!---->
-    <!--&lt;!&ndash; 插入数据 &ndash;&gt;-->
-    <!--<insert id="insertMainOrder" parameterType="Order">-->
-        <!--INSERT INTO MAIN_ORDER (<include refid="allColumns" />)-->
-        <!--VALUES (-->
-            <!--#{id},-->
-            <!--#{uid},-->
-            <!--#{orderNum},-->
-            <!--#{orderStatus},-->
-            <!--#{remark},-->
-            <!--#{orderTime},-->
-            <!--#{orderSumprice},-->
-            <!--#{actualpay},-->
-            <!--#{addressId},-->
-            <!--#{isStatus},-->
-            <!--#{pid},-->
-            <!--#{count}-->
-        <!--)-->
-    <!--</insert>-->
-    <!---->
-    <!--&lt;!&ndash; 修改数据 &ndash;&gt;-->
-    <!--<update id="updateMainOrder" parameterType="Order">-->
-        <!--UPDATE MAIN_ORDER SET-->
-            <!--UID = #{uid},-->
-            <!--ORDER_NUM = #{orderNum},-->
-            <!--ORDER_STATUS = #{orderStatus},-->
-            <!--REMARK = #{remark},-->
-            <!--ORDER_TIME = #{orderTime},-->
-            <!--ORDER_SUMPRICE = #{orderSumprice},-->
-            <!--ACTUALPAY = #{actualpay},-->
-            <!--ADDRESS_ID = #{addressId},-->
-            <!--IS_STATUS = #{isStatus},-->
-            <!--PID = #{pid},-->
-            <!--COUNT = #{count}-->
-        <!--WHERE ID = #{id}-->
-    <!--</update>-->
-    <!---->
-    <!--&lt;!&ndash; 根据主键批量删除数据 &ndash;&gt;-->
-    <!--<delete id="deleteMainOrderByIds" parameterType="list">-->
-        <!--DELETE FROM MAIN_ORDER WHERE ID IN-->
-        <!--<foreach collection="list" index="index" item="id" open="(" separator="," close=")">-->
-            <!--#{id}-->
-        <!--</foreach>-->
-    <!--</delete>-->
+    <resultMap id="mainOrderMap" type="com.chimu.wine.bean.OrderBean">
+    </resultMap>
+
+    <insert id="addOrder" parameterType="com.chimu.wine.bean.OrderBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`(uid, order_num, status, count, amount, create_time, modify_time) VALUES
+            (${uid}, #{order_num}, #{status}, #{count}, #{amount}, #{create_time}, #{modify_time})
+    </insert>
+
+    <select id="getOrderById" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE id = #{id}
+    </select>
+
+    <update id="modifyOrder" parameterType="com.chimu.wine.bean.OrderBean">
+        UPDATE `order` SET address_id = #{address_id}, coupon_id = #{coupon_id}, status = #{status}, memo = #{memo}, pay = #{pay}, modify_time = #{modify_time} WHERE id = #{id}
+    </update>
+
 </mapper>

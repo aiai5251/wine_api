@@ -1,56 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- MAIN_COMMENT -->
 <mapper namespace="com.chimu.wine.dao.CommentDao">
-    <!--&lt;!&ndash; 结果映射 &ndash;&gt;-->
-    <!--<resultMap id="mainCommentMap" type="MainCommentEntity"></resultMap>-->
-    <!---->
-    <!-- 表所有字段 -->
-    <!--<sql id="allColumns">-->
-        <!--ID, PID, MESSAGE, UID, DATE-->
-    <!--</sql>-->
-    <!---->
-    <!--&lt;!&ndash; 根据条件查询数据 &ndash;&gt;-->
-    <!--<select id="findMainCommentByCondition" resultMap="Comment" parameterType="Comment">-->
-        <!--SELECT-->
-        <!--<include refid="allColumns" />-->
-        <!--FROM MAIN_COMMENT WHERE 1 = 1-->
-        <!--<if test="pid != null and pid != ''">-->
-            <!--AND PID LIKE CONCAT('%',#{pid},'%')-->
-        <!--</if>-->
-        <!--<if test="message != null and message != ''">-->
-            <!--AND MESSAGE LIKE CONCAT('%',#{message},'%')-->
-        <!--</if>-->
-    <!--</select>-->
-    <!---->
-    <!--&lt;!&ndash; 插入数据 &ndash;&gt;-->
-    <!--<insert id="insertMainComment" parameterType="Comment">-->
-        <!--INSERT INTO MAIN_COMMENT (<include refid="allColumns" />)-->
-        <!--VALUES (-->
-            <!--#{id},-->
-            <!--#{pid},-->
-            <!--#{message},-->
-            <!--#{uid},-->
-            <!--#{date}-->
-        <!--)-->
-    <!--</insert>-->
-    <!---->
-    <!--&lt;!&ndash; 修改数据 &ndash;&gt;-->
-    <!--<update id="updateMainComment" parameterType="Comment">-->
-        <!--UPDATE MAIN_COMMENT SET-->
-            <!--PID = #{pid},-->
-            <!--MESSAGE = #{message},-->
-            <!--UID = #{uid},-->
-            <!--DATE = #{date}-->
-        <!--WHERE ID = #{id}-->
-    <!--</update>-->
-    <!---->
-    <!--&lt;!&ndash; 根据主键批量删除数据 &ndash;&gt;-->
-    <!--<delete id="deleteMainCommentByIds" parameterType="list">-->
-        <!--DELETE FROM MAIN_COMMENT WHERE ID IN-->
-        <!--<foreach collection="list" index="index" item="id" open="(" separator="," close=")">-->
-            <!--#{id}-->
-        <!--</foreach>-->
-    <!--</delete>-->
+    <resultMap id="mainCommentMap" type="com.chimu.wine.bean.CommentBean">
+    </resultMap>
+
+    <select id="getCommentByPid" resultMap="mainCommentMap" parameterType="List">
+        SELECT * FROM comment WHERE pid = #{pid}
+    </select>
+
 </mapper>

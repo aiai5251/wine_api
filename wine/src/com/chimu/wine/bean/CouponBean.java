@@ -2,18 +2,20 @@ package com.chimu.wine.bean;
 
 public class CouponBean {
 
-    private Float price; // 金额
-    private String title; // 内容
+    private Integer id;
+    private Integer pid;
     private Integer uid; // 用户名
-    private String buildTime; // 开始时间
-    private String endTime; // 结束时间
-    private Integer maxPrice; // 最大金额？？？
+    private Integer price; // 金额
+    private String title; // 内容
+    private String build_time; // 开始时间
+    private String end_time; // 结束时间
+    private Integer max_price; // 最大金额？？？
 
-    public Float getPrice() {
+    public Integer getPrice() {
         return this.price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -33,27 +35,43 @@ public class CouponBean {
         this.uid = uid;
     }
 
-    public String getBuildTime() {
-        return this.buildTime;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBuildTime(String buildTime) {
-        this.buildTime = buildTime;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getEndTime() {
-        return this.endTime;
+    public Integer getPid() {
+        return pid;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
-    public Integer getMaxPrice() {
-        return this.maxPrice;
+    public String getBuild_time() {
+        return build_time;
     }
 
-    public void setMaxPrice(Integer maxPrice) {
-        this.maxPrice = maxPrice;
+    public void setBuild_time(String build_time) {
+        this.build_time = build_time;
+    }
+
+    public String getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
+    }
+
+    public Integer getMax_price() {
+        return max_price;
+    }
+
+    public void setMax_price(Integer max_price) {
+        this.max_price = max_price;
     }
 }

@@ -1,7 +1,7 @@
 package com.chimu.wine.dao;
 
-/**
- * Created by didi on 2017/7/14.
- */
-public class UserDao {
+import com.chimu.wine.bean.UserBean;
+
+public interface UserDao {
+    UserBean getCommentUserByUid(Integer uid);
 }

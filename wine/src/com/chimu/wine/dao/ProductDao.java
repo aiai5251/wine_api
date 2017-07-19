@@ -10,5 +10,7 @@ public interface ProductDao {
     List<ProductBean> getProductList();
 
     // 通过id，查找当前的banner数据
-    ProductBean getBannerWithId(@Param("id") Integer id);
+    ProductBean getProductWithId(@Param("id") Integer id);
+
+    void modifyProduct(ProductBean productBean);
 }

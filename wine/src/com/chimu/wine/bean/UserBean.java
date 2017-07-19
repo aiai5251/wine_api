@@ -1,17 +1,16 @@
 package com.chimu.wine.bean;
 
 public class UserBean {
-
     private Integer id;
     private String avatar;
     private String name;
     private Integer isVip;
     private Integer point;
     private Integer award;
-    private Integer extendMan;
-    private Integer extendMoneyman;
-    private Integer couponCount;
-    private Integer isSpoke;
+    private Integer extend_man;
+    private Integer extend_moneyman;
+    private Integer coupon_count;
+    private Integer is_spoke;
     private String openid;
 
     public Integer getId() {
@@ -62,43 +61,43 @@ public class UserBean {
         this.award = award;
     }
 
-    public Integer getExtendMan() {
-        return this.extendMan;
-    }
-
-    public void setExtendMan(Integer extendMan) {
-        this.extendMan = extendMan;
-    }
-
-    public Integer getExtendMoneyman() {
-        return this.extendMoneyman;
-    }
-
-    public void setExtendMoneyman(Integer extendMoneyman) {
-        this.extendMoneyman = extendMoneyman;
-    }
-
-    public Integer getCouponCount() {
-        return this.couponCount;
-    }
-
-    public void setCouponCount(Integer couponCount) {
-        this.couponCount = couponCount;
-    }
-
-    public Integer getIsSpoke() {
-        return this.isSpoke;
-    }
-
-    public void setIsSpoke(Integer isSpoke) {
-        this.isSpoke = isSpoke;
-    }
-
     public String getOpenid() {
         return this.openid;
     }
 
     public void setOpenid(String openid) {
         this.openid = openid;
+    }
+
+    public Integer getExtend_man() {
+        return extend_man;
+    }
+
+    public void setExtend_man(Integer extend_man) {
+        this.extend_man = extend_man;
+    }
+
+    public Integer getCoupon_count() {
+        return coupon_count;
+    }
+
+    public void setCoupon_count(Integer coupon_count) {
+        this.coupon_count = coupon_count;
+    }
+
+    public Integer getExtend_moneyman() {
+        return extend_moneyman;
+    }
+
+    public void setExtend_moneyman(Integer extend_moneyman) {
+        this.extend_moneyman = extend_moneyman;
+    }
+
+    public Integer getIs_spoke() {
+        return is_spoke;
+    }
+
+    public void setIs_spoke(Integer is_spoke) {
+        this.is_spoke = is_spoke;
     }
 }

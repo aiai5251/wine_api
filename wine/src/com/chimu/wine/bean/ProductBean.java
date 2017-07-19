@@ -1,5 +1,7 @@
 package com.chimu.wine.bean;
 
+import java.util.List;
+
 public class ProductBean {
 
     private Integer id;
@@ -39,12 +41,12 @@ public class ProductBean {
     /**
      * 商品详情图
      */
-    private String descriptionImages;
+    private String description_images;
 
     /**
      * 运费
      */
-    private Float freightMoney;
+    private Float freight_money;
 
     /**
      * 可获得积分
@@ -55,6 +57,15 @@ public class ProductBean {
      * 销售
      */
     private Integer sales;
+
+//    促销列表
+    private List<PromotionBean> promotionList;
+
+//    优惠券列表
+    private List<CouponBean> couponList;
+
+//    评论列表
+    private List<CommentBean> commentList;
 
     /**
      * 获取商品 id
@@ -223,17 +234,17 @@ public class ProductBean {
      *
      * @return 商品详情图
      */
-    public String getDescriptionImages() {
-        return this.descriptionImages;
+    public String getDescription_images() {
+        return this.description_images;
     }
 
     /**
      * 设置商品详情图
      *
-     * @param descriptionImages 商品详情图
+     * @param description_images 商品详情图
      */
-    public void setDescriptionImages(String descriptionImages) {
-        this.descriptionImages = descriptionImages;
+    public void setDescription_images(String description_images) {
+        this.description_images = description_images;
     }
 
     /**
@@ -241,17 +252,17 @@ public class ProductBean {
      *
      * @return 运费
      */
-    public Float getFreightMoney() {
-        return this.freightMoney;
+    public Float getFreight_money() {
+        return this.freight_money;
     }
 
     /**
      * 设置运费
      *
-     * @param freightMoney 运费
+     * @param freight_money 运费
      */
-    public void setFreightMoney(Float freightMoney) {
-        this.freightMoney = freightMoney;
+    public void setFreight_money(Float freight_money) {
+        this.freight_money = freight_money;
     }
 
     /**
@@ -288,5 +299,29 @@ public class ProductBean {
      */
     public void setSales(Integer sales) {
         this.sales = sales;
+    }
+
+    public List getPromotionList() {
+        return promotionList;
+    }
+
+    public void setPromotionList(List promotionList) {
+        this.promotionList = promotionList;
+    }
+
+    public List<CouponBean> getCouponList() {
+        return couponList;
+    }
+
+    public void setCouponList(List<CouponBean> couponList) {
+        this.couponList = couponList;
+    }
+
+    public List<CommentBean> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<CommentBean> commentList) {
+        this.commentList = commentList;
     }
 }
