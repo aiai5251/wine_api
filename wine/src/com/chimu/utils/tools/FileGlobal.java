@@ -3,6 +3,8 @@ package com.chimu.utils.tools;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,4 +40,23 @@ public class FileGlobal {
 
         return null;
     }
+
+    public static String ReadFile(File file, String charsetName) throws IOException {
+        if (file != null) {
+            byte[] buffer;
+            FileInputStream in = null;
+            try {
+                in = new FileInputStream(file);
+                buffer = new byte[in.available()];
+                in.read(buffer);
+            } finally {
+                if (in != null)
+                    in.close();
+            }
+            return new String(buffer, charsetName);
+        }
+        return null;
+    }
+
+
 }
