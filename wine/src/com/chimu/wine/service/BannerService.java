@@ -16,11 +16,11 @@ public class BannerService {
     }
 
     public void add(BannerBean bannerBean, MultipartFile file) throws Exception {
-        String imageUrl = FileGlobal.AddFile(file, "http://localhost:9090",
-                "/Users/didi/Desktop/wineProject/wine_api/wine/WebRoot/WEB-INF/image");
+        String imageUrl = FileGlobal.AddFile(file);
         if (CMString.isValid(imageUrl)) {
             bannerBean.setImgurl(imageUrl);
         }
+        System.out.print("getUrl == " + bannerBean.getImgurl());
         bannerDao.addBanner(bannerBean);
 
 //        String url;

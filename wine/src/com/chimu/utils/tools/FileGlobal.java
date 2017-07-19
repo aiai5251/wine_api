@@ -15,10 +15,12 @@ public class FileGlobal {
         }
     }
 
-    public static String AddFile(MultipartFile file, String remote, String local) throws Exception {
+    public static String AddFile(MultipartFile file) throws Exception {
         if(file != null && !file.isEmpty()){
             Date date = new Date();
-
+            String remote =  "http://localhost:9090/image";
+            String local = "/Users/didi/Desktop/wineProject/wine_api/wine/WebRoot/WEB-INF/image";
+            
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
 
             SimpleDateFormat year = new SimpleDateFormat("yyyy");
@@ -40,23 +42,5 @@ public class FileGlobal {
 
         return null;
     }
-
-    public static String ReadFile(File file, String charsetName) throws IOException {
-        if (file != null) {
-            byte[] buffer;
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(file);
-                buffer = new byte[in.available()];
-                in.read(buffer);
-            } finally {
-                if (in != null)
-                    in.close();
-            }
-            return new String(buffer, charsetName);
-        }
-        return null;
-    }
-
 
 }
