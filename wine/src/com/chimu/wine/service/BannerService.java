@@ -3,13 +3,9 @@ package com.chimu.wine.service;
 import com.chimu.utils.tools.CMString;
 import com.chimu.utils.tools.FileGlobal;
 import com.chimu.wine.bean.BannerBean;
-import com.chimu.wine.bean.ImageBean;
 import com.chimu.wine.dao.BannerDao;
-import com.chimu.wine.dao.ImageDao;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +16,8 @@ public class BannerService {
     }
 
     public void add(BannerBean bannerBean, MultipartFile file) throws Exception {
-        String imageUrl = FileGlobal.AddFile(file, "wine", "http://localhost:9090");
+        String imageUrl = FileGlobal.AddFile(file, "http://localhost:9090",
+                "/Users/didi/Desktop/wineProject/wine_api/wine/resource");
         if (CMString.isValid(imageUrl)) {
             bannerBean.setImgurl(imageUrl);
         }
