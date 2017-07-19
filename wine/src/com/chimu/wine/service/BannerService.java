@@ -1,5 +1,6 @@
 package com.chimu.wine.service;
 
+import com.chimu.utils.Constant;
 import com.chimu.utils.tools.CMString;
 import com.chimu.utils.tools.FileGlobal;
 import com.chimu.wine.bean.BannerBean;
@@ -16,33 +17,12 @@ public class BannerService {
     }
 
     public void add(BannerBean bannerBean, MultipartFile file) throws Exception {
-        String imageUrl = FileGlobal.AddFile(file, "http://localhost:9090",
-                "/Users/didi/Desktop/wineProject/wine_api/wine/WebRoot/WEB-INF/image");
+        String imageUrl = FileGlobal.AddFile(file, Constant.Host,
+                Constant.SaveImagesLocalPath);
         if (CMString.isValid(imageUrl)) {
             bannerBean.setImgurl(imageUrl);
         }
         bannerDao.addBanner(bannerBean);
-
-//        String url;
-//        ImageBean imageBean;
-//        MultipartFile file;
-//        List<ImageBean> images = new ArrayList<>();
-//        if (files != null && files.size() > 0) {
-//            for (int i = 0; i < files.size(); i++) {
-//                file = files.get(i);
-//                if (file != null && !file.isEmpty()) {
-//                    Thread.sleep(1);
-//                    url = FileGlobal.AddFile(file, "http://localhost:9090", "banner");
-//                    imageBean = new ImageBean();
-//                    imageBean.setUrl(url);
-//                    imageBean.setBanner_id(bannerBean.getId());
-//                    imageDao.addImage(imageBean);
-//                    images.add(imageBean);
-//                }
-//            }
-//        }
-
-
     }
 
     public List<BannerBean> getBannerList() {

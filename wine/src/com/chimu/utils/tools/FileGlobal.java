@@ -16,11 +16,9 @@ public class FileGlobal {
     }
 
     public static String AddFile(MultipartFile file, String remote, String local) throws Exception {
-        if(file != null && !file.isEmpty()){
+        if (file != null && !file.isEmpty()) {
             Date date = new Date();
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
-
             SimpleDateFormat year = new SimpleDateFormat("yyyy");
             SimpleDateFormat month = new SimpleDateFormat("MM");
             SimpleDateFormat day = new SimpleDateFormat("dd");
@@ -32,12 +30,9 @@ public class FileGlobal {
             String prefix = fileName.substring(fileName.lastIndexOf("."));
 
             File localFile = new File(local + "/" + path + "/" + sdf.format(date) + prefix);
-
             file.transferTo(localFile);
-
             return remote + "/" + path + "/" + sdf.format(date) + prefix;
         }
-
         return null;
     }
 
