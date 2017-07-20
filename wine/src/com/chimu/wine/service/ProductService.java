@@ -20,14 +20,12 @@ public class ProductService {
         this.imageDao = imageDao;
     }
 
-    public int addProduct(ProductBean productBean, List<MultipartFile> files, List<MultipartFile> files1) throws Exception {
+    public void addProduct(ProductBean productBean, List<MultipartFile> files, List<MultipartFile> files1) throws Exception {
         List<ImageBean> imageList = getImageList(files, 0);
         List<ImageBean> desc_imageList = getImageList(files1, 1);
         productBean.setImage(imageList.get(0).getUrl());
         productBean.setDescription_image(desc_imageList.get(0).getUrl());
-        int id = productDao.addProduct(productBean);
-        System.out.print("dasdasd === " + id);
-
+        productDao.addProduct(productBean);
         for (ImageBean imageBean : imageList) {
             imageBean.setProduct_id(productBean.getId());
             imageDao.addImage(imageBean);
@@ -37,7 +35,6 @@ public class ProductService {
             imageBean.setProduct_id(productBean.getId());
             imageDao.addImage(imageBean);
         }
-        return 1;
     }
 
     private List<ImageBean> getImageList(List<MultipartFile> files, Integer product_type) throws Exception {
