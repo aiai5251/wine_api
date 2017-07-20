@@ -4,6 +4,11 @@
     <resultMap id="BaseResultMap" type="com.chimu.wine.bean.ProductBean">
     </resultMap>
 
+    <insert id="addProduct" parameterType="com.chimu.wine.bean.ProductBean">
+        INSERT INTO product(title, submessage, price, volume, image, description, origprice, count, description_image, freight_money, point, sales) VALUES
+            (#{title}, #{submessage}, #{price}, #{volume}, #{image}, #{description}, #{origprice}, #{count}, #{description_image}, #{freight_money}, #{point}, #{sales})
+    </insert>
+
     <select id="getProductList" resultMap="BaseResultMap">
         SELECT * FROM product
     </select>

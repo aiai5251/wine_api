@@ -22,27 +22,12 @@ public class BannerService {
         }
         System.out.print("getUrl == " + bannerBean.getImgurl());
         bannerDao.addBanner(bannerBean);
+    }
 
-//        String url;
-//        ImageBean imageBean;
-//        MultipartFile file;
-//        List<ImageBean> images = new ArrayList<>();
-//        if (files != null && files.size() > 0) {
-//            for (int i = 0; i < files.size(); i++) {
-//                file = files.get(i);
-//                if (file != null && !file.isEmpty()) {
-//                    Thread.sleep(1);
-//                    url = FileGlobal.AddFile(file, "http://localhost:9090", "banner");
-//                    imageBean = new ImageBean();
-//                    imageBean.setUrl(url);
-//                    imageBean.setBanner_id(bannerBean.getId());
-//                    imageDao.addImage(imageBean);
-//                    images.add(imageBean);
-//                }
-//            }
-//        }
-
-
+    public void modifyBanner(BannerBean bannerBean, MultipartFile file) {
+//        url = image.getUrl().replaceAll(remote, local);
+//        FileGlobal.RemoveFile(url);
+        bannerDao.modifyBanner(bannerBean);
     }
 
     public List<BannerBean> getBannerList() {

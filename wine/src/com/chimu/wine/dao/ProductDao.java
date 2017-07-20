@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ProductDao {
+    int addProduct(ProductBean productBean);
 
     List<ProductBean> getProductList();
 

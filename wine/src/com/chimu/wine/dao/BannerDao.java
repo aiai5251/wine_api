@@ -14,5 +14,5 @@ public interface BannerDao {
     void addBanner(BannerBean bannerBean);
 
     //  修改一个banner
-    BannerBean modifyBanner(BannerBean bannerBean);
+    void modifyBanner(BannerBean bannerBean);
 }

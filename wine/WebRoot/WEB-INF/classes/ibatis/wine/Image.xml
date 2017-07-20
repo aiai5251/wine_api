@@ -5,7 +5,7 @@
     </resultMap>
 
     <insert id="addImage" parameterType="com.chimu.wine.bean.ImageBean">
-        INSERT INTO image(product_id, url, banner_id) VALUES (#{product_id}, #{url}, #{banner_id})
+        INSERT INTO image(product_id, url, banner_id, product_type) VALUES (#{product_id}, #{url}, #{banner_id}, #{product_type})
     </insert>
 
     <select id="getImagesByPid" resultType="List">

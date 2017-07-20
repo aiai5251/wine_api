@@ -64,7 +64,20 @@ public class BannerAction extends BaseAction {
     @ResponseBody
     public Map<String, Object> bannerModify(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
+        String id = request.getParameter("id");
+        String bannerTitle = request.getParameter("title");
+        String bannerUrl = request.getParameter("url");
+
         Map<String, Object> map = new HashMap<>();
+        BannerBean bannerBean = bannerService.getBannerWithId(Integer.parseInt(id));
+        bannerBean.setTitle(bannerTitle);
+        bannerBean.setUrl(bannerUrl);
+        MultipartFile file = null;
+        try {
+            file = ((MultipartHttpServletRequest)request).getFile("file");
+        } catch(Exception ignored) {}
+
+        bannerService.modifyBanner(bannerBean, file);
         return super.configResponseMap(map, 1);
     }
 }

@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="com.chimu.wine, com.chimu.admin" />
+    <context:component-scan base-package="com.chimu.wine" />
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${dataSource.mysql.driverClassName}" />
@@ -33,17 +33,16 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath:/ibatis/wine/*.xml</value>
-                <value>classpath:/ibatis/admin/*.xml</value>
             </list>
         </property>
         <!-- MyBatis 类型关联包路径配置 -->
-        <property name="typeAliasesPackage" value="com.chimu.wine.bean, com.chimu.admin.bean">
+        <property name="typeAliasesPackage" value="com.chimu.wine.bean">
         </property>
     </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.chimu.wine.dao, com.chimu.admin.dao" />
+        <property name="basePackage" value="com.chimu.wine.dao" />
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
     </bean>
 

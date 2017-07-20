@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,8 +66,7 @@ public class ProductAction extends BaseAction {
         // 评价列表
         List<CommentBean> commentList = commentService.getCommentByPid(productBean.getId());
         List<CommentBean> comments = new ArrayList<>();
-        for (int i = 0; i < commentList.size(); i++) {
-            CommentBean commentBean = commentList.get(i);
+        for (CommentBean commentBean : commentList) {
             System.out.print("uid" + commentBean.getUid());
             UserBean userBean = userService.getCommentUserByUid(commentBean.getUid());
             commentBean.setUser_name(userBean.getName());
@@ -76,6 +77,48 @@ public class ProductAction extends BaseAction {
 
         map.put("data", productBean);
         return super.configResponseMap(map, 1);
+    }
+
+    @RequestMapping(value = "/product_add")
+    @ResponseBody
+    public Map<String, Object> addProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String title = request.getParameter("title");
+        String submessage = request.getParameter("submessage");
+        String price = request.getParameter("price");
+        String volume = request.getParameter("volume");
+        String description = request.getParameter("description");
+        String origprice = request.getParameter("origprice");
+        String count = request.getParameter("count");
+        String freight_money = request.getParameter("freight_money");
+        String point = request.getParameter("point");
+
+        List<MultipartFile> files = null;
+        try {
+            files = ((MultipartHttpServletRequest)request).getFiles("file");
+        } catch(Exception ignored) {}
+
+        List<MultipartFile> files1 = null;
+        try {
+            files1 = ((MultipartHttpServletRequest)request).getFiles("descriptionFile");
+        } catch (Exception ignored) {}
+
+        if (files != null && files.size() > 0 && files1 != null && files1.size() > 0) {
+            ProductBean productBean = new ProductBean();
+            productBean.setTitle(title);
+            productBean.setSubmessage(submessage);
+            productBean.setPrice(Float.parseFloat(price));
+            productBean.setVolume(Integer.parseInt(volume));
+            productBean.setDescription(description);
+            productBean.setOrigprice(Float.parseFloat(origprice));
+            productBean.setCount(Integer.parseInt(count));
+            productBean.setFreight_money(Float.parseFloat(freight_money));
+            productBean.setPoint(Integer.parseInt(point));
+            productService.addProduct(productBean, files, files1);
+            return super.configResponseMap(map, 1);
+        }
+        return super.configResponseMap(map, 0);
     }
 
 }

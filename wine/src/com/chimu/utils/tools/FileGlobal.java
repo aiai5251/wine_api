@@ -1,10 +1,7 @@
 package com.chimu.utils.tools;
 
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,10 +16,9 @@ public class FileGlobal {
         if(file != null && !file.isEmpty()){
             Date date = new Date();
             String remote =  "http://localhost:9090/image";
-            String local = "/Users/didi/Desktop/wineProject/wine_api/wine/WebRoot/WEB-INF/image";
+            String local = "/Users/didi/Desktop/wineProject/wine_api/image";
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
-
             SimpleDateFormat year = new SimpleDateFormat("yyyy");
             SimpleDateFormat month = new SimpleDateFormat("MM");
             SimpleDateFormat day = new SimpleDateFormat("dd");
@@ -34,7 +30,6 @@ public class FileGlobal {
             String prefix = fileName.substring(fileName.lastIndexOf("."));
 
             File localFile = new File(local + "/" + path + "/" + sdf.format(date) + prefix);
-
             file.transferTo(localFile);
 
             return remote + "/" + path + "/" + sdf.format(date) + prefix;
@@ -43,4 +38,11 @@ public class FileGlobal {
         return null;
     }
 
+    public static boolean RemoveFile(String path) throws Exception {
+        File file = new File(path);
+        if(file.exists())
+            return file.delete();
+
+        return false;
+    }
 }

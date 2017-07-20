@@ -19,9 +19,9 @@ public class ProductBean {
     private Integer volume;
 
     /**
-     * 商品图片list
+     * 商品图片主图
      */
-    private String images;
+    private String image;
 
     /**
      * 商品描述
@@ -41,7 +41,7 @@ public class ProductBean {
     /**
      * 商品详情图
      */
-    private String description_images;
+    private String description_image;
 
     /**
      * 运费
@@ -158,21 +158,21 @@ public class ProductBean {
     }
 
     /**
-     * 获取商品图片list
+     * 获取商品图片
      *
-     * @return 商品图片list
+     * @return 商品图片
      */
-    public String getImages() {
-        return this.images;
+    public String getImage() {
+        return this.image;
     }
 
     /**
-     * 设置商品图片list
+     * 设置商品图片
      *
-     * @param images 商品图片list
+     * @param image 商品图片
      */
-    public void setImages(String images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     /**
@@ -234,17 +234,17 @@ public class ProductBean {
      *
      * @return 商品详情图
      */
-    public String getDescription_images() {
-        return this.description_images;
+    public String getDescription_image() {
+        return this.description_image;
     }
 
     /**
      * 设置商品详情图
      *
-     * @param description_images 商品详情图
+     * @param description_image 商品详情图
      */
-    public void setDescription_images(String description_images) {
-        this.description_images = description_images;
+    public void setDescription_image(String description_image) {
+        this.description_image = description_image;
     }
 
     /**
