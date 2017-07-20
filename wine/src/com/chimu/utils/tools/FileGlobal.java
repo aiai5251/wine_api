@@ -1,48 +1,33 @@
 package com.chimu.utils.tools;
 
+import com.chimu.utils.Constant;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FileGlobal {
-    private static void CreateDirectory(File file) {
-        if (file != null && !file.exists()) {
-            file.mkdirs();
-        }
-    }
-
     public static String AddFile(MultipartFile file) throws Exception {
         if(file != null && !file.isEmpty()){
             Date date = new Date();
-            String remote =  "http://localhost:9090/image";
-            String local = "/Users/didi/Desktop/wineProject/wine_api/image";
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
-            SimpleDateFormat year = new SimpleDateFormat("yyyy");
-            SimpleDateFormat month = new SimpleDateFormat("MM");
-            SimpleDateFormat day = new SimpleDateFormat("dd");
+            String remote = Constant.Host;
+            String local = Constant.SaveImagesLocalPath;
 
-            String path = year.format(date) + "/" + month.format(date) + "/" + day.format(date);
-            CreateDirectory(new File(local + "/" + path));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
 
             String fileName = file.getOriginalFilename();
             String prefix = fileName.substring(fileName.lastIndexOf("."));
 
-            File localFile = new File(local + "/" + path + "/" + sdf.format(date) + prefix);
+            File localFile = new File(local + "/" + sdf.format(date) + prefix);
             file.transferTo(localFile);
 
-            return remote + "/" + path + "/" + sdf.format(date) + prefix;
+            return remote + sdf.format(date) + prefix;
         }
-
         return null;
     }
 
     public static boolean RemoveFile(String path) throws Exception {
         File file = new File(path);
-        if(file.exists())
-            return file.delete();
-
-        return false;
+        return file.exists() && file.delete();
     }
 }
