@@ -49,4 +49,16 @@ public class UserAction extends BaseAction {
         return super.configResponseMap(map, 0);
     }
 
+    @RequestMapping(value = "/getPersonalInfo")
+    @ResponseBody
+    public Map<String, Object> getMyPageInfo(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        Integer uid = Integer.parseInt(request.getParameter("uid"));
+        Integer numberOfCoupon = userService.numberOfCouponByUid(uid);
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("couponCount", numberOfCoupon);
+        map.put("data", dataMap);
+        return super.configResponseMap(map, 1);
+    }
 }

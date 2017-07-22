@@ -17,4 +17,7 @@
         SELECT * FROM coupon WHERE uid = #{uid}
     </select>
 
+    <select id="numberOfCouponByUid" resultType="Integer">
+        SELECT count(id) FROM coupon WHERE uid=#{uid}
+    </select>
 </mapper>
