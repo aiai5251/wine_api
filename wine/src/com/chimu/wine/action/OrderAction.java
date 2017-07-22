@@ -2,6 +2,7 @@ package com.chimu.wine.action;
 
 import com.chimu.utils.BaseAction;
 import com.chimu.utils.tools.CMString;
+import com.chimu.wine.bean.ImageBean;
 import com.chimu.wine.bean.OrderBean;
 import com.chimu.wine.bean.OrderDetailBean;
 import com.chimu.wine.bean.ProductBean;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,7 +37,7 @@ public class OrderAction extends BaseAction {
 
     @RequestMapping(value = "/order_add", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addOrderAction(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> addOrderAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         String uid = request.getParameter("uid");
         String pids = request.getParameter("pids");
@@ -77,7 +79,7 @@ public class OrderAction extends BaseAction {
                     orderPrice += price;
                     productBean.setCount(productBean.getCount() - count);
                     productBean.setSales(productBean.getSales() + count);
-                    productService.modifyProduct(productBean);
+                    productService.modifyProduct(productBean, null, null);
                 }
             }
 
@@ -116,10 +118,27 @@ public class OrderAction extends BaseAction {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
         String id = request.getParameter("id");
-        OrderBean orderBean = orderService.getOrderById(Integer.parseInt(id));
-        if (orderBean != null) {
-            map.put("data", orderBean);
+        String uid = request.getParameter("uid");
+        String order_num =request.getParameter("order_num");
+        if (CMString.isValid(id)) {
+            OrderBean orderBean = orderService.getOrderById(Integer.parseInt(id));
+            if (orderBean != null) {
+                map.put("data", orderBean);
+                return super.configResponseMap(map, 1);
+            }
+        } else if (CMString.isValid(uid)) {
+            List<OrderBean> orderList = orderService.getOrderByUid(Integer.parseInt(uid));
+            map.put("data", orderList);
             return super.configResponseMap(map, 1);
+        } else if (CMString.isValid(order_num)) {
+            OrderBean orderBean = orderService.getOrderByOrderNum(order_num);
+            if (orderBean != null) {
+                map.put("data", orderBean);
+                return super.configResponseMap(map, 1);
+            }
+        } else {
+            List<OrderBean> orderList = orderService.getOrderList();
+            map.put("data", orderList);
         }
         return super.configResponseMap(map, 0);
     }

@@ -5,6 +5,23 @@
     <resultMap id="mainUserMap" type="com.chimu.wine.bean.UserBean">
     </resultMap>
 
+    <insert id="addUser" parameterType="com.chimu.wine.bean.UserBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(avatar, name, isVip, point, award, openid, admin) VALUES
+            (#{avatar}, #{name}, #{isVip}, #{point}, #{award}, #{openid}, #{admin})
+    </insert>
+
+    <update id="modifyUser" parameterType="com.chimu.wine.bean.UserBean">
+        UPDATE user SET avatar = #{avatar}, name = #{name}, isVip = #{isVip}, point = #{point}, award = #{award}, openid = #{openid}, admin = #{admin} WHERE id = #{id}
+    </update>
+
+    <select id="getUserList" resultMap="mainUserMap">
+        SELECT * FROM user
+    </select>
+
+    <select id="getUserWithOpenid" resultMap="mainUserMap">
+        SELECT * FROM  user WHERE openid = #{openid}
+    </select>
+
     <select id="getCommentUserByUid" resultMap="mainUserMap">
         SELECT name, avatar FROM user WHERE id = #{uid}
     </select>

@@ -7,13 +7,20 @@
     <insert id="addImage" parameterType="com.chimu.wine.bean.ImageBean">
         INSERT INTO image(product_id, url, banner_id, product_type) VALUES (#{product_id}, #{url}, #{banner_id}, #{product_type})
     </insert>
-
-    <select id="getImagesByPid" resultType="List">
-        SELECT url FROM image WHERE product_id = #{product_id}
+<!--商品图片-->
+    <select id="getImagesByPid" resultType="String">
+        SELECT url FROM image WHERE product_id = #{product_id} AND product_type = #{product_type}
     </select>
 
-    <select id="getImagesByBid" resultType="List">
+    <delete id="deleteImageByPid">
+        DELETE FROM image WHERE product_id = #{product_id}
+    </delete>
+<!--首页活动banner图片-->
+    <select id="getImagesByBid" resultType="String">
         SELECT url FROM image WHERE banner_id = #{banner_id}
     </select>
 
+    <delete id="deleteImageByBid">
+        DELETE FROM image WHERE banner_id = #{banner_id}
+    </delete>
 </mapper>

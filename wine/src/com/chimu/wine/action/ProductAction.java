@@ -84,6 +84,26 @@ public class ProductAction extends BaseAction {
     public Map<String, Object> addProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
+        Boolean isSucceed = getProductWith(request, true);
+        if (isSucceed) {
+            return super.configResponseMap(map, 1);
+        }
+        return super.configResponseMap(map, 0);
+    }
+
+    @RequestMapping(value = "/product_modify")
+    @ResponseBody
+    public Map<String, Object> modifyProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        Boolean isSucceed = getProductWith(request, false);
+        if (isSucceed) {
+            return super.configResponseMap(map, 1);
+        }
+        return super.configResponseMap(map, 0);
+    }
+
+    private Boolean getProductWith(HttpServletRequest request, Boolean isAdd) throws Exception {
         String title = request.getParameter("title");
         String submessage = request.getParameter("submessage");
         String price = request.getParameter("price");
@@ -93,7 +113,7 @@ public class ProductAction extends BaseAction {
         String count = request.getParameter("count");
         String freight_money = request.getParameter("freight_money");
         String point = request.getParameter("point");
-
+        String invalid = request.getParameter("invalid");
         List<MultipartFile> files = null;
         try {
             files = ((MultipartHttpServletRequest)request).getFiles("file");
@@ -105,7 +125,13 @@ public class ProductAction extends BaseAction {
         } catch (Exception ignored) {}
 
         if (files != null && files.size() > 0 && files1 != null && files1.size() > 0) {
-            ProductBean productBean = new ProductBean();
+            ProductBean productBean;
+            if (isAdd) {
+                productBean = new ProductBean();
+            } else {
+                String id = request.getParameter("id");
+                productBean = productService.getProductWithId(Integer.parseInt(id));
+            }
             productBean.setTitle(title);
             productBean.setSubmessage(submessage);
             productBean.setPrice(Float.parseFloat(price));
@@ -115,10 +141,15 @@ public class ProductAction extends BaseAction {
             productBean.setCount(Integer.parseInt(count));
             productBean.setFreight_money(Float.parseFloat(freight_money));
             productBean.setPoint(Integer.parseInt(point));
-            productService.addProduct(productBean, files, files1);
-            return super.configResponseMap(map, 1);
+            productBean.setInvalid(Integer.parseInt(invalid));
+            if (isAdd) {
+                productService.addProduct(productBean, files, files1);
+            } else {
+                productService.modifyProduct(productBean, files, files1);
+            }
+            return true;
         }
-        return super.configResponseMap(map, 0);
+        return false;
     }
 
 }

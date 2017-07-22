@@ -16,6 +16,10 @@ public class CMString {
         return (str.length() > 0);
     }
 
+    public static boolean isValidInt(Integer count) {
+        return count != null && count > 0;
+    }
+
     /// 字符串保护
     public static String safeString(String str) {
         if (str == null) {

@@ -7,4 +7,8 @@ public class Constant {
     public static final String SaveImagesLocalPath = "/Users/didi/Desktop/wineProject/image/";
     // 图片存取本地路径 - liang
 //    public static final String SaveImagesLocalPath = "/Users/leiliang/Desktop/wine/wine_api/wine/WebRoot/WEB-INF/image";
+
+    public static final String Appid = "wxa699e71285eee5a1";
+
+    public static final String Appsecret = "8720022262e5661fa5def6c20ec876e4";
 }

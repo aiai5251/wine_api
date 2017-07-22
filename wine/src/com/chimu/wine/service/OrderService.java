@@ -1,9 +1,13 @@
 package com.chimu.wine.service;
 
+import com.chimu.utils.tools.CMString;
 import com.chimu.wine.bean.OrderBean;
 import com.chimu.wine.bean.OrderDetailBean;
 import com.chimu.wine.dao.*;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -24,14 +28,41 @@ public class OrderService {
         orderDao.addOrder(orderBean);
     }
 
+    public List<OrderBean> getOrderList() {
+        List<OrderBean> orderList = orderDao.getOrderList();
+        List<OrderBean> orderNewList = new ArrayList<>();
+        for (OrderBean orderBean : orderList) {
+            orderNewList.add(getOrderDetail(orderBean));
+        }
+        return orderNewList;
+    }
+
     public OrderBean getOrderById(Integer id) {
         OrderBean orderBean = orderDao.getOrderById(id);
+        return getOrderDetail(orderBean);
+    }
+
+    public List<OrderBean> getOrderByUid(Integer uid) {
+        List<OrderBean> orderList = orderDao.getOrderByUid(uid);
+        List<OrderBean> orderNewList = new ArrayList<>();
+        for (OrderBean orderBean : orderList) {
+            orderNewList.add(getOrderDetail(orderBean));
+        }
+        return orderNewList;
+    }
+
+    public OrderBean getOrderByOrderNum(String order_num) {
+        OrderBean orderBean = orderDao.getOrderByOrderNum(order_num);
+        return getOrderDetail(orderBean);
+    }
+
+    private OrderBean getOrderDetail(OrderBean orderBean) {
         // 地址信息
-        if (orderBean.getAddress_id() > 0) {
+        if (CMString.isValidInt(orderBean.getAddress_id())) {
             orderBean.setAddressInfo(addressDao.getAddressById(orderBean.getAddress_id()));
         }
         // 优惠券信息
-        if (orderBean.getCoupon_id() > 0) {
+        if (CMString.isValidInt(orderBean.getCoupon_id())) {
             orderBean.setCouponInfo(couponDao.getCouponById(orderBean.getCoupon_id()));
         }
         // 订单详情信息

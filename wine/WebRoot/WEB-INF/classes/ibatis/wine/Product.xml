@@ -5,8 +5,8 @@
     </resultMap>
 
     <insert id="addProduct" parameterType="com.chimu.wine.bean.ProductBean" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO product(title, submessage, price, volume, image, description, origprice, count, description_image, freight_money, point, sales) VALUES
-            (#{title}, #{submessage}, #{price}, #{volume}, #{image}, #{description}, #{origprice}, #{count}, #{description_image}, #{freight_money}, #{point}, #{sales})
+        INSERT INTO product(title, submessage, price, volume, image, description, origprice, count, description_image, freight_money, point, sales, invalid) VALUES
+            (#{title}, #{submessage}, #{price}, #{volume}, #{image}, #{description}, #{origprice}, #{count}, #{description_image}, #{freight_money}, #{point}, #{sales}, #{invalid})
     </insert>
 
     <select id="getProductList" resultMap="BaseResultMap">
@@ -18,7 +18,7 @@
     </select>
 
     <update id="modifyProduct">
-        UPDATE product SET title = #{title}, submessage = #{submessage}, price = #{price}, volume = #{volume}, description = #{description}, origprice = #{origprice}, count = #{count}, freight_money = #{freight_money}, point = #{point}, sales = #{sales} WHERE id = #{id}
+        UPDATE product SET title = #{title}, submessage = #{submessage}, price = #{price}, volume = #{volume}, description = #{description}, origprice = #{origprice}, count = #{count}, freight_money = #{freight_money}, point = #{point}, sales = #{sales}, image = #{image}, description_image = #{description_image}, invalid = #{invalid} WHERE id = #{id}
     </update>
 
 </mapper>

@@ -10,8 +10,20 @@
             (${uid}, #{order_num}, #{status}, #{count}, #{amount}, #{create_time}, #{modify_time})
     </insert>
 
+    <select id="getOrderList" resultMap="mainOrderMap">
+        SELECT * FROM `order`
+    </select>
+
     <select id="getOrderById" resultMap="mainOrderMap">
         SELECT * FROM `order` WHERE id = #{id}
+    </select>
+
+    <select id="getOrderByUid" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE uid = #{uid}
+    </select>
+
+    <select id="getOrderByOrderNum" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE order_num = #{order_num}
     </select>
 
     <update id="modifyOrder" parameterType="com.chimu.wine.bean.OrderBean">
