@@ -1,24 +1,20 @@
 package com.chimu.wine.bean;
 
-public class PointBean {
+import java.util.Date;
 
+public class PointBean {
     private Integer id;
-    private Integer pid;
     private Integer uid;
     private Integer point;
+    private Date create_time;
+    private int type;
+    private String desciption;
 
     public Integer getId() {
         return this.id;
     }
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getPid() {
-        return this.pid;
-    }
-    public void setPid(Integer pid) {
-        this.pid = pid;
     }
 
     public Integer getPoint() {
@@ -33,5 +29,29 @@ public class PointBean {
     }
     public void setUid(Integer uid) {
         this.uid = uid;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getDesciption() {
+        return desciption;
+    }
+
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
     }
 }

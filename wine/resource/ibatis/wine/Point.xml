@@ -5,8 +5,11 @@
     <resultMap id="mainPointMap" type="com.chimu.wine.bean.PointBean">
     </resultMap>
     
-    <select id="findPointByPid" resultMap="mainPointMap">
-        SELECT * FROM point WHERE pid = #{pid}
+    <select id="getPointListByUid" resultMap="mainPointMap">
+        SELECT * FROM point WHERE uid = #{uid} ORDER BY create_time ASC
     </select>
 
+    <insert id="addPoint" parameterType="com.chimu.wine.bean.PointBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO point(uid, point, create_time, type, desciption) VALUES (#{uid}, #{point}, #{create_time}, #{type}, #{desciption})
+    </insert>
 </mapper>

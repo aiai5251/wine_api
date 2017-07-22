@@ -3,10 +3,12 @@ package com.chimu.wine.service;
 import com.chimu.utils.tools.CMString;
 import com.chimu.wine.bean.OrderBean;
 import com.chimu.wine.bean.OrderDetailBean;
+import com.chimu.wine.bean.PointBean;
 import com.chimu.wine.dao.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,12 +18,14 @@ public class OrderService {
     private ProductDao productDao;
     private AddressDao addressDao;
     private CouponDao couponDao;
-    public OrderService(OrderDao orderDao, OrderDetailDao orderDetailDao, ProductDao productDao, AddressDao addressDao, CouponDao couponDao) {
+    private PointDao pointDao;
+    public OrderService(OrderDao orderDao, OrderDetailDao orderDetailDao, ProductDao productDao, AddressDao addressDao, CouponDao couponDao, PointDao pointDao) {
         this.orderDao = orderDao;
         this.orderDetailDao = orderDetailDao;
         this.productDao = productDao;
         this.addressDao = addressDao;
         this.couponDao = couponDao;
+        this.pointDao = pointDao;
     }
 
     public void addOrder(OrderBean orderBean) {
@@ -75,6 +79,15 @@ public class OrderService {
     }
 
     public void modifyOrder(OrderBean orderBean) {
+        if (orderBean.getStatus() == 1) {
+            // 订单完成
+            PointBean pointBean = new PointBean();
+            pointBean.setPoint(10);
+            pointBean.setDesciption("买酒");
+            pointBean.setCreate_time(new Date());
+            pointBean.setUid(orderBean.getUid());
+            pointDao.addPoint(pointBean);
+        }
         orderDao.modifyOrder(orderBean);
     }
 }

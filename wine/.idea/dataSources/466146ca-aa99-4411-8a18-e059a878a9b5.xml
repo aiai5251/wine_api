@@ -30,35 +30,35 @@
     <table id="24" parent="2" name="user"/>
     <column id="25" parent="7" name="id">
       <Position>1</Position>
-      <Comment>地址id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="26" parent="7" name="name">
       <Position>2</Position>
-      <Comment>名称</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(200)|0</DataType>
     </column>
     <column id="27" parent="7" name="tel">
       <Position>3</Position>
-      <Comment>电话</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(30)|0</DataType>
     </column>
     <column id="28" parent="7" name="is_default">
       <Position>4</Position>
-      <Comment>是否默认</Comment>
+      <Comment>????</Comment>
       <DataType>int(30)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="29" parent="7" name="uid">
       <Position>5</Position>
-      <Comment>用户id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
     </column>
     <column id="30" parent="7" name="address">
       <Position>6</Position>
-      <Comment>地址</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(200)|0</DataType>
     </column>
     <column id="31" parent="7" name="is_delete">
@@ -84,13 +84,13 @@
     </column>
     <column id="35" parent="8" name="phone">
       <Position>2</Position>
-      <DataType>int(12)|0</DataType>
+      <DataType>varchar(12)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="36" parent="8" name="password">
       <Position>3</Position>
-      <DataType>varchar(20)|0</DataType>
+      <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
@@ -101,24 +101,24 @@
     </key>
     <column id="38" parent="9" name="id">
       <Position>1</Position>
-      <Comment>轮播图 id</Comment>
+      <Comment>??? id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="39" parent="9" name="imgurl">
       <Position>2</Position>
-      <Comment>轮播图图片</Comment>
+      <Comment>?????</Comment>
       <DataType>varchar(120)|0</DataType>
     </column>
     <column id="40" parent="9" name="url">
       <Position>3</Position>
-      <Comment>跳转地址</Comment>
+      <Comment>????</Comment>
       <DataType>varchar(120)|0</DataType>
     </column>
     <column id="41" parent="9" name="title">
       <Position>4</Position>
-      <Comment>跳转的标题</Comment>
+      <Comment>?????</Comment>
       <DataType>varchar(60)|0</DataType>
     </column>
     <key id="42" parent="9" name="PRIMARY">
@@ -134,17 +134,17 @@
     </column>
     <column id="44" parent="10" name="pid">
       <Position>2</Position>
-      <Comment>商品id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(11)|0</DataType>
     </column>
     <column id="45" parent="10" name="uid">
       <Position>3</Position>
-      <Comment>用户id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(11)|0</DataType>
     </column>
     <column id="46" parent="10" name="count">
       <Position>4</Position>
-      <Comment>购物车数量</Comment>
+      <Comment>?????</Comment>
       <DataType>int(11)|0</DataType>
     </column>
     <key id="47" parent="10" name="PRIMARY">
@@ -181,34 +181,34 @@
     </key>
     <column id="53" parent="12" name="id">
       <Position>1</Position>
-      <Comment>评论</Comment>
+      <Comment>??</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="54" parent="12" name="pid">
       <Position>2</Position>
-      <Comment>商品id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
     </column>
     <column id="55" parent="12" name="title">
       <Position>3</Position>
-      <Comment>商品描述</Comment>
+      <Comment>????</Comment>
       <DataType>varchar(200)|0</DataType>
     </column>
     <column id="56" parent="12" name="uid">
       <Position>4</Position>
-      <Comment>用户id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
     </column>
     <column id="57" parent="12" name="date">
       <Position>5</Position>
-      <Comment>日期</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(40)|0</DataType>
     </column>
     <column id="58" parent="12" name="images">
       <Position>6</Position>
-      <Comment>图片</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(200)|0</DataType>
     </column>
     <key id="59" parent="12" name="PRIMARY">
@@ -218,40 +218,40 @@
     </key>
     <column id="60" parent="13" name="id">
       <Position>1</Position>
-      <Comment>优惠券</Comment>
+      <Comment>???</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="61" parent="13" name="price">
       <Position>2</Position>
-      <Comment>价格</Comment>
+      <Comment>??</Comment>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="62" parent="13" name="pid">
       <Position>3</Position>
-      <Comment>商品id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
     </column>
     <column id="63" parent="13" name="uid">
       <Position>4</Position>
-      <Comment>用户id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
     </column>
     <column id="64" parent="13" name="build_time">
       <Position>5</Position>
-      <Comment>开始日期</Comment>
+      <Comment>????</Comment>
       <DataType>varchar(30)|0</DataType>
     </column>
     <column id="65" parent="13" name="end_time">
       <Position>6</Position>
-      <Comment>结束日期</Comment>
+      <Comment>????</Comment>
       <DataType>varchar(30)|0</DataType>
     </column>
     <column id="66" parent="13" name="max_price">
       <Position>7</Position>
-      <Comment>满多少减</Comment>
+      <Comment>????</Comment>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
@@ -302,401 +302,420 @@
     </column>
     <column id="75" parent="15" name="url">
       <Position>3</Position>
-      <DataType>varchar(600)|0</DataType>
+      <DataType>int(11)|0</DataType>
     </column>
     <column id="76" parent="15" name="banner_id">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="77" parent="15" name="product_type">
-      <Position>5</Position>
-      <DataType>int(11)|0</DataType>
-    </column>
-    <key id="78" parent="15" name="PRIMARY">
+    <key id="77" parent="15" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="79" parent="16" name="id">
+    <column id="78" parent="16" name="id">
       <Position>1</Position>
       <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="80" parent="16" name="pid">
+    <column id="79" parent="16" name="pid">
       <Position>2</Position>
       <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="81" parent="16" name="name">
+    <column id="80" parent="16" name="name">
       <Position>3</Position>
       <Comment>???</Comment>
       <DataType>varchar(30)|0</DataType>
     </column>
-    <column id="82" parent="16" name="detail">
+    <column id="81" parent="16" name="detail">
       <Position>4</Position>
       <Comment>????</Comment>
       <DataType>varchar(600)|0</DataType>
     </column>
-    <key id="83" parent="16" name="PRIMARY">
+    <key id="82" parent="16" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="84" parent="17" name="id">
+    <column id="83" parent="17" name="id">
       <Position>1</Position>
-      <Comment>订单</Comment>
+      <Comment>??</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="85" parent="17" name="uid">
+    <column id="84" parent="17" name="uid">
       <Position>2</Position>
-      <Comment>用户id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="86" parent="17" name="order_num">
+    <column id="85" parent="17" name="order_num">
       <Position>3</Position>
-      <Comment>订单number</Comment>
+      <Comment>??number</Comment>
       <DataType>varchar(120)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="87" parent="17" name="status">
+    <column id="86" parent="17" name="status">
       <Position>4</Position>
-      <Comment>订单状态0：未支付，1:已支付，2:已发货，3:订单完成</Comment>
+      <Comment>????0?????1:????2:????3:????</Comment>
       <DataType>int(1)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="88" parent="17" name="memo">
+    <column id="87" parent="17" name="memo">
       <Position>5</Position>
-      <Comment>备注</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="89" parent="17" name="address_id">
+    <column id="88" parent="17" name="address_id">
       <Position>6</Position>
-      <Comment>地址id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="90" parent="17" name="count">
+    <column id="89" parent="17" name="count">
       <Position>7</Position>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="91" parent="17" name="coupon_id">
+    <column id="90" parent="17" name="coupon_id">
       <Position>8</Position>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="92" parent="17" name="amount">
+    <column id="91" parent="17" name="amount">
       <Position>9</Position>
-      <Comment>订单总价</Comment>
+      <Comment>????</Comment>
       <DataType>double(10,1)|0</DataType>
       <DefaultExpression>&apos;0.0&apos;</DefaultExpression>
     </column>
-    <column id="93" parent="17" name="create_time">
+    <column id="92" parent="17" name="create_time">
       <Position>10</Position>
-      <Comment>订单创建时间</Comment>
+      <Comment>??????</Comment>
       <DataType>date|0</DataType>
     </column>
-    <column id="94" parent="17" name="modify_time">
+    <column id="93" parent="17" name="modify_time">
       <Position>11</Position>
-      <Comment>订单修改时间</Comment>
+      <Comment>??????</Comment>
       <DataType>date|0</DataType>
     </column>
-    <column id="95" parent="17" name="pay">
+    <column id="94" parent="17" name="pay">
       <Position>12</Position>
-      <Comment>实付</Comment>
+      <Comment>??</Comment>
       <DataType>double(10,1)|0</DataType>
       <DefaultExpression>&apos;0.0&apos;</DefaultExpression>
     </column>
-    <key id="96" parent="17" name="PRIMARY">
+    <key id="95" parent="17" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="97" parent="18" name="id">
+    <column id="96" parent="18" name="id">
       <Position>1</Position>
-      <Comment>订单详情id</Comment>
+      <Comment>????id</Comment>
       <DataType>int(11) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="98" parent="18" name="oid">
+    <column id="97" parent="18" name="oid">
       <Position>2</Position>
-      <Comment>订单id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="99" parent="18" name="pid">
+    <column id="98" parent="18" name="pid">
       <Position>3</Position>
-      <Comment>商品id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="100" parent="18" name="count">
+    <column id="99" parent="18" name="count">
       <Position>4</Position>
-      <Comment>商品购买的个数</Comment>
+      <Comment>???????</Comment>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="101" parent="18" name="price">
+    <column id="100" parent="18" name="price">
       <Position>5</Position>
-      <Comment>商品购买的单价</Comment>
+      <Comment>???????</Comment>
       <DataType>float(11,1)|0</DataType>
       <DefaultExpression>&apos;0.0&apos;</DefaultExpression>
     </column>
-    <key id="102" parent="18" name="PRIMARY">
+    <key id="101" parent="18" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="103" parent="19" name="id">
+    <column id="102" parent="19" name="id">
       <Position>1</Position>
-      <Comment>积分</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="104" parent="19" name="pid">
+    <column id="103" parent="19" name="uid">
       <Position>2</Position>
-      <Comment>商品id</Comment>
       <DataType>int(10)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="105" parent="19" name="point">
+    <column id="104" parent="19" name="point">
       <Position>3</Position>
-      <Comment>积分</Comment>
       <DataType>int(10)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="106" parent="19" name="PRIMARY">
+    <column id="105" parent="19" name="create_time">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="106" parent="19" name="type">
+      <Position>5</Position>
+      <DataType>int(1)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="107" parent="19" name="desciption">
+      <Position>6</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="108" parent="19" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="107" parent="20" name="id">
+    <column id="109" parent="20" name="id">
       <Position>1</Position>
-      <Comment>商品 id</Comment>
+      <Comment>?? id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="108" parent="20" name="title">
+    <column id="110" parent="20" name="title">
       <Position>2</Position>
-      <Comment>商品名称</Comment>
+      <Comment>????</Comment>
       <DataType>varchar(120)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="109" parent="20" name="submessage">
+    <column id="111" parent="20" name="submessage">
       <Position>3</Position>
-      <Comment>商品小标题</Comment>
+      <Comment>?????</Comment>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="110" parent="20" name="price">
+    <column id="112" parent="20" name="price">
       <Position>4</Position>
-      <Comment>商品价格</Comment>
+      <Comment>????</Comment>
       <DataType>double(10,1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0.0&apos;</DefaultExpression>
     </column>
-    <column id="111" parent="20" name="volume">
+    <column id="113" parent="20" name="volume">
       <Position>5</Position>
-      <Comment>商品容量</Comment>
+      <Comment>????</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="112" parent="20" name="image">
+    <column id="114" parent="20" name="images">
       <Position>6</Position>
-      <Comment>商品图片list</Comment>
+      <Comment>????list</Comment>
       <DataType>varchar(600)|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="113" parent="20" name="description">
+    <column id="115" parent="20" name="description">
       <Position>7</Position>
-      <Comment>商品描述</Comment>
+      <Comment>????</Comment>
       <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="114" parent="20" name="origprice">
+    <column id="116" parent="20" name="origprice">
       <Position>8</Position>
-      <Comment>原价</Comment>
+      <Comment>??</Comment>
       <DataType>float(10,1)|0</DataType>
       <DefaultExpression>&apos;0.0&apos;</DefaultExpression>
     </column>
-    <column id="115" parent="20" name="count">
+    <column id="117" parent="20" name="count">
       <Position>9</Position>
-      <Comment>商品数量</Comment>
+      <Comment>????</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;99&apos;</DefaultExpression>
     </column>
-    <column id="116" parent="20" name="description_image">
+    <column id="118" parent="20" name="description_images">
       <Position>10</Position>
-      <Comment>商品详情图</Comment>
+      <Comment>?????</Comment>
       <DataType>varchar(600)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="117" parent="20" name="freight_money">
+    <column id="119" parent="20" name="freight_money">
       <Position>11</Position>
-      <Comment>运费</Comment>
+      <Comment>??</Comment>
       <DataType>float(10,1)|0</DataType>
       <DefaultExpression>&apos;0.0&apos;</DefaultExpression>
     </column>
-    <column id="118" parent="20" name="point">
+    <column id="120" parent="20" name="point">
       <Position>12</Position>
-      <Comment>可获得积分</Comment>
+      <Comment>?????</Comment>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="119" parent="20" name="sales">
+    <column id="121" parent="20" name="sales">
       <Position>13</Position>
-      <Comment>销售</Comment>
+      <Comment>??</Comment>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="120" parent="20" name="invalid">
-      <Position>14</Position>
-      <Comment>默认无效，不上架</Comment>
-      <DataType>int(11)|0</DataType>
-      <DefaultExpression>&apos;0&apos;</DefaultExpression>
-    </column>
-    <key id="121" parent="20" name="PRIMARY">
+    <key id="122" parent="20" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="122" parent="21" name="id">
+    <column id="123" parent="21" name="id">
       <Position>1</Position>
       <Comment>??</Comment>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="123" parent="21" name="pid">
+    <column id="124" parent="21" name="pid">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="124" parent="21" name="name">
+    <column id="125" parent="21" name="name">
       <Position>3</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="125" parent="21" name="description">
+    <column id="126" parent="21" name="description">
       <Position>4</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <key id="126" parent="21" name="PRIMARY">
+    <key id="127" parent="21" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="127" parent="22" name="id">
+    <column id="128" parent="22" name="id">
       <Position>1</Position>
       <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="128" parent="22" name="uid">
+    <column id="129" parent="22" name="uid">
       <Position>2</Position>
       <Comment>??id</Comment>
       <DataType>varchar(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="129" parent="22" name="fri_id">
+    <column id="130" parent="22" name="fri_id">
       <Position>3</Position>
       <Comment>??????id</Comment>
       <DataType>varchar(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="130" parent="22" name="PRIMARY">
+    <key id="131" parent="22" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="131" parent="23" name="id">
+    <column id="132" parent="23" name="id">
       <Position>1</Position>
       <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="132" parent="23" name="pid">
+    <column id="133" parent="23" name="pid">
       <Position>2</Position>
       <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
     </column>
-    <column id="133" parent="23" name="name">
+    <column id="134" parent="23" name="name">
       <Position>3</Position>
       <Comment>????</Comment>
       <DataType>varchar(30)|0</DataType>
     </column>
-    <column id="134" parent="23" name="type">
+    <column id="135" parent="23" name="type">
       <Position>4</Position>
       <Comment>??</Comment>
       <DataType>int(10)|0</DataType>
     </column>
-    <key id="135" parent="23" name="PRIMARY">
+    <key id="136" parent="23" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="136" parent="24" name="id">
+    <column id="137" parent="24" name="id">
       <Position>1</Position>
-      <Comment>用户id</Comment>
+      <Comment>??id</Comment>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="137" parent="24" name="avatar">
+    <column id="138" parent="24" name="avatar">
       <Position>2</Position>
-      <Comment>头像</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="138" parent="24" name="name">
+    <column id="139" parent="24" name="name">
       <Position>3</Position>
-      <Comment>名称</Comment>
+      <Comment>??</Comment>
       <DataType>varchar(30)|0</DataType>
     </column>
-    <column id="139" parent="24" name="isVip">
+    <column id="140" parent="24" name="isVip">
       <Position>4</Position>
-      <Comment>是否是会员</Comment>
+      <Comment>?????</Comment>
       <DataType>int(1)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="140" parent="24" name="point">
+    <column id="141" parent="24" name="point">
       <Position>5</Position>
-      <Comment>积分</Comment>
+      <Comment>??</Comment>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="141" parent="24" name="award">
+    <column id="142" parent="24" name="award">
       <Position>6</Position>
-      <Comment>奖励</Comment>
+      <Comment>??</Comment>
       <DataType>int(10)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="142" parent="24" name="openid">
+    <column id="143" parent="24" name="extend_man">
       <Position>7</Position>
-      <Comment>微信id</Comment>
-      <DataType>varchar(200)|0</DataType>
+      <Comment>?????</Comment>
+      <DataType>int(10)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="143" parent="24" name="admin">
+    <column id="144" parent="24" name="extend_moneyman">
       <Position>8</Position>
+      <Comment>?????????</Comment>
+      <DataType>int(10)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="145" parent="24" name="coupon_count">
+      <Position>9</Position>
+      <Comment>?????</Comment>
+      <DataType>int(5)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="146" parent="24" name="is_spoke">
+      <Position>10</Position>
+      <Comment>???0??1?</Comment>
       <DataType>int(1)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="144" parent="24" name="PRIMARY">
+    <column id="147" parent="24" name="openid">
+      <Position>11</Position>
+      <Comment>??openid</Comment>
+      <DataType>varchar(60)|0</DataType>
+    </column>
+    <key id="148" parent="24" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
