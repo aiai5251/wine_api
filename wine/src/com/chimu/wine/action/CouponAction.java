@@ -22,7 +22,7 @@ public class CouponAction extends BaseAction {
 
     @RequestMapping(value = "/coupon")
     @ResponseBody
-    protected Map<String, Object>coupon(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> coupon(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
         String pid = request.getParameter("pid");
         String uid = request.getParameter("uid");
