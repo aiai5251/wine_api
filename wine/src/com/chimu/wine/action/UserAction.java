@@ -42,10 +42,10 @@ public class UserAction extends BaseAction {
         String url = request.getParameter("state");
         System.out.println("--------微信授权回调成功-----");
         System.out.print("code = " + code + "; url = " + url);
-        UserBean userBean = wechatService.getUserByCode(code);
-        if (userBean != null) {
-            response.sendRedirect("http://www.main-zha.com/wine/com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
-        }
+//        UserBean userBean = wechatService.getUserByCode(code);
+//        if (userBean != null) {
+//            response.sendRedirect("http://www.main-zha.com/wine/com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
+//        }
         return super.configResponseMap(map, 0);
     }
 

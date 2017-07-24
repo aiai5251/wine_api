@@ -46,4 +46,8 @@ public class WechatService {
         return null;
     }
 
+    public String getPayId(String order_num, String openid, Double amount) {
+        return "";
+    }
+
 }

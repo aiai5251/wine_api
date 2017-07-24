@@ -15,4 +15,6 @@ public interface BannerDao {
 
     //  修改一个banner
     void modifyBanner(BannerBean bannerBean);
+
+    void deleteBanner(Integer id);
 }

@@ -21,8 +21,8 @@
         UPDATE cart SET count = #{count} WHERE id = #{id}
     </update>
 
-    <delete id="deleteCartByPidWithUid">
-        DELETE FROM cart WHERE pid = #{pid} AND uid = #{uid}
+    <delete id="deleteCartById">
+        DELETE FROM cart WHERE id = #{id}
     </delete>
 
 </mapper>

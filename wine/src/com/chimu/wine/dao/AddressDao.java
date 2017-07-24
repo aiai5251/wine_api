@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface AddressDao {
     void addAddress(AddressBean addressBean);
-    void deleteAddress(@Param("is_delete")Integer is_delete, @Param("id")Integer id);
+    void deleteAddress(Integer id);
+    void modifyAddressById(AddressBean addressBean);
     List<AddressBean> getAddressByUid(Integer uid);
     AddressBean getAddressById(Integer id);
-    void modifyAddressById(AddressBean addressBean);
-    AddressBean getSelectedByUid(Integer uid);
+    AddressBean getAddressSelectedByUid(Integer uid);
 }

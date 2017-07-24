@@ -6,29 +6,29 @@
     </resultMap>
     
     <insert id="addAddress" parameterType="com.chimu.wine.bean.AddressBean" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO address(name, tel, uid, address, is_default, is_selected) VALUES
-            (#{name}, #{tel}, #{uid}, #{address}, #{is_default}, #{is_selected})
+        INSERT INTO address(name, tel, uid, address, province_city, is_default, is_selected) VALUES
+            (#{name}, #{tel}, #{uid}, #{address}, #{province_city}, #{is_default}, #{is_selected})
     </insert>
 
+    <!--删除的做标记，但是数据库中存储-->
     <update id="deleteAddress">
-        UPDATE address SET is_delete = #{is_delete} WHERE id = #{id}
+        UPDATE address SET is_delete = 1 WHERE id = #{id}
     </update>
 
-<!--删除的不展示，但是数据库中存储-->
-    <select id="getAddressByUid" resultMap="mainAddressMap">
-        SELECT * FROM address WHERE uid = #{uid} AND is_delete = 0
-    </select>
+    <update id="modifyAddressById" parameterType="com.chimu.wine.bean.AddressBean">
+        UPDATE address SET name = #{name}, tel = #{tel}, address = #{address}, province_city = #{province_city}, is_default = #{is_default}, is_selected = #{is_selected} WHERE id = #{id}
+    </update>
 
     <select id="getAddressById" resultMap="mainAddressMap">
         SELECT * FROM address WHERE id = #{id}
     </select>
 
-    <select id="getSelectedByUid" resultMap="mainAddressMap">
-        SELECT * FROM address WHERE is_selected = 1
+    <select id="getAddressByUid" resultMap="mainAddressMap">
+        SELECT * FROM address WHERE uid = #{uid} AND is_delete = 0
     </select>
 
-    <update id="modifyAddressById" parameterType="com.chimu.wine.bean.AddressBean">
-        UPDATE address SET name = #{name}, tel = #{tel}, address = #{address}, is_default = #{is_default}, is_selected = #{is_selected} WHERE id = #{id}
-    </update>
+    <select id="getAddressSelectedByUid" resultMap="mainAddressMap">
+        SELECT * FROM address WHERE is_selected = 1 AND uid = #{uid}
+    </select>
 
 </mapper>

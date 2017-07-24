@@ -10,7 +10,7 @@ public class CartBean {
     private String submessage;
     private Float price;
     private Integer volume;
-    private String images;
+    private String image;
 
     public Integer getId() {
         return this.id;
@@ -68,12 +68,12 @@ public class CartBean {
         this.volume = volume;
     }
 
-    public String getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setImage(String images) {
+        this.image = images;
     }
 
     public Integer getCount() {
@@ -89,6 +89,7 @@ public class CartBean {
         this.setSubmessage(productBean.getSubmessage());
         this.setPrice(productBean.getPrice());
         this.setVolume(productBean.getVolume());
+        this.setImage(productBean.getImage());
     }
 
 }

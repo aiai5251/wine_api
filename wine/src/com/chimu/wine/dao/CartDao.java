@@ -9,7 +9,7 @@ public interface CartDao {
     void addCart(CartBean cartBean);
 //    多个参数需要添加 @Param("id")
     CartBean getCartByPidWithUid(@Param("pid")Integer pid, @Param("uid")Integer uid);
-    void modifyCartById(@Param("id")Integer id, @Param("count")Integer count);
+    void modifyCartById(CartBean cartBean);
     List<CartBean> getCartByUid(Integer uid);
-    void deleteCartByPidWithUid(@Param("pid")Integer pid, @Param("uid")Integer uid);
+    void deleteCartById(Integer id);
 }

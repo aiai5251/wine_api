@@ -32,8 +32,6 @@ public class OrderAction extends BaseAction {
     private ProductService productService;
     @Autowired()
     private OrderDetailService orderDetailService;
-    @Autowired()
-    private CartService cartService;
 
     @RequestMapping(value = "/order_add", method = RequestMethod.POST)
     @ResponseBody
@@ -103,7 +101,6 @@ public class OrderAction extends BaseAction {
                     orderDetailBean.setPid(pid);
                     orderDetailBean.setPrice(price);
                     orderDetailService.addOrderDetail(orderDetailBean);
-                    cartService.deleteCartByPidWithUid(pid, Integer.parseInt(uid));
                 }
             }
             map.put("data", orderBean);
@@ -176,6 +173,75 @@ public class OrderAction extends BaseAction {
             orderService.modifyOrder(orderBean);
             return super.configResponseMap(map, 1);
         }
+        return super.configResponseMap(map, 0);
+    }
+
+    @RequestMapping(value = "wechat_pay")
+    @ResponseBody
+    public Map<String, Object> wechatPayAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String order_num = request.getParameter("order_num");
+        String openid = request.getParameter("openid");
+        String amount = request.getParameter("amount");
+
+//        String prepayId = null;
+//        /******订单号生成规则*****/
+//        //订单号      ：    当前时间 + 6位随机数
+//        //多选订单号 ：  当前时间 + 4位随机数
+//        String order_num = null;//下单订单号
+//        String choose = null;//多订单支付单据号
+//        String random = null;//随机数
+//        String current = null;//当前时间
+//        String sign = null;
+//        int count = 0;//购买数量
+//        float p_price = 0;//商品原价
+//        int p_id = 0;
+//        float p_money = 0;
+//        float money = 0;
+//        int result = 0;
+//        System.out.println("----");
+//
+//        //随机数生成
+//        random = RandomUtil.produceStringAndNumber(10);
+//
+//        prepayId = Wxpay.getpayId(order_num,price,openid,random);
+//        System.out.println("url =="+prepayId);
+        /**
+         * 微信二次签名
+         *prepayId 微信订单号
+         *appid  微信appid
+         *timestamp 时间戳
+         *nonce 随机字符串
+         *key 密钥
+         *
+         * */
+//        String packages = "prepay_id="+prepayId;
+//        String timeStamp = WxSign.getTimeStamp();
+//        String random1 = WxSign.getNonceStr();
+//        sign = UnifiedorderService.GetTwoSign(prepayId, Wxpay.wx_appid, timeStamp, random1, Wxpay.wx_key);
+//        if (prepayId !=null) {
+//            map.put("status", 1);
+//            map.put("prepayId", prepayId);
+//            map.put("appId", Wxpay.wx_appid);
+//            map.put("timeStamp", timeStamp);
+//            map.put("nonceStr", random1);
+//            map.put("packages", packages);
+//            map.put("sign", sign);
+//            map.put("infoMsg", "获取成功");
+//        }else {
+//            map.put("status", 0);
+//            map.put("infoMsg", "获取失败");
+//        }
+//        try {
+//            resp.sendRedirect("http://www.main-zha.com/WxPay.jsp?"+"appId="+Wxpay.wx_appid+"&sign="+sign+"&timeStamp="+timeStamp+"&nonceStr="+random1+"&packages="+packages);
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        System.out.println("map==="+map);
+//        response.sendRedirect("http://www.main-zha.com/WxPay.jsp?"+"appId="+Wxpay.wx_appid+"&sign="+sign+"&timeStamp="+timeStamp+"&nonceStr="+random1+"&packages="+packages);
+
         return super.configResponseMap(map, 0);
     }
 

@@ -10,10 +10,7 @@ public class CMString {
 
     /// 是否是有效字符串
     public static boolean isValid(String str) {
-        if (str == null) {
-            return false;
-        }
-        return (str.length() > 0);
+        return str != null && (str.length() > 0);
     }
 
     public static boolean isValidInt(Integer count) {

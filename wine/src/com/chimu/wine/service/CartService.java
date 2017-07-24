@@ -21,15 +21,15 @@ public class CartService {
         return cartDao.getCartByPidWithUid(pid, uid);
     }
 
-    public void modifyCartById(Integer id, Integer count) {
-        cartDao.modifyCartById(id, count);
+    public void modifyCartById(CartBean cartBean) {
+        cartDao.modifyCartById(cartBean);
     }
 
     public List<CartBean> getCartByUid(Integer uid) {
         return cartDao.getCartByUid(uid);
     }
 
-    public void deleteCartByPidWithUid(Integer pid, Integer uid) {
-        cartDao.deleteCartByPidWithUid(pid, uid);
+    public void deleteCartById(Integer id) {
+        cartDao.deleteCartById(id);
     }
 }

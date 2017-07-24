@@ -19,6 +19,10 @@
     <update id="modifyBanner">
         UPDATE banner SET title = #{title}, url = #{url}, imgurl = #{imgurl} WHERE id = #{id}
     </update>
+
+    <delete id="deleteBanner">
+        DELETE FROM banner WHERE id = #{id}
+    </delete>
 </mapper>
 
 

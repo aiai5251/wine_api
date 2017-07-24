@@ -1,7 +1,5 @@
 package com.chimu.wine.bean;
 
-import java.util.Date;
-
 public class BannerBean {
 
     private int id;

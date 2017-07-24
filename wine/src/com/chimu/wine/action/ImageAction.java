@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/wine")
 public class ImageAction extends BaseAction {
 
     @RequestMapping(value = "/image")

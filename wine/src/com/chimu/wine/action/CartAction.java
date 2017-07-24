@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/wine")
-public class CashAction extends BaseAction {
+public class CartAction extends BaseAction {
     @Autowired()
     private CartService cartService;
     @Autowired()
@@ -33,8 +34,8 @@ public class CashAction extends BaseAction {
 
         CartBean hasCartBean = cartService.getCartByPidWithUid(Integer.parseInt(pid), Integer.parseInt(uid));
         if (hasCartBean != null) {
-            hasCartBean.setCount(Integer.parseInt(count));
-            cartService.modifyCartById(hasCartBean.getId(), Integer.parseInt(count));
+            hasCartBean.setCount(Integer.parseInt(count) + hasCartBean.getCount());
+            cartService.modifyCartById(hasCartBean);
             map.put("data", hasCartBean);
         } else {
             CartBean cartBean = new CartBean();
@@ -54,10 +55,22 @@ public class CashAction extends BaseAction {
         String uid = request.getParameter("uid");
         Map<String, Object> map = new HashMap<>();
         List<CartBean> cartList = cartService.getCartByUid(Integer.parseInt(uid));
+        List<CartBean> carts = new ArrayList<>();
         for (CartBean cartBean : cartList) {
             cartBean.setProductModel(productService.getProductWithId(cartBean.getPid()));
+            carts.add(cartBean);
         }
-        map.put("data", cartList);
+        map.put("data", carts);
+        return super.configResponseMap(map, 1);
+    }
+
+    @RequestMapping(value = "cart_delete")
+    @ResponseBody
+    public Map<String, Object> deleteCartAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        String id = request.getParameter("id");
+        Map<String, Object> map = new HashMap<>();
+        cartService.deleteCartById(Integer.parseInt(id));
         return super.configResponseMap(map, 1);
     }
 }

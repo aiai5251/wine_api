@@ -17,8 +17,8 @@ public class ProductBean {
     private Float freight_money;
     private Integer point;
     private Integer sales;
-    private List<String> images;
-    private List<String> desc_images;
+    private List<ImageBean> images;
+    private List<ImageBean> desc_images;
     private Integer invalid; //默认下架
 //    促销列表
     private List<PromotionBean> promotionList;
@@ -155,19 +155,19 @@ public class ProductBean {
         this.commentList = commentList;
     }
 
-    public List<String> getImages() {
+    public List<ImageBean> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<ImageBean> images) {
         this.images = images;
     }
 
-    public List<String> getDesc_images() {
+    public List<ImageBean> getDesc_images() {
         return desc_images;
     }
 
-    public void setDesc_images(List<String> desc_images) {
+    public void setDesc_images(List<ImageBean> desc_images) {
         this.desc_images = desc_images;
     }
 

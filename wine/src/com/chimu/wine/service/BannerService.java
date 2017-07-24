@@ -1,5 +1,6 @@
 package com.chimu.wine.service;
 
+import com.chimu.utils.Constant;
 import com.chimu.utils.tools.CMString;
 import com.chimu.utils.tools.FileGlobal;
 import com.chimu.wine.bean.BannerBean;
@@ -24,9 +25,15 @@ public class BannerService {
         bannerDao.addBanner(bannerBean);
     }
 
-    public void modifyBanner(BannerBean bannerBean, MultipartFile file) {
-//        url = image.getUrl().replaceAll(remote, local);
-//        FileGlobal.RemoveFile(url);
+    public void modifyBanner(BannerBean bannerBean, MultipartFile file) throws Exception {
+        // 先删除原来的图片文件，再添加
+        String url = bannerBean.getImgurl().replace(Constant.Host, Constant.SaveImagesLocalPath);
+        FileGlobal.RemoveFile(url);
+        // 添加
+        String imageUrl = FileGlobal.AddFile(file);
+        if (CMString.isValid(imageUrl)) {
+            bannerBean.setImgurl(imageUrl);
+        }
         bannerDao.modifyBanner(bannerBean);
     }
 
@@ -36,5 +43,9 @@ public class BannerService {
 
     public BannerBean getBannerWithId(Integer id) {
         return bannerDao.getBannerWithId(id);
+    }
+
+    public void deleteBanner(Integer id) {
+        bannerDao.deleteBanner(id);
     }
 }

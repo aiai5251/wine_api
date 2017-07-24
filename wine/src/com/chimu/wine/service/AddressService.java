@@ -1,5 +1,6 @@
 package com.chimu.wine.service;
 
+import com.chimu.utils.tools.CMString;
 import com.chimu.wine.bean.AddressBean;
 import com.chimu.wine.dao.AddressDao;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class AddressService {
         addressDao.addAddress(addressBean);
     }
 
-    public void deleteAddress(Integer is_delete, Integer id) {
-        addressDao.deleteAddress(is_delete, id);
+    public void deleteAddress(Integer id) {
+        addressDao.deleteAddress(id);
     }
 
     public List<AddressBean> getAddressByUid(Integer uid) {
@@ -33,7 +34,7 @@ public class AddressService {
         addressDao.modifyAddressById(addressBean);
     }
 
-    public AddressBean getSelectedByUid(Integer uid) {
-        return addressDao.getSelectedByUid(uid);
+    public AddressBean getAddressSelectedByUid(Integer uid) {
+        return addressDao.getAddressSelectedByUid(uid);
     }
 }

@@ -1,6 +1,7 @@
 package com.chimu.wine.service;
 
 import com.chimu.utils.Constant;
+import com.chimu.utils.tools.CMString;
 import com.chimu.utils.tools.FileGlobal;
 import com.chimu.wine.bean.ImageBean;
 import com.chimu.wine.bean.ProductBean;
@@ -22,8 +23,8 @@ public class ProductService {
     }
 
     public void addProduct(ProductBean productBean, List<MultipartFile> files, List<MultipartFile> files1) throws Exception {
-        List<ImageBean> imageList = getImageList(files, 0);
-        List<ImageBean> desc_imageList = getImageList(files1, 1);
+        List<ImageBean> imageList = getImageList(new ArrayList<ImageBean>(), files, null, 0);
+        List<ImageBean> desc_imageList = getImageList(new ArrayList<ImageBean>(), files1,  null, 1);
         productBean.setImage(imageList.get(0).getUrl());
         productBean.setDescription_image(desc_imageList.get(0).getUrl());
         productDao.addProduct(productBean);
@@ -41,52 +42,60 @@ public class ProductService {
     }
 
     public void modifyProduct(ProductBean productBean, List<MultipartFile> files, List<MultipartFile> files1) throws Exception {
-        // image数据库中删除原来的图片，删除本地文件
-        imageDao.deleteImageByPid(productBean.getId());
-        deleteFile(productBean);
-        List<ImageBean> imageList = getImageList(files, 0);
-        List<ImageBean> desc_imageList = getImageList(files1, 1);
-        productBean.setImage(imageList.get(0).getUrl());
-        productBean.setDescription_image(desc_imageList.get(0).getUrl());
-        productDao.modifyProduct(productBean);
+        if (files != null && files1 != null) {
+            // image数据库中删除原来的图片，删除本地文件
+            List<ImageBean> imageList = getImageList(productBean.getImages(), files, productBean.getId(), 0);
+            List<ImageBean> desc_imageList = getImageList(productBean.getDesc_images(), files1, productBean.getId(), 1);
 
-        //        图片添加到image数据库中
-        for (ImageBean imageBean : imageList) {
-            imageBean.setProduct_id(productBean.getId());
-            imageDao.addImage(imageBean);
-        }
+            if (imageList.size() > 0) {
+                productBean.setImage(imageList.get(0).getUrl());
+            }
 
-        for (ImageBean imageBean : desc_imageList) {
-            imageBean.setProduct_id(productBean.getId());
-            imageDao.addImage(imageBean);
-        }
-    }
-
-    private List<ImageBean> getImageList(List<MultipartFile> files, Integer product_type) throws Exception {
-        List<ImageBean> imageList = new ArrayList<>();
-        for (MultipartFile file : files) {
-            if (file != null && !file.isEmpty()) {
-                Thread.sleep(1);
-                String url = FileGlobal.AddFile(file);
-                ImageBean imageBean = new ImageBean();
-                imageBean.setUrl(url);
-                imageBean.setProduct_type(product_type);
-                imageList.add(imageBean);
+            if (desc_imageList.size() > 0) {
+                productBean.setDescription_image(desc_imageList.get(0).getUrl());
             }
         }
-        return imageList;
+        productDao.modifyProduct(productBean);
     }
 
-    private void deleteFile(ProductBean productBean) throws Exception {
-        String url;
-        for (int i = 0; i < productBean.getImages().size(); i++) {
-            url = productBean.getImages().get(i).replace(Constant.Host, Constant.SaveImagesLocalPath);
-            FileGlobal.RemoveFile(url);
+    private List<ImageBean> getImageList(List<ImageBean> images, List<MultipartFile> files, Integer id, Integer product_type) throws Exception {
+        ImageBean imageBean;
+        // 有删除图片
+        if (images.size() > files.size()) {
+            for(int i = images.size() - 1; i > files.size() - 1; i--) {
+                imageDao.deleteImageById(images.get(i).getId());
+                images.remove(i);
+            }
         }
-        for (int i = 0; i < productBean.getDesc_images().size(); i++) {
-            url = productBean.getDesc_images().get(i).replace(Constant.Host, Constant.SaveImagesLocalPath);
-            FileGlobal.RemoveFile(url);
+
+        for(int i = 0; i < files.size(); i++){
+            MultipartFile file = files.get(i);
+            if(file != null && !file.isEmpty()){
+                if(images.size() > i){
+                    imageBean = images.get(i);
+                    // remove
+                    String url = imageBean.getUrl().replace(Constant.Host, Constant.SaveImagesLocalPath);
+                    FileGlobal.RemoveFile(url);
+                    // add
+                    url = FileGlobal.AddFile(file);
+                    imageBean.setUrl(url);
+                    imageDao.modifyImageById(imageBean);
+                } else {
+                    String url = FileGlobal.AddFile(file);
+                    imageBean = new ImageBean();
+                    imageBean.setUrl(url);
+                    if (CMString.isValidInt(id)) {
+                        imageBean.setProduct_id(id);
+                    }
+                    imageBean.setProduct_type(product_type);
+                    imageBean.setBanner_id(0);
+                    imageBean.setComment_id(0);
+                    images.add(imageBean);
+                    imageDao.addImage(imageBean);
+                }
+            }
         }
+        return images;
     }
 
     public List<ProductBean> getProductList() {
@@ -95,8 +104,8 @@ public class ProductService {
 
     public ProductBean getProductWithId(Integer id) {
         ProductBean productBean = productDao.getProductWithId(id);
-        productBean.setImages(imageDao.getImagesByPid(id, 0));
-        productBean.setDesc_images(imageDao.getImagesByPid(id, 1));
+        productBean.setImages(imageDao.getImagesByPid(productBean.getId(), 0));
+        productBean.setDesc_images(imageDao.getImagesByPid(productBean.getId(), 1));
         return productBean;
     }
 

@@ -5,6 +5,7 @@ import com.chimu.wine.bean.BannerBean;
 import com.chimu.wine.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +30,7 @@ public class BannerAction extends BaseAction {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
         List<BannerBean> bannerList = bannerService.getBannerList();
-        map.put("banners", bannerList);
+        map.put("data", bannerList);
         if (bannerList != null) {
             return super.configResponseMap(map, 1);
         }
@@ -54,7 +55,7 @@ public class BannerAction extends BaseAction {
             bannerBean.setTitle(bannerTitle);
             bannerBean.setUrl(bannerUrl);
             bannerService.add(bannerBean, file);
-            map.put("banner", bannerBean);
+            map.put("data", bannerBean);
             return super.configResponseMap(map, 1);
         }
         return super.configResponseMap(map,0);
@@ -62,7 +63,7 @@ public class BannerAction extends BaseAction {
 
     @RequestMapping(value = "/banner_modify")
     @ResponseBody
-    public Map<String, Object> bannerModify(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> bannerModify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         String id = request.getParameter("id");
         String bannerTitle = request.getParameter("title");
@@ -76,8 +77,21 @@ public class BannerAction extends BaseAction {
         try {
             file = ((MultipartHttpServletRequest)request).getFile("file");
         } catch(Exception ignored) {}
+        if (file != null && !file.isEmpty()) {
+            bannerService.modifyBanner(bannerBean, file);
+            map.put("data", bannerBean);
+            return super.configResponseMap(map, 1);
+        }
+        return super.configResponseMap(map, 0);
+    }
 
-        bannerService.modifyBanner(bannerBean, file);
+    @RequestMapping(value = "/banner_delete")
+    @ResponseBody
+    public Map<String, Object> deleteBannerAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String id = request.getParameter("id");
+        bannerService.deleteBanner(Integer.parseInt(id));
         return super.configResponseMap(map, 1);
     }
 }

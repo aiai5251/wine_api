@@ -62,7 +62,9 @@ public class OrderService {
 
     private OrderBean getOrderDetail(OrderBean orderBean) {
         // 地址信息
-        if (CMString.isValidInt(orderBean.getAddress_id())) {
+        if (orderBean.getAddress_id() == 0) {
+            orderBean.setAddressInfo(addressDao.getAddressSelectedByUid(orderBean.getUid()));
+        } else {
             orderBean.setAddressInfo(addressDao.getAddressById(orderBean.getAddress_id()));
         }
         // 优惠券信息

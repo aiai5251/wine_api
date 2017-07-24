@@ -6,6 +6,7 @@ public class ImageBean {
     private Integer product_id;
     private Integer product_type;
     private Integer banner_id;
+    private Integer comment_id;
 
     public int getId() {
         return id;
@@ -13,14 +14,6 @@ public class ImageBean {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public Integer getProduct_id() {
@@ -45,5 +38,21 @@ public class ImageBean {
 
     public void setProduct_type(Integer product_type) {
         this.product_type = product_type;
+    }
+
+    public Integer getComment_id() {
+        return comment_id;
+    }
+
+    public void setComment_id(Integer comment_id) {
+        this.comment_id = comment_id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

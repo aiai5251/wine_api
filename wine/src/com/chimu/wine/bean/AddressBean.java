@@ -7,6 +7,7 @@ public class AddressBean {
     private String name;
     private String tel;
     private String address;
+    private String province_city;
     private Integer is_default;
     private Integer is_selected; // 是否选中地址
     private Integer is_delete; // 是否删除
@@ -69,5 +70,13 @@ public class AddressBean {
 
     public void setIs_selected(Integer is_selected) {
         this.is_selected = is_selected;
+    }
+
+    public String getProvince_city() {
+        return province_city;
+    }
+
+    public void setProvince_city(String province_city) {
+        this.province_city = province_city;
     }
 }
