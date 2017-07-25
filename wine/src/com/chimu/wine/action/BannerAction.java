@@ -37,6 +37,17 @@ public class BannerAction extends BaseAction {
         return super.configResponseMap(map, 0);
     }
 
+    @RequestMapping(value = "/banner_detail")
+    @ResponseBody
+    public Map<String, Object> bannerDetailAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String id = request.getParameter("id");
+        BannerBean bannerBean = bannerService.getBannerWithId(Integer.parseInt(id));
+        map.put("data", bannerBean);
+        return super.configResponseMap(map, 1);
+    }
+
     @RequestMapping(value = "/banner_add")
     @ResponseBody
     public Map<String, Object> bannerAdd(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -76,13 +87,11 @@ public class BannerAction extends BaseAction {
         MultipartFile file = null;
         try {
             file = ((MultipartHttpServletRequest)request).getFile("file");
-        } catch(Exception ignored) {}
-        if (file != null && !file.isEmpty()) {
-            bannerService.modifyBanner(bannerBean, file);
-            map.put("data", bannerBean);
-            return super.configResponseMap(map, 1);
-        }
-        return super.configResponseMap(map, 0);
+        } catch (Exception ignored) {}
+
+        bannerService.modifyBanner(bannerBean, file);
+        map.put("data", bannerBean);
+        return super.configResponseMap(map, 1);
     }
 
     @RequestMapping(value = "/banner_delete")

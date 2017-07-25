@@ -5,12 +5,15 @@
       <w>alibaba</w>
       <w>appid</w>
       <w>appsecret</w>
+      <w>chimuwechat</w>
       <w>fastjson</w>
       <w>headimgurl</w>
       <w>ibatis</w>
       <w>imgurl</w>
+      <w>jsapi</w>
       <w>origprice</w>
       <w>pids</w>
+      <w>spbill</w>
       <w>submessage</w>
       <w>transportmoney</w>
       <w>wcid</w>

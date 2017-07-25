@@ -1,6 +1,7 @@
 package com.chimu.wine.action;
 
 import com.chimu.utils.BaseAction;
+import com.chimu.utils.tools.CMString;
 import com.chimu.wine.bean.UserBean;
 import com.chimu.wine.service.UserService;
 import com.chimu.wine.service.WechatService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,11 +46,9 @@ public class UserAction extends BaseAction {
         System.out.print("code = " + code + "; url = " + url);
         UserBean userBean = wechatService.getUserByCode(code);
         if (userBean != null) {
-            map.put("data", userBean);
-            return super.configResponseMap(map,1);
-//            response.sendRedirect("http://www.main-zha.com/wine/com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
+            response.sendRedirect("http://www.main-zha.com/wine/com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
         }
-        return super.configResponseMap(map, 0);
+        return super.configResponseMap(map, 1);
     }
 
     @RequestMapping(value = "/getPersonalInfo")
@@ -63,4 +63,5 @@ public class UserAction extends BaseAction {
         map.put("data", dataMap);
         return super.configResponseMap(map, 1);
     }
+
 }

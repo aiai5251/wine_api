@@ -2,7 +2,11 @@ package com.chimu.utils.tools;
 
 import com.chimu.utils.Constant;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,4 +34,29 @@ public class FileGlobal {
         File file = new File(path);
         return file.exists() && file.delete();
     }
+
+    // 存储微信xml数据
+    public static String AddWeCahtFile(String context) throws Exception {
+        Date date = new Date();
+        String remote = "";
+        String local = "C:/Notify/";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
+
+        String name = sdf.format(date) + ".html";
+        File file = new File(local + "/" + name);
+
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+            bw.write(context);
+            bw.close();
+        } finally {
+            if (bw != null){
+                bw.close();
+            }
+        }
+        return remote + "/" + name;
+    }
+
 }
