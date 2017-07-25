@@ -27,14 +27,14 @@ public class CommentAction extends BaseAction {
 
     @RequestMapping(value = "/comment")
     @ResponseBody
-    protected Map<String, Object>comment(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> commentAction(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
         String pid = request.getParameter("pid");
         Map<String, Object> map = new HashMap<>();
         List<CommentBean> commentList = commentService.getCommentByPid(Integer.parseInt(pid));
         List<CommentBean> comments = new ArrayList<>();
         for (CommentBean commentBean : commentList) {
-            UserBean userBean = userService.getCommentUserByUid(commentBean.getUid());
+            UserBean userBean = userService.getCommentUserById(commentBean.getUid());
             commentBean.setUser_name(userBean.getName());
             commentBean.setUser_avatar(userBean.getAvatar());
             comments.add(commentBean);

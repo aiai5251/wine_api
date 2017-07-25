@@ -10,5 +10,5 @@ public interface UserDao {
     List<UserBean> getUserList();
     UserBean getUserWithOpenid(String openid);
     // 评论获取用户信息
-    UserBean getCommentUserByUid(Integer uid);
+    UserBean getCommentUserById(Integer id);
 }

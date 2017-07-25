@@ -18,8 +18,10 @@ public class WechatService {
 
     public UserBean getUserByCode(String code) throws Exception {
         String url = String.format("https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code", Constant.Appid, Constant.Appsecret, code);
+        System.out.print("-------------------- " + url + "-------------------");
         String json = NetGlobal.HttpGet(url, null);
-        if(json != null && json.length() > 0){
+        System.out.print("====================" + json + "================");
+        if(json != null && json.length() > 0) {
             JSONObject row = JSON.parseObject(json);
             System.out.print("access_token -- row ======= " + row);
             System.out.print("openid = " + row.getString("openid"));
@@ -28,7 +30,7 @@ public class WechatService {
             row = JSON.parseObject(json);
             System.out.print("-------------------- row=" + row);
             System.out.print("userInfo ====== " + row.getString("openid"));
-            if(!CMString.isValid(row.getString("openid"))){
+            if(CMString.isValid(row.getString("openid"))){
                 UserBean userBean = userDao.getUserWithOpenid(row.getString("openid"));
                 if (userBean != null) {
                     userBean.setName(new String(row.getString("nickname").getBytes("ISO-8859-1"), "utf-8"));
@@ -42,6 +44,7 @@ public class WechatService {
                     userBean.setPoint(0);
                     userBean.setAward(0);
                     userBean.setIsVip(0);
+                    userBean.setAdmin(0);
                     userDao.addUser(userBean);
                 }
                 return userBean;

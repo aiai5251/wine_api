@@ -18,12 +18,12 @@
         SELECT * FROM user
     </select>
 
-    <select id="getUserWithOpenid" resultMap="mainUserMap">
-        SELECT * FROM  user WHERE openid = #{openid}
+    <select id="getUserWithOpenid" resultMap="mainUserMap" parameterType="String">
+        SELECT * FROM user WHERE openid = #{openid}
     </select>
 
-    <select id="getCommentUserByUid" resultMap="mainUserMap">
-        SELECT name, avatar FROM user WHERE id = #{uid}
+    <select id="getCommentUserById" resultMap="mainUserMap">
+        SELECT name, avatar FROM user WHERE id = #{id}
     </select>
 
 </mapper>

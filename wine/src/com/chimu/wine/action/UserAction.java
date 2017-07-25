@@ -44,7 +44,9 @@ public class UserAction extends BaseAction {
         System.out.print("code = " + code + "; url = " + url);
         UserBean userBean = wechatService.getUserByCode(code);
         if (userBean != null) {
-            response.sendRedirect("http://www.main-zha.com/wine/com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
+            map.put("data", userBean);
+            return super.configResponseMap(map,1);
+//            response.sendRedirect("http://www.main-zha.com/wine/com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
         }
         return super.configResponseMap(map, 0);
     }

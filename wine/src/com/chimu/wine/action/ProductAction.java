@@ -68,7 +68,7 @@ public class ProductAction extends BaseAction {
         List<CommentBean> comments = new ArrayList<>();
         for (CommentBean commentBean : commentList) {
             System.out.print("uid" + commentBean.getUid());
-            UserBean userBean = userService.getCommentUserByUid(commentBean.getUid());
+            UserBean userBean = userService.getCommentUserById(commentBean.getUid());
             commentBean.setUser_name(userBean.getName());
             commentBean.setUser_avatar(userBean.getAvatar());
             comments.add(commentBean);

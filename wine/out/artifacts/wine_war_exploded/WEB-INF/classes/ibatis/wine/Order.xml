@@ -7,7 +7,7 @@
 
     <insert id="addOrder" parameterType="com.chimu.wine.bean.OrderBean" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `order`(uid, order_num, status, count, amount, create_time, modify_time) VALUES
-            (${uid}, #{order_num}, #{status}, #{count}, #{amount}, #{create_time}, #{modify_time})
+            (#{uid}, #{order_num}, #{status}, #{count}, #{amount}, #{create_time}, #{modify_time})
     </insert>
 
     <select id="getOrderList" resultMap="mainOrderMap">

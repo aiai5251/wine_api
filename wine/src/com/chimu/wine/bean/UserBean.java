@@ -8,6 +8,7 @@ public class UserBean {
     private Integer point;
     private Integer award;
     private String openid;
+    private Integer admin;
 
     public Integer getId() {
         return this.id;
@@ -65,4 +66,11 @@ public class UserBean {
         this.openid = openid;
     }
 
+    public Integer getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Integer admin) {
+        this.admin = admin;
+    }
 }

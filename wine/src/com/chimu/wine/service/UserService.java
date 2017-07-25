@@ -17,20 +17,12 @@ public class UserService {
         this.couponDao = couponDao;
     }
 
-    public void addUser(UserBean userBean) {
-        userDao.addUser(userBean);
-    }
-
     public List<UserBean> getUserList() {
         return userDao.getUserList();
     }
 
-    public UserBean getUserWithOpenid(String openid) {
-        return userDao.getUserWithOpenid(openid);
-    }
-
-    public UserBean getCommentUserByUid(Integer uid) {
-        return userDao.getCommentUserByUid(uid);
+    public UserBean getCommentUserById(Integer id) {
+        return userDao.getCommentUserById(id);
     }
 
     public Integer numberOfCouponByUid(Integer uid) {
