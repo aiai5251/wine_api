@@ -1,5 +1,6 @@
 package com.chimu.wine.bean;
 
+import com.chimu.utils.Constant;
 import com.chimu.utils.tools.CMString;
 
 import java.security.MessageDigest;
@@ -228,7 +229,7 @@ public class WechatPayBean {
             sb.append(String.format("trade_type=%s&", 			trade_type));
 
         if(sb.length() > 0){
-            sb.append("key=chimuwechat00010001000100010001");
+            sb.append(String.format("key=%s", Constant.AppKey));
             sign = CMString.MD5Encode(sb.toString()).toUpperCase();
         }
     }

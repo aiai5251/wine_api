@@ -5,19 +5,41 @@
     <resultMap id="mainCouponMap" type="com.chimu.wine.bean.CouponBean">
     </resultMap>
 
+    <insert id="addCoupon" parameterType="com.chimu.wine.bean.CouponBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO coupon(price, pid, uid, build_time, end_time, max_price) VALUES
+            (#{price}, #{pid}, #{uid}, #{build_time}, #{end_time}, #{max_price})
+    </insert>
+
+    <update id="modifyCouponById">
+        UPDATE coupon SET price = #{price}, price = #{price}, pid = #{pid}, uid = #{uid}, build_time = #{build_time}, end_time = #{end_time}, max_price = #{max_price} WHERE id = #{id}
+    </update>
+
     <select id="getCouponById" resultMap="mainCouponMap">
         SELECT * FROM coupon WHERE id = #{id}
     </select>
 
-    <select id="getCouponByPid" resultMap="mainCouponMap" parameterType="List">
+    <delete id="deleteCouponById">
+        DELETE FROM coupon WHERE id = #{id}
+    </delete>
+
+    <select id="getCouponByPid" resultMap="mainCouponMap">
         SELECT * FROM coupon WHERE pid = #{pid}
     </select>
 
-    <select id="getCouponByUid" resultMap="mainCouponMap" parameterType="List">
+    <select id="getCouponByUid" resultMap="mainCouponMap">
         SELECT * FROM coupon WHERE uid = #{uid}
+    </select>
+
+    <select id="getCouponByUidWithStatus" resultMap="mainCouponMap">
+        SELECT * FROM coupon WHERE uid = #{uid} AND status = 0
+    </select>
+
+    <select id="getCouponList" resultMap="mainCouponMap">
+        SELECT * FROM coupon
     </select>
 
     <select id="numberOfCouponByUid" resultType="Integer">
         SELECT count(id) FROM coupon WHERE uid=#{uid}
     </select>
+
 </mapper>

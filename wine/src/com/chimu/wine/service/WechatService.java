@@ -66,8 +66,9 @@ public class WechatService {
         wechatPayBean.setTrade_type("JSAPI");
         wechatPayBean.setOpenid(openid);
         wechatPayBean.buildSign();
+        System.out.print("下单发送数据: ---------------" + wechatPayBean.createXml() + "---------------------");
         String xml = NetGlobal.HttpPost("https://api.mch.weixin.qq.com/pay/unifiedorder", null, wechatPayBean.createXml());
-        System.out.print("统一下单：" + xml);
+        System.out.print("发单post接口返回数据：" + xml + "-------------");
         String prepay_id = null;
         if (CMString.isValid(xml)) {
             prepay_id = WeChatGlobal.getOrderNumWithXML(xml, "prepay_id");
@@ -87,7 +88,7 @@ public class WechatService {
         sb.append(String.format("package=prepay_id=%s&", 	prepayId));
         sb.append("signType=MD5&");
         sb.append(String.format("timeStamp=%s&", 			timeStamp));
-        sb.append("key=chimuwechat00010001000100010001");
+        sb.append("key=" + Constant.AppKey);
         System.out.print("签名：" + sb.toString());
         String sign = CMString.Encode(sb.toString()).toUpperCase();
 

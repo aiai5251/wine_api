@@ -10,6 +10,7 @@ public class CouponBean {
     private String build_time; // 开始时间
     private String end_time; // 结束时间
     private Integer max_price; // 最大金额？？？
+    private Integer status; //使用状态
 
     public Integer getPrice() {
         return this.price;
@@ -73,5 +74,13 @@ public class CouponBean {
 
     public void setMax_price(Integer max_price) {
         this.max_price = max_price;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

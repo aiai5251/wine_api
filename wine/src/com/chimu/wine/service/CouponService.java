@@ -14,6 +14,22 @@ public class CouponService {
         this.couponDao = couponDao;
     }
 
+    public void addCoupon(CouponBean couponBean) {
+        couponDao.addCoupon(couponBean);
+    }
+
+    public void modifyCouponById(CouponBean couponBean) {
+        couponDao.modifyCouponById(couponBean);
+    }
+
+    public CouponBean getCouponById(Integer id) {
+        return couponDao.getCouponById(id);
+    }
+
+    public void deleteCouponById(Integer id) {
+        couponDao.deleteCouponById(id);
+    }
+
     public List<CouponBean> getCouponByPid(Integer pid) {
         List<CouponBean> couponList = couponDao.getCouponByPid(pid);
         List<CouponBean> coupons = new ArrayList<>();
@@ -29,4 +45,11 @@ public class CouponService {
         return couponDao.getCouponByUid(uid);
     }
 
+    public List<CouponBean> getCouponByUidWithStatus(Integer uid) {
+        return couponDao.getCouponByUidWithStatus(uid);
+    }
+
+    public List<CouponBean> getCouponList() {
+        return couponDao.getCouponList();
+    }
 }

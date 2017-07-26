@@ -9,6 +9,7 @@ public class UserBean {
     private Integer award;
     private String openid;
     private Integer admin;
+    private Integer coupon_count;
 
     public Integer getId() {
         return this.id;
@@ -72,5 +73,13 @@ public class UserBean {
 
     public void setAdmin(Integer admin) {
         this.admin = admin;
+    }
+
+    public Integer getCoupon_count() {
+        return coupon_count;
+    }
+
+    public void setCoupon_count(Integer coupon_count) {
+        this.coupon_count = coupon_count;
     }
 }

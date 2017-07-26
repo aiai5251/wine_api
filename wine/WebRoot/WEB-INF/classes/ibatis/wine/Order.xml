@@ -22,6 +22,10 @@
         SELECT * FROM `order` WHERE uid = #{uid}
     </select>
 
+    <select id="getOrderByUidWithStatus" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE uid = #{uid} AND status = #{status}
+    </select>
+
     <select id="getOrderByOrderNum" resultMap="mainOrderMap">
         SELECT * FROM `order` WHERE order_num = #{order_num}
     </select>

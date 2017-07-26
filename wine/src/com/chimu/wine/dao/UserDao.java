@@ -7,8 +7,14 @@ import java.util.List;
 public interface UserDao {
     void addUser(UserBean userBean);
     void modifyUser(UserBean userBean);
-    List<UserBean> getUserList();
+    UserBean getUserById(Integer id);
+
+    // 根据微信id搜索用户
     UserBean getUserWithOpenid(String openid);
+
     // 评论获取用户信息
     UserBean getCommentUserById(Integer id);
+
+    // 后台管理系统展示
+    List<UserBean> getUserList();
 }

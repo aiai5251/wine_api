@@ -128,6 +128,7 @@ public class ProductAction extends BaseAction {
             ProductBean productBean;
             if (isAdd) {
                 productBean = new ProductBean();
+                productBean.setSales(0);
             } else {
                 String id = request.getParameter("id");
                 productBean = productService.getProductWithId(Integer.parseInt(id));

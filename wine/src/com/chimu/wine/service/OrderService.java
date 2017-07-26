@@ -55,6 +55,15 @@ public class OrderService {
         return orderNewList;
     }
 
+    public List<OrderBean> getOrderByUidWithStatus(Integer uid, Integer status) {
+        List<OrderBean> orderList = orderDao.getOrderByUidWithStatus(uid, status);
+        List<OrderBean> orderNewList = new ArrayList<>();
+        for (OrderBean orderBean : orderList) {
+            orderNewList.add(getOrderDetail(orderBean));
+        }
+        return orderNewList;
+    }
+
     public OrderBean getOrderByOrderNum(String order_num) {
         OrderBean orderBean = orderDao.getOrderByOrderNum(order_num);
         return getOrderDetail(orderBean);

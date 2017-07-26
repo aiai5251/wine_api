@@ -14,6 +14,10 @@
         UPDATE user SET avatar = #{avatar}, name = #{name}, isVip = #{isVip}, point = #{point}, award = #{award}, openid = #{openid}, admin = #{admin} WHERE id = #{id}
     </update>
 
+    <select id="getUserById" resultMap="mainUserMap">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
     <select id="getUserList" resultMap="mainUserMap">
         SELECT * FROM user
     </select>
