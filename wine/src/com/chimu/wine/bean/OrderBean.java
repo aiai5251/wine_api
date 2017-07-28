@@ -16,6 +16,7 @@ public class OrderBean {
     private Integer coupon_id;
     private Double amount;
     private Double pay;
+    private Integer point;
     private Date create_time;
     private Date modify_time;
     private Random random = new Random();
@@ -145,5 +146,13 @@ public class OrderBean {
 
     public void setCouponInfo(CouponBean couponInfo) {
         this.couponInfo = couponInfo;
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
     }
 }

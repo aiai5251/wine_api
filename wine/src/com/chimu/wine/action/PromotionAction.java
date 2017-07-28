@@ -1,6 +1,7 @@
 package com.chimu.wine.action;
 
 import com.chimu.utils.BaseAction;
+import com.chimu.utils.tools.CMString;
 import com.chimu.wine.bean.PromotionBean;
 import com.chimu.wine.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,70 @@ public class PromotionAction extends BaseAction {
 
     @RequestMapping(value = "/promotion")
     @ResponseBody
-    public Map<String, Object> productDetail(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> promotionAction(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
-        String pid = request.getParameter("id");
+        String id = request.getParameter("id");
+        String pid = request.getParameter("pid");
         Map<String, Object> map = new HashMap<>();
-        List<PromotionBean> promotionBeanList = promotionService.getPromotionList(Integer.parseInt(pid));
-        map.put("data", promotionBeanList);
+        if (CMString.isValid(id)) {
+            PromotionBean promotionBean = promotionService.getPromotionById(Integer.parseInt(id));
+            map.put("data", promotionBean);
+        } else {
+            List<PromotionBean> promotionBeanList = promotionService.getPromotionList(Integer.parseInt(pid));
+            map.put("data", promotionBeanList);
+        }
+        return super.configResponseMap(map, 1);
+    }
+
+    @RequestMapping(value = "/promotion_add")
+    @ResponseBody
+    public Map<String, Object> addPromotionAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String pid = request.getParameter("pid");
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+
+        PromotionBean promotionBean = new PromotionBean();
+        promotionBean.setName(name);
+        promotionBean.setPid(Integer.parseInt(pid));
+        promotionBean.setDescription(description);
+        promotionService.addPromotion(promotionBean);
+
+        map.put("data", promotionBean);
+        return super.configResponseMap(map, 1);
+    }
+
+    @RequestMapping(value = "/promotion_modify")
+    @ResponseBody
+    public Map<String, Object> modifyPromotionAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String id = request.getParameter("id");
+        String pid = request.getParameter("pid");
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+
+        PromotionBean promotionBean = promotionService.getPromotionById(Integer.parseInt(id));
+        if (CMString.isValid(pid))
+            promotionBean.setPid(Integer.parseInt(pid));
+        if (CMString.isValid(name))
+            promotionBean.setName(name);
+        if (CMString.isValid(description))
+            promotionBean.setDescription(description);
+
+        promotionService.modifyPromotion(promotionBean);
+        map.put("data", promotionBean);
+        return super.configResponseMap(map, 1);
+    }
+
+    @RequestMapping(value = "/promotion_delete")
+    @ResponseBody
+    public Map<String, Object> deletePromotionAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String id = request.getParameter("id");
+        promotionService.deletePromotionById(Integer.parseInt(id));
         return super.configResponseMap(map, 1);
     }
 

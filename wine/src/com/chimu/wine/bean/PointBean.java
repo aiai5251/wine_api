@@ -8,7 +8,7 @@ public class PointBean {
     private Integer point;
     private Date create_time;
     private int type;
-    private String desciption;
+    private String description;
 
     public Integer getId() {
         return this.id;
@@ -47,11 +47,11 @@ public class PointBean {
         this.type = type;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

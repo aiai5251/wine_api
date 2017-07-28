@@ -15,7 +15,6 @@ public class ProductBean {
     private Integer count;
     private String description_image;
     private Float freight_money;
-    private Integer point;
     private Integer sales;
     private List<ImageBean> images;
     private List<ImageBean> desc_images;
@@ -113,14 +112,6 @@ public class ProductBean {
 
     public void setFreight_money(Float freight_money) {
         this.freight_money = freight_money;
-    }
-
-    public Integer getPoint() {
-        return this.point;
-    }
-
-    public void setPoint(Integer point) {
-        this.point = point;
     }
 
     public Integer getSales() {

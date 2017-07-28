@@ -68,9 +68,9 @@ public class ProductService {
             }
         }
 
-        for(int i = 0; i < files.size(); i++){
+        for (int i = 0; i < files.size(); i++) {
             MultipartFile file = files.get(i);
-            if(file != null && !file.isEmpty()){
+            if(file != null && !file.isEmpty()) {
                 if(images.size() > i){
                     imageBean = images.get(i);
                     // remove

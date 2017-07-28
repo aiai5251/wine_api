@@ -96,7 +96,7 @@ public class BannerAction extends BaseAction {
 
     @RequestMapping(value = "/banner_delete")
     @ResponseBody
-    public Map<String, Object> deleteBannerAction(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> deleteBannerAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
         String id = request.getParameter("id");

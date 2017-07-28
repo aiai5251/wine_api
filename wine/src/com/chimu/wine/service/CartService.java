@@ -32,4 +32,8 @@ public class CartService {
     public void deleteCartById(Integer id) {
         cartDao.deleteCartById(id);
     }
+
+    public void deleteCartByPidWithUid(Integer pid, Integer uid) {
+        cartDao.deleteCartByPidWithUid(pid, uid);
+    }
 }

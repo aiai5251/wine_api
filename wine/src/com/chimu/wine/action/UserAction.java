@@ -30,8 +30,14 @@ public class UserAction extends BaseAction {
     public Map<String, Object> getUserList(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
-        List<UserBean> userList = userService.getUserList();
-        map.put("data", userList);
+        String id = request.getParameter("id");
+        if (CMString.isValid(id)) {
+            UserBean userBean = userService.getUserById(Integer.parseInt(id));
+            map.put("data", userBean);
+        } else {
+            List<UserBean> userList = userService.getUserList();
+            map.put("data", userList);
+        }
         return super.configResponseMap(map, 1);
     }
 

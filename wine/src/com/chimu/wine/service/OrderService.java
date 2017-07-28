@@ -1,9 +1,7 @@
 package com.chimu.wine.service;
 
 import com.chimu.utils.tools.CMString;
-import com.chimu.wine.bean.OrderBean;
-import com.chimu.wine.bean.OrderDetailBean;
-import com.chimu.wine.bean.PointBean;
+import com.chimu.wine.bean.*;
 import com.chimu.wine.dao.*;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +17,16 @@ public class OrderService {
     private AddressDao addressDao;
     private CouponDao couponDao;
     private PointDao pointDao;
-    public OrderService(OrderDao orderDao, OrderDetailDao orderDetailDao, ProductDao productDao, AddressDao addressDao, CouponDao couponDao, PointDao pointDao) {
+    private UserDao userDao;
+
+    public OrderService(OrderDao orderDao, OrderDetailDao orderDetailDao, ProductDao productDao, AddressDao addressDao, CouponDao couponDao, PointDao pointDao, UserDao userDao) {
         this.orderDao = orderDao;
         this.orderDetailDao = orderDetailDao;
         this.productDao = productDao;
         this.addressDao = addressDao;
         this.couponDao = couponDao;
         this.pointDao = pointDao;
+        this.userDao = userDao;
     }
 
     public void addOrder(OrderBean orderBean) {
@@ -76,6 +77,7 @@ public class OrderService {
         } else {
             orderBean.setAddressInfo(addressDao.getAddressById(orderBean.getAddress_id()));
         }
+
         // 优惠券信息
         if (CMString.isValidInt(orderBean.getCoupon_id())) {
             orderBean.setCouponInfo(couponDao.getCouponById(orderBean.getCoupon_id()));
@@ -90,15 +92,42 @@ public class OrderService {
     }
 
     public void modifyOrder(OrderBean orderBean) {
+        // 订单完成
         if (orderBean.getStatus() == 1) {
-            // 订单完成
-            PointBean pointBean = new PointBean();
-            pointBean.setPoint(10);
-            pointBean.setDesciption("买酒");
-            pointBean.setCreate_time(new Date());
-            pointBean.setUid(orderBean.getUid());
-            pointDao.addPoint(pointBean);
+            // 先送积分,根据订单总额来送
+            addPointWithModifyUser(orderBean, (int)Math.round((orderBean.getAmount() / 100.0)), true);
+            // 该订单使用了积分
+            if (orderBean.getPoint() > 0) {
+                addPointWithModifyUser(orderBean, orderBean.getPoint(), false);
+            }
+            // 使用了优惠券
+            if (orderBean.getCoupon_id() > 0) {
+                CouponBean couponBean = couponDao.getCouponById(orderBean.getCoupon_id());
+                couponBean.setStatus(1);
+                couponDao.modifyCouponById(couponBean);
+            }
         }
         orderDao.modifyOrder(orderBean);
+    }
+
+    private void addPointWithModifyUser(OrderBean orderBean, Integer point, boolean point_add) {
+        // 积分增加减少，纪录信息，用户积分变化
+        PointBean pointBean = new PointBean();
+        pointBean.setCreate_time(new Date());
+        pointBean.setUid(orderBean.getUid());
+        UserBean userBean = userDao.getUserById(orderBean.getUid());
+        if (point_add) {
+            pointBean.setPoint(point);
+            pointBean.setDescription("购买送积分");
+            pointBean.setType(0);
+            userBean.setPoint(userBean.getPoint() + point);
+        } else {
+            pointBean.setPoint(point);
+            pointBean.setDescription("消费使用积分");
+            pointBean.setType(1);
+            userBean.setPoint(userBean.getPoint() - point);
+        }
+        pointDao.addPoint(pointBean);
+        userDao.modifyUser(userBean);
     }
 }

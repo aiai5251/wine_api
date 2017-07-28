@@ -15,24 +15,15 @@
     <delete id="deleteImageById">
         DELETE FROM image WHERE id = #{id}
     </delete>
-<!--商品图片-->
+
+    <!--商品图片-->
     <select id="getImagesByPid" resultMap="BaseResultMap">
         SELECT id, product_id, product_type, url FROM image WHERE product_id = #{product_id} AND product_type = #{product_type}
     </select>
 
-    <delete id="deleteImageByPid">
-        DELETE FROM image WHERE product_id = #{product_id}
-    </delete>
-<!--首页活动banner图片-->
-    <select id="getImagesByBid" resultMap="BaseResultMap">
-        SELECT id, banner_id, url FROM image WHERE banner_id = #{banner_id}
-    </select>
-
-    <delete id="deleteImageByBid">
-        DELETE FROM image WHERE banner_id = #{banner_id}
-    </delete>
     <!--评论的图片数组-->
     <select id="getImagesByCid" resultMap="BaseResultMap">
         SELECT id, url, comment_id FROM image WHERE comment_id = #{comment_id}
     </select>
+
 </mapper>

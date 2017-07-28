@@ -8,7 +8,6 @@ public interface CouponDao {
     void addCoupon(CouponBean couponBean);
     void modifyCouponById(CouponBean couponBean);
     CouponBean getCouponById(Integer id);
-    void  deleteCouponById(Integer id);
 
     // 通过商品id查看
     List<CouponBean> getCouponByPid(Integer pid);

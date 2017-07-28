@@ -8,9 +8,9 @@ import java.util.List;
 public interface ImageDao {
     void addImage(ImageBean imageBean);
     List<ImageBean> getImagesByPid(@Param("product_id")Integer product_id, @Param("product_type")Integer product_type);
-    void deleteImageByPid(Integer product_id);
-    List<ImageBean> getImagesByBid(Integer banner_id);
-    void deleteImageByBid(Integer banner_id);
+
     void deleteImageById(Integer id);
     void modifyImageById(ImageBean imageBean);
+
+    List<ImageBean> getImagesByCid(Integer comment_id);
 }

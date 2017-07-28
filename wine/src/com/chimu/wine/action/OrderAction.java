@@ -40,6 +40,12 @@ public class OrderAction extends BaseAction {
     private OrderDetailService orderDetailService;
     @Autowired()
     private WechatService wechatService;
+    @Autowired()
+    private CartService cartService;
+    @Autowired()
+    private UserService userService;
+    @Autowired()
+    private PointService pointService;
 
     @RequestMapping(value = "/order_add", method = RequestMethod.POST)
     @ResponseBody
@@ -95,6 +101,8 @@ public class OrderAction extends BaseAction {
             orderBean.setStatus(0);
             orderBean.setCount(orderCount);
             orderBean.setAmount(orderPrice);
+            // 四舍五入
+            orderBean.setPoint(0);
             orderBean.setCreate_time(new Date());
             orderService.addOrder(orderBean);
 
@@ -128,6 +136,8 @@ public class OrderAction extends BaseAction {
         if (CMString.isValid(id)) {
             OrderBean orderBean = orderService.getOrderById(Integer.parseInt(id));
             if (orderBean != null) {
+                // 只为了展示当前订单送多少积分
+                orderBean.setPoint((int)Math.round((orderBean.getAmount() / 100.0)));
                 map.put("data", orderBean);
                 return super.configResponseMap(map, 1);
             }
@@ -158,6 +168,7 @@ public class OrderAction extends BaseAction {
         String status = request.getParameter("status");
         String memo = request.getParameter("memo");
         String pay = request.getParameter("pay");
+        String point = request.getParameter("point");
 
         Map<String, Object> map = new HashMap<>();
         OrderBean orderBean = orderService.getOrderById(Integer.parseInt(id));
@@ -177,8 +188,13 @@ public class OrderAction extends BaseAction {
             if (CMString.isValid(pay)) {
                 orderBean.setPay(Double.parseDouble(pay));
             }
+            // 使用了多少积分, 订单未完成，不需要去修改用户积分，只是纪录
+            if (CMString.isValid(point)) {
+                orderBean.setPoint(Integer.parseInt(point));
+            }
             orderBean.setModify_time(new Date());
             orderService.modifyOrder(orderBean);
+
             return super.configResponseMap(map, 1);
         }
         return super.configResponseMap(map, 0);
@@ -195,8 +211,9 @@ public class OrderAction extends BaseAction {
 
         String perPay = wechatService.getPerPayId(order_num, openid, amount);
         System.out.print("------------+++++++++++++ " + perPay + ".....");
+        String url = "\"http://www.main-zha.com/wine/my.html\"";
         try {
-            response.sendRedirect("http://www.main-zha.com/WxPay.jsp?" + perPay);
+            response.sendRedirect("http://www.main-zha.com/WxPay.jsp?data=" + perPay + "&url=" + url);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -209,10 +226,22 @@ public class OrderAction extends BaseAction {
     public Map<String, Object> weChatNotifyAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         String xml = IOUtils.toString(request.getInputStream());
-        FileGlobal.AddWeCahtFile(xml);
+        FileGlobal.AddWeChatFile(xml);
         String order_num = WeChatGlobal.getOrderNumWithXML(xml, "out_trade_no");
-        System.out.print("订单：" + order_num);
+
+        System.out.print("订单order_num：" + order_num);
         if (CMString.isValid(order_num)) {
+            // 支付完成 更改状态
+            OrderBean orderBean = orderService.getOrderByOrderNum(order_num);
+            orderBean.setStatus(1);
+            orderService.modifyOrder(orderBean);
+
+            // 删除购物车中的商品
+            List<OrderDetailBean> orderDetails = orderBean.getOrderDetails();
+            for (OrderDetailBean orderDetailBean : orderDetails) {
+                cartService.deleteCartByPidWithUid(orderDetailBean.getPid(), orderBean.getUid());
+            }
+
             response.getWriter().print(WeChatGlobal.getSucceedXML("SUCCESS", "OK"));
         }
         return null;

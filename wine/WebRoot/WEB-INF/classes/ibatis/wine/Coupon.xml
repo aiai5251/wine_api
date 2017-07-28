@@ -6,21 +6,17 @@
     </resultMap>
 
     <insert id="addCoupon" parameterType="com.chimu.wine.bean.CouponBean" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO coupon(price, pid, uid, build_time, end_time, max_price) VALUES
+        INSERT INTO coupon(price, pid, uid, build_time, end_time, max_price, status) VALUES
             (#{price}, #{pid}, #{uid}, #{build_time}, #{end_time}, #{max_price})
     </insert>
 
     <update id="modifyCouponById">
-        UPDATE coupon SET price = #{price}, price = #{price}, pid = #{pid}, uid = #{uid}, build_time = #{build_time}, end_time = #{end_time}, max_price = #{max_price} WHERE id = #{id}
+        UPDATE coupon SET price = #{price}, price = #{price}, pid = #{pid}, uid = #{uid}, build_time = #{build_time}, end_time = #{end_time}, max_price = #{max_price}, status = #{status} WHERE id = #{id}
     </update>
 
     <select id="getCouponById" resultMap="mainCouponMap">
         SELECT * FROM coupon WHERE id = #{id}
     </select>
-
-    <delete id="deleteCouponById">
-        DELETE FROM coupon WHERE id = #{id}
-    </delete>
 
     <select id="getCouponByPid" resultMap="mainCouponMap">
         SELECT * FROM coupon WHERE pid = #{pid}

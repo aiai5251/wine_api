@@ -36,7 +36,7 @@ public class FileGlobal {
     }
 
     // 存储微信xml数据
-    public static String AddWeCahtFile(String context) throws Exception {
+    public static String AddWeChatFile(String context) throws Exception {
         Date date = new Date();
         String remote = "";
         String local = "C:/Notify/";

@@ -10,7 +10,7 @@ public class CouponBean {
     private String build_time; // 开始时间
     private String end_time; // 结束时间
     private Integer max_price; // 最大金额？？？
-    private Integer status; //使用状态
+    private Integer status; //使用状态 0:未使用，1:已使用, 2:删除
 
     public Integer getPrice() {
         return this.price;

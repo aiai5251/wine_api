@@ -24,16 +24,14 @@ public class PointAction extends BaseAction {
     @Autowired
     private PointService pointService;
 
-    @RequestMapping(value = "/getPointDetailList")
+    @RequestMapping(value = "/point")
     @ResponseBody
-    public Map<String, Object> getPointList(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> pointAction(HttpServletRequest request, HttpServletResponse response) {
         super.configResponse(response);
         Map<String, Object> map = new HashMap<>();
         Integer uid = Integer.parseInt(request.getParameter("uid"));
         List<PointBean> pointList = pointService.getPointListByUid(uid);
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("pointList", pointList);
-        map.put("data", dataMap);
+        map.put("data", pointList);
         return super.configResponseMap(map, 1);
     }
 

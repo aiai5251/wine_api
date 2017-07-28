@@ -10,6 +10,6 @@
     </select>
 
     <insert id="addPoint" parameterType="com.chimu.wine.bean.PointBean" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO point(uid, point, create_time, type, desciption) VALUES (#{uid}, #{point}, #{create_time}, #{type}, #{desciption})
+        INSERT INTO point(uid, point, create_time, type, description) VALUES (#{uid}, #{point}, #{create_time}, #{type}, #{description})
     </insert>
 </mapper>

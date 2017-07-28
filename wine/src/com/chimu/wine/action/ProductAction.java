@@ -141,7 +141,6 @@ public class ProductAction extends BaseAction {
             productBean.setOrigprice(Float.parseFloat(origprice));
             productBean.setCount(Integer.parseInt(count));
             productBean.setFreight_money(Float.parseFloat(freight_money));
-            productBean.setPoint(Integer.parseInt(point));
             productBean.setInvalid(Integer.parseInt(invalid));
             if (isAdd) {
                 productService.addProduct(productBean, files, files1);

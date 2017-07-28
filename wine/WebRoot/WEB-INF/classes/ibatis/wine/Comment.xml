@@ -5,6 +5,10 @@
     <resultMap id="mainCommentMap" type="com.chimu.wine.bean.CommentBean">
     </resultMap>
 
+    <insert id="addComment" parameterType="com.chimu.wine.bean.CommentBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment(pid, title, uid, create_time) VALUES (#{pid}, #{title}, #{uid}, #{create_time})
+    </insert>
+
     <select id="getCommentByPid" resultMap="mainCommentMap" parameterType="List">
         SELECT * FROM comment WHERE pid = #{pid}
     </select>

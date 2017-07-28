@@ -9,13 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/wine")
@@ -40,6 +39,33 @@ public class CommentAction extends BaseAction {
             comments.add(commentBean);
         }
         map.put("data", comments);
+        return super.configResponseMap(map, 1);
+    }
+
+    @RequestMapping(value = "/comment_add")
+    @ResponseBody
+    public Map<String, Object> addCommentAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String title = request.getParameter("title");
+        String pid = request.getParameter("pid");
+        String uid = request.getParameter("uid");
+
+        CommentBean commentBean = new CommentBean();
+        commentBean.setTitle(title);
+        commentBean.setPid(Integer.parseInt(pid));
+        commentBean.setUid(Integer.parseInt(uid));
+        commentBean.setCreate_time(new Date());
+
+        List<MultipartFile> files = null;
+        try {
+            files = ((MultipartHttpServletRequest)request).getFiles("file");
+        } catch(Exception ignored) {}
+
+        if (files != null && files.size() > 0) {
+            commentService.addComment(commentBean, files);
+        }
+
         return super.configResponseMap(map, 1);
     }
 }

@@ -12,4 +12,7 @@ public interface CartDao {
     void modifyCartById(CartBean cartBean);
     List<CartBean> getCartByUid(Integer uid);
     void deleteCartById(Integer id);
+
+    // 下单支付完成之后需要删除购物车
+    void deleteCartByPidWithUid(@Param("pid")Integer pid, @Param("uid")Integer uid);
 }

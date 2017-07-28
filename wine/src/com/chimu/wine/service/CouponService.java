@@ -27,7 +27,9 @@ public class CouponService {
     }
 
     public void deleteCouponById(Integer id) {
-        couponDao.deleteCouponById(id);
+        CouponBean couponBean = couponDao.getCouponById(id);
+        couponBean.setStatus(2);
+        couponDao.modifyCouponById(couponBean);
     }
 
     public List<CouponBean> getCouponByPid(Integer pid) {

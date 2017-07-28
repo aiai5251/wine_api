@@ -4,7 +4,23 @@
     <resultMap id="BaseResultMap" type="com.chimu.wine.bean.PromotionBean">
     </resultMap>
 
-    <select id="getPromotionList" resultMap="BaseResultMap" parameterType="List">
+    <insert id="addPromotion" parameterType="com.chimu.wine.bean.PromotionBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO promotion(pid, name, description) VALUES (#{pid}, #{name}, #{description})
+    </insert>
+
+    <update id="modifyPromotionById">
+        UPDATE promotion SET pid = #{pid}, name = #{name}, description = #{description} WHERE id = #{id}
+    </update>
+
+    <select id="getPromotionById" resultMap="BaseResultMap">
+        SELECT * FROM promotion WHERE id = #{id}
+    </select>
+
+    <delete id="deletePromotionById">
+        DELETE FROM promotion WHERE id = #{id}
+    </delete>
+
+    <select id="getPromotionList" resultMap="BaseResultMap">
         SELECT * FROM promotion WHERE pid = #{pid}
     </select>
 

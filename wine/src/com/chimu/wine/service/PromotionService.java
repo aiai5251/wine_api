@@ -13,6 +13,22 @@ public class PromotionService {
         this.promotionDao = promotionDao;
     }
 
+    public void addPromotion(PromotionBean promotionBean) {
+        promotionDao.addPromotion(promotionBean);
+    }
+
+    public void modifyPromotion(PromotionBean promotionBean) {
+        promotionDao.modifyPromotion(promotionBean);
+    }
+
+    public PromotionBean getPromotionById(Integer id) {
+        return promotionDao.getPromotionById(id);
+    }
+
+    public void deletePromotionById(Integer id) {
+        promotionDao.deletePromotionById(id);
+    }
+
     public List<PromotionBean> getPromotionList(Integer pid) {
         return promotionDao.getPromotionList(pid);
     }

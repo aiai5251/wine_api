@@ -6,8 +6,8 @@
     </resultMap>
 
     <insert id="addOrder" parameterType="com.chimu.wine.bean.OrderBean" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO `order`(uid, order_num, status, count, amount, create_time, modify_time) VALUES
-            (#{uid}, #{order_num}, #{status}, #{count}, #{amount}, #{create_time}, #{modify_time})
+        INSERT INTO `order`(uid, order_num, status, count, amount, create_time, modify_time, point) VALUES
+            (#{uid}, #{order_num}, #{status}, #{count}, #{amount}, #{create_time}, #{modify_time}, #{point})
     </insert>
 
     <select id="getOrderList" resultMap="mainOrderMap">
@@ -31,7 +31,7 @@
     </select>
 
     <update id="modifyOrder" parameterType="com.chimu.wine.bean.OrderBean">
-        UPDATE `order` SET address_id = #{address_id}, coupon_id = #{coupon_id}, status = #{status}, memo = #{memo}, pay = #{pay}, modify_time = #{modify_time} WHERE id = #{id}
+        UPDATE `order` SET address_id = #{address_id}, coupon_id = #{coupon_id}, status = #{status}, memo = #{memo}, pay = #{pay}, modify_time = #{modify_time}, point = #{point} WHERE id = #{id}
     </update>
 
 </mapper>

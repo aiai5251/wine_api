@@ -25,4 +25,8 @@
         DELETE FROM cart WHERE id = #{id}
     </delete>
 
+    <delete id="deleteCartByPidWithUid">
+        DELETE FROM cart WHERE pid = #{pid} AND uid = #{uid}
+    </delete>
+
 </mapper>

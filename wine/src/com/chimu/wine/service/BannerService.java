@@ -47,7 +47,11 @@ public class BannerService {
         return bannerDao.getBannerWithId(id);
     }
 
-    public void deleteBanner(Integer id) {
+    public void deleteBanner(Integer id) throws Exception {
+        BannerBean bannerBean = bannerDao.getBannerWithId(id);
+        // 删除本地资源，释放空间
+        String url = bannerBean.getImgurl().replace(Constant.Host, Constant.SaveImagesLocalPath);
+        FileGlobal.RemoveFile(url);
         bannerDao.deleteBanner(id);
     }
 }
