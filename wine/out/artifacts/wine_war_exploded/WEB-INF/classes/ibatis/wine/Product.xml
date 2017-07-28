@@ -10,7 +10,7 @@
     </insert>
 
     <select id="getProductList" resultMap="BaseResultMap">
-        SELECT * FROM product WHERE invalid = 0
+        SELECT * FROM product
     </select>
 
     <select id="getProductWithId" resultMap="BaseResultMap">

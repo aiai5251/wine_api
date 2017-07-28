@@ -664,7 +664,16 @@
       <DataType>int(1)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="138" parent="22" name="PRIMARY">
+    <column id="138" parent="22" name="tel">
+      <Position>9</Position>
+      <DataType>varchar(20)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="139" parent="22" name="password">
+      <Position>10</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="140" parent="22" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

@@ -10,6 +10,8 @@ public class UserBean {
     private String openid;
     private Integer admin;
     private Integer coupon_count;
+    private String tel;
+    private String password;
 
     public Integer getId() {
         return this.id;
@@ -81,5 +83,21 @@ public class UserBean {
 
     public void setCoupon_count(Integer coupon_count) {
         this.coupon_count = coupon_count;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

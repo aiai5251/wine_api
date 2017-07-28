@@ -17,6 +17,10 @@ public class UserService {
         this.couponDao = couponDao;
     }
 
+    public void modifyUser(UserBean userBean) {
+        userDao.modifyUser(userBean);
+    }
+
     public UserBean getUserById(Integer id) {
         UserBean userBean = userDao.getUserById(id);
         // 获取优惠券个数
@@ -24,8 +28,16 @@ public class UserService {
         return userBean;
     }
 
+    public UserBean getUserByTel(String tel) {
+        return userDao.getUserByTel(tel);
+    }
+
     public List<UserBean> getUserList() {
         return userDao.getUserList();
+    }
+
+    public List<UserBean> getUserWithAdmin() {
+        return userDao.getUserWithAdmin();
     }
 
     public UserBean getCommentUserById(Integer id) {

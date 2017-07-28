@@ -8,6 +8,9 @@ public interface UserDao {
     void addUser(UserBean userBean);
     void modifyUser(UserBean userBean);
     UserBean getUserById(Integer id);
+    // 获取管理员
+    List<UserBean> getUserWithAdmin();
+    UserBean getUserByTel(String tel);
 
     // 根据微信id搜索用户
     UserBean getUserWithOpenid(String openid);

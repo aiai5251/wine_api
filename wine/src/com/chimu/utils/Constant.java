@@ -3,6 +3,7 @@ package com.chimu.utils;
 public class Constant {
     // Host
     public static final String Host = "http://www.main-zha.com/chimu/wine/image?name=";
+
     // 线上图片保存地址
     public static final String SaveImagesLocalPath = "C:/uploadImage/";
 

@@ -28,12 +28,16 @@ public class BannerService {
     public void modifyBanner(BannerBean bannerBean, MultipartFile file) throws Exception {
         if (file != null && !file.isEmpty()) {
             // 先删除原来的图片文件，再添加
-            String url = bannerBean.getImgurl().replace(Constant.Host, Constant.SaveImagesLocalPath);
-            FileGlobal.RemoveFile(url);
-            // 添加
-            String imageUrl = FileGlobal.AddFile(file);
-            if (CMString.isValid(imageUrl)) {
-                bannerBean.setImgurl(imageUrl);
+            String[] rows = bannerBean.getImgurl().split("=");
+            if (rows.length == 2) {
+                String url = Constant.SaveImagesLocalPath + rows[1];
+                System.out.print("removeUrl == " + url);
+                FileGlobal.RemoveFile(url);
+                // 添加
+                String imageUrl = FileGlobal.AddFile(file);
+                if (CMString.isValid(imageUrl)) {
+                    bannerBean.setImgurl(imageUrl);
+                }
             }
         }
         bannerDao.modifyBanner(bannerBean);
@@ -50,8 +54,12 @@ public class BannerService {
     public void deleteBanner(Integer id) throws Exception {
         BannerBean bannerBean = bannerDao.getBannerWithId(id);
         // 删除本地资源，释放空间
-        String url = bannerBean.getImgurl().replace(Constant.Host, Constant.SaveImagesLocalPath);
-        FileGlobal.RemoveFile(url);
-        bannerDao.deleteBanner(id);
+        String[] rows = bannerBean.getImgurl().split("=");
+        if (rows.length == 2) {
+            String url = Constant.SaveImagesLocalPath + rows[1];
+            System.out.print("removeUrl == " + url);
+            FileGlobal.RemoveFile(url);
+            bannerDao.deleteBanner(id);
+        }
     }
 }

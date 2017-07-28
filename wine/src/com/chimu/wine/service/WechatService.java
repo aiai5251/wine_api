@@ -11,6 +11,10 @@ import com.chimu.wine.bean.WechatPayBean;
 import com.chimu.wine.dao.UserDao;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class WechatService {
     private UserDao userDao;
@@ -103,5 +107,30 @@ public class WechatService {
         return json.toString();
     }
 
+    // 微信发送消息
+    public String sendWechat(String wcid, String message) throws Exception {
+        String url = String.format("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s", getToken());
+        String body = String.format("{\"touser\":\"%s\",\"msgtype\":\"text\", \"text\":{\"content\":\"%s\"}}", wcid, message);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        return NetGlobal.HttpPost(url, headers, body, null);
+    }
+
+    private String getToken() throws Exception{
+        Date now = new Date();
+        if (WeChatGlobal.date == null || now.getTime() > WeChatGlobal.date.getTime() + 3600000) {
+            synchronized(WeChatGlobal.objectToken) {
+                if (WeChatGlobal.date == null || now.getTime() > WeChatGlobal.date.getTime() + 3600000) {
+                    String url = String.format("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", Constant.Appid, Constant.Appsecret);
+                    String json = NetGlobal.HttpGet(url, null);
+                    if (json != null && json.length() > 0) {
+                        WeChatGlobal.token = JSON.parseObject(json).getString("access_token");
+                        WeChatGlobal.date = now;
+                    }
+                }
+            }
+        }
+        return WeChatGlobal.token;
+    }
 
 }

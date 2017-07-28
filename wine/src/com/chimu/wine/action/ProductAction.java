@@ -112,7 +112,6 @@ public class ProductAction extends BaseAction {
         String origprice = request.getParameter("origprice");
         String count = request.getParameter("count");
         String freight_money = request.getParameter("freight_money");
-        String point = request.getParameter("point");
         String invalid = request.getParameter("invalid");
         List<MultipartFile> files = null;
         try {

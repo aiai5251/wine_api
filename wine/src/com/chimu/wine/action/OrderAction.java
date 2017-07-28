@@ -5,10 +5,7 @@ import com.chimu.utils.Constant;
 import com.chimu.utils.tools.CMString;
 import com.chimu.utils.tools.FileGlobal;
 import com.chimu.utils.tools.WeChatGlobal;
-import com.chimu.wine.bean.ImageBean;
-import com.chimu.wine.bean.OrderBean;
-import com.chimu.wine.bean.OrderDetailBean;
-import com.chimu.wine.bean.ProductBean;
+import com.chimu.wine.bean.*;
 import com.chimu.wine.service.*;
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
@@ -44,8 +41,6 @@ public class OrderAction extends BaseAction {
     private CartService cartService;
     @Autowired()
     private UserService userService;
-    @Autowired()
-    private PointService pointService;
 
     @RequestMapping(value = "/order_add", method = RequestMethod.POST)
     @ResponseBody
@@ -188,7 +183,6 @@ public class OrderAction extends BaseAction {
             if (CMString.isValid(pay)) {
                 orderBean.setPay(Double.parseDouble(pay));
             }
-            // 使用了多少积分, 订单未完成，不需要去修改用户积分，只是纪录
             if (CMString.isValid(point)) {
                 orderBean.setPoint(Integer.parseInt(point));
             }
@@ -242,8 +236,22 @@ public class OrderAction extends BaseAction {
                 cartService.deleteCartByPidWithUid(orderDetailBean.getPid(), orderBean.getUid());
             }
 
+            for (UserBean userBean : userService.getUserWithAdmin()) {
+                wechatService.sendWechat(userBean.getOpenid(), "来订单了，<a href='http://www.main-zha.com/admin/wine/order.html?order_num=" + order_num + "'>订单详情</a>");
+            }
+
             response.getWriter().print(WeChatGlobal.getSucceedXML("SUCCESS", "OK"));
         }
+        return null;
+    }
+
+    @RequestMapping(value = "/wechat_send")
+    @ResponseBody
+    public Map<String, Object> sendWechatAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        super.configResponse(response);
+        String wcid = request.getParameter("wcid");
+        String message = request.getParameter("message");
+        response.getWriter().print(String.format("%s", wechatService.sendWechat(wcid, message)));
         return null;
     }
 

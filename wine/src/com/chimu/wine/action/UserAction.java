@@ -41,6 +41,37 @@ public class UserAction extends BaseAction {
         return super.configResponseMap(map, 1);
     }
 
+    @RequestMapping(value = "/login")
+    @ResponseBody
+    public Map<String, Object> loginAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String tel = request.getParameter("tel");
+        String password = request.getParameter("password");
+        UserBean userBean = userService.getUserByTel(tel);
+        if (userBean.getAdmin() == 1) {
+            if (userBean.getPassword().equals(CMString.MD5Encode(password))) {
+                return super.configResponseMap(map, 1);
+            }
+        }
+        return super.configResponseMap(map,0);
+    }
+
+    @RequestMapping(value = "/register")
+    @ResponseBody
+    public Map<String, Object> registerAction(HttpServletRequest request, HttpServletResponse response) {
+        super.configResponse(response);
+        Map<String, Object> map = new HashMap<>();
+        String id = request.getParameter("id");
+        String tel = request.getParameter("tel");
+        String password = request.getParameter("password");
+        UserBean userBean = userService.getUserById(Integer.parseInt(id));
+        userBean.setTel(tel);
+        userBean.setPassword(CMString.MD5Encode(password));
+        userService.modifyUser(userBean);
+        return super.configResponseMap(map, 1);
+    }
+
     @RequestMapping(value = "/wechat")
     @ResponseBody
     public Map<String, Object> wechatAction(HttpServletRequest request, HttpServletResponse response) throws Exception {

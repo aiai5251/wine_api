@@ -11,11 +11,19 @@
     </insert>
 
     <update id="modifyUser" parameterType="com.chimu.wine.bean.UserBean">
-        UPDATE user SET avatar = #{avatar}, name = #{name}, isVip = #{isVip}, point = #{point}, award = #{award}, openid = #{openid}, admin = #{admin} WHERE id = #{id}
+        UPDATE user SET avatar = #{avatar}, name = #{name}, isVip = #{isVip}, point = #{point}, award = #{award}, openid = #{openid}, admin = #{admin}, tel = #{tel}, password = #{password} WHERE id = #{id}
     </update>
 
     <select id="getUserById" resultMap="mainUserMap">
         SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <select id="getUserByTel" resultMap="mainUserMap">
+        SELECT * FROM user WHERE tel = #{tel}
+    </select>
+
+    <select id="getUserWithAdmin" resultMap="mainUserMap">
+        SELECT * FROM user WHERE admin = 1
     </select>
 
     <select id="getUserList" resultMap="mainUserMap">

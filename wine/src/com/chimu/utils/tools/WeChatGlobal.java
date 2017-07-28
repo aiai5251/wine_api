@@ -7,9 +7,13 @@ import org.jdom2.input.SAXBuilder;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 public class WeChatGlobal {
+    public static Date date;
+    public static Object objectToken = new Object();
+    public static String token = null;
 
     public static String getOrderNumWithXML(String xml, String paramString) throws IOException, JDOMException {
         String returnString = null;
