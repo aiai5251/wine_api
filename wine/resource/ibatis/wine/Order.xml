@@ -11,7 +11,7 @@
     </insert>
 
     <select id="getOrderList" resultMap="mainOrderMap">
-        SELECT * FROM `order`
+        SELECT * FROM `order` ORDER BY create_time DESC
     </select>
 
     <select id="getOrderById" resultMap="mainOrderMap">
@@ -19,11 +19,11 @@
     </select>
 
     <select id="getOrderByUid" resultMap="mainOrderMap">
-        SELECT * FROM `order` WHERE uid = #{uid}
+        SELECT * FROM `order` WHERE uid = #{uid} ORDER BY create_time DESC
     </select>
 
     <select id="getOrderByUidWithStatus" resultMap="mainOrderMap">
-        SELECT * FROM `order` WHERE uid = #{uid} AND status = #{status}
+        SELECT * FROM `order` WHERE uid = #{uid} AND status = #{status} ORDER BY create_time DESC
     </select>
 
     <select id="getOrderByOrderNum" resultMap="mainOrderMap">
