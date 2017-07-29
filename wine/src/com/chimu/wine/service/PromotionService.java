@@ -17,8 +17,8 @@ public class PromotionService {
         promotionDao.addPromotion(promotionBean);
     }
 
-    public void modifyPromotion(PromotionBean promotionBean) {
-        promotionDao.modifyPromotion(promotionBean);
+    public void modifyPromotionById(PromotionBean promotionBean) {
+        promotionDao.modifyPromotionById(promotionBean);
     }
 
     public PromotionBean getPromotionById(Integer id) {
@@ -29,8 +29,12 @@ public class PromotionService {
         promotionDao.deletePromotionById(id);
     }
 
-    public List<PromotionBean> getPromotionList(Integer pid) {
-        return promotionDao.getPromotionList(pid);
+    public List<PromotionBean> getPromotionList() {
+        return promotionDao.getPromotionList();
+    }
+
+    public List<PromotionBean> getPromotionListByPid(Integer pid) {
+        return promotionDao.getPromotionListByPid(pid);
     }
 
 }

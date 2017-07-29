@@ -20,8 +20,12 @@
         DELETE FROM promotion WHERE id = #{id}
     </delete>
 
+    <select id="getPromotionListByPid" resultMap="BaseResultMap">
+        SELECT * FROM promotion WHERE pid = #{pid} OR pid = 0
+    </select>
+
     <select id="getPromotionList" resultMap="BaseResultMap">
-        SELECT * FROM promotion WHERE pid = #{pid}
+        SELECT * FROM promotion
     </select>
 
 </mapper>

@@ -10,7 +10,9 @@ public class CouponBean {
     private String build_time; // 开始时间
     private String end_time; // 结束时间
     private Integer max_price; // 最大金额？？？
-    private Integer status; //使用状态 0:未使用，1:已使用, 2:删除
+    private Integer is_delete; //使用状态 1:删除
+
+    private Integer status; // 某个用户的使用情况
 
     public Integer getPrice() {
         return this.price;
@@ -74,6 +76,14 @@ public class CouponBean {
 
     public void setMax_price(Integer max_price) {
         this.max_price = max_price;
+    }
+
+    public Integer getIs_delete() {
+        return is_delete;
+    }
+
+    public void setIs_delete(Integer is_delete) {
+        this.is_delete = is_delete;
     }
 
     public Integer getStatus() {

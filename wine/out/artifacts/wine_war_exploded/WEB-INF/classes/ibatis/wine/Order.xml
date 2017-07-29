@@ -30,7 +30,7 @@
         SELECT * FROM `order` WHERE order_num = #{order_num}
     </select>
 
-    <update id="modifyOrder" parameterType="com.chimu.wine.bean.OrderBean">
+    <update id="modifyOrderById" parameterType="com.chimu.wine.bean.OrderBean">
         UPDATE `order` SET address_id = #{address_id}, coupon_id = #{coupon_id}, status = #{status}, memo = #{memo}, pay = #{pay}, modify_time = #{modify_time}, point = #{point} WHERE id = #{id}
     </update>
 

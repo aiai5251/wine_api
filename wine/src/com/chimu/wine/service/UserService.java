@@ -2,6 +2,7 @@ package com.chimu.wine.service;
 
 import com.chimu.wine.bean.UserBean;
 import com.chimu.wine.dao.CouponDao;
+import com.chimu.wine.dao.MyCouponDao;
 import com.chimu.wine.dao.UserDao;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,11 @@ import java.util.List;
 @Service
 public class UserService {
     private UserDao userDao;
-    private CouponDao couponDao;
+    private MyCouponDao myCouponDao;
 
-    public UserService(UserDao userDao, CouponDao couponDao) {
+    public UserService(UserDao userDao, MyCouponDao myCouponDao) {
         this.userDao = userDao;
-        this.couponDao = couponDao;
+        this.myCouponDao = myCouponDao;
     }
 
     public void modifyUser(UserBean userBean) {
@@ -24,7 +25,7 @@ public class UserService {
     public UserBean getUserById(Integer id) {
         UserBean userBean = userDao.getUserById(id);
         // 获取优惠券个数
-        userBean.setCoupon_count(couponDao.numberOfCouponByUid(userBean.getId()));
+        userBean.setCoupon_count(myCouponDao.numberOfCouponByUid(userBean.getId()));
         return userBean;
     }
 

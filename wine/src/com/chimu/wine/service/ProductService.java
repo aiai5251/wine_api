@@ -135,6 +135,7 @@ public class ProductService {
 
     public ProductBean getProductWithId(Integer id) {
         ProductBean productBean = productDao.getProductWithId(id);
+        productBean.setPoint((int)Math.round((productBean.getPrice() / 10.0)));
         productBean.setImages(imageDao.getImagesByPid(productBean.getId(), 0));
         productBean.setDesc_images(imageDao.getImagesByPid(productBean.getId(), 1));
         return productBean;

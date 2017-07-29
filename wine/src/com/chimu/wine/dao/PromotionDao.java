@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface PromotionDao {
     void addPromotion(PromotionBean promotionBean);
-    void modifyPromotion(PromotionBean promotionBean);
+    void modifyPromotionById(PromotionBean promotionBean);
     PromotionBean getPromotionById(Integer id);
     void deletePromotionById(Integer id);
 
-    List<PromotionBean> getPromotionList(Integer pid);
+    List<PromotionBean> getPromotionList();
+    List<PromotionBean> getPromotionListByPid(Integer pid);
+
 }

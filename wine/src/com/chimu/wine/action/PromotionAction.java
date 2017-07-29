@@ -31,8 +31,11 @@ public class PromotionAction extends BaseAction {
         if (CMString.isValid(id)) {
             PromotionBean promotionBean = promotionService.getPromotionById(Integer.parseInt(id));
             map.put("data", promotionBean);
+        } else if (CMString.isValid(pid)) {
+            List<PromotionBean> promotionBeanList = promotionService.getPromotionListByPid(Integer.parseInt(pid));
+            map.put("data", promotionBeanList);
         } else {
-            List<PromotionBean> promotionBeanList = promotionService.getPromotionList(Integer.parseInt(pid));
+            List<PromotionBean> promotionBeanList = promotionService.getPromotionList();
             map.put("data", promotionBeanList);
         }
         return super.configResponseMap(map, 1);
@@ -75,7 +78,7 @@ public class PromotionAction extends BaseAction {
         if (CMString.isValid(description))
             promotionBean.setDescription(description);
 
-        promotionService.modifyPromotion(promotionBean);
+        promotionService.modifyPromotionById(promotionBean);
         map.put("data", promotionBean);
         return super.configResponseMap(map, 1);
     }

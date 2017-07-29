@@ -132,7 +132,7 @@ public class OrderAction extends BaseAction {
             OrderBean orderBean = orderService.getOrderById(Integer.parseInt(id));
             if (orderBean != null) {
                 // 只为了展示当前订单送多少积分
-                orderBean.setPoint((int)Math.round((orderBean.getAmount() / 100.0)));
+                orderBean.setPoint((int)Math.round((orderBean.getAmount() / 10.0)));
                 map.put("data", orderBean);
                 return super.configResponseMap(map, 1);
             }
@@ -227,17 +227,16 @@ public class OrderAction extends BaseAction {
         if (CMString.isValid(order_num)) {
             // 支付完成 更改状态
             OrderBean orderBean = orderService.getOrderByOrderNum(order_num);
-            orderBean.setStatus(1);
-            orderService.modifyOrder(orderBean);
+            if (orderBean != null && orderBean.getStatus() == 0) {
+                orderBean.setStatus(1);
+                orderService.modifyOrder(orderBean);
 
-            // 删除购物车中的商品
-            List<OrderDetailBean> orderDetails = orderBean.getOrderDetails();
-            for (OrderDetailBean orderDetailBean : orderDetails) {
-                cartService.deleteCartByPidWithUid(orderDetailBean.getPid(), orderBean.getUid());
-            }
+                // 删除购物车中的商品
+                List<OrderDetailBean> orderDetails = orderBean.getOrderDetails();
+                for (OrderDetailBean orderDetailBean : orderDetails) {
+                    cartService.deleteCartByPidWithUid(orderDetailBean.getPid(), orderBean.getUid());
+                }
 
-            for (UserBean userBean : userService.getUserWithAdmin()) {
-                wechatService.sendWechat(userBean.getOpenid(), "来订单了，<a href='http://www.main-zha.com/admin/wine/order.html?order_num=" + order_num + "'>订单详情</a>");
             }
 
             response.getWriter().print(WeChatGlobal.getSucceedXML("SUCCESS", "OK"));

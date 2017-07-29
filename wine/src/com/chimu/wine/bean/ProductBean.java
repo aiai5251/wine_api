@@ -14,11 +14,12 @@ public class ProductBean {
     private Float origprice;
     private Integer count;
     private String description_image;
-    private Float freight_money;
     private Integer sales;
     private List<ImageBean> images;
     private List<ImageBean> desc_images;
     private Integer invalid; //默认下架
+
+    private Integer point;
 //    促销列表
     private List<PromotionBean> promotionList;
 //    优惠券列表
@@ -106,14 +107,6 @@ public class ProductBean {
         this.description_image = description_image;
     }
 
-    public Float getFreight_money() {
-        return this.freight_money;
-    }
-
-    public void setFreight_money(Float freight_money) {
-        this.freight_money = freight_money;
-    }
-
     public Integer getSales() {
         return this.sales;
     }
@@ -168,5 +161,13 @@ public class ProductBean {
 
     public void setInvalid(Integer invalid) {
         this.invalid = invalid;
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
     }
 }

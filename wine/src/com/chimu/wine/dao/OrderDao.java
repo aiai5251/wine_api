@@ -13,5 +13,5 @@ public interface OrderDao {
     // 根据订单状态获取列表
     List<OrderBean> getOrderByUidWithStatus(@Param("uid")Integer uid, @Param("status")Integer status);
     OrderBean getOrderByOrderNum(String order_num);
-    void modifyOrder(OrderBean orderBean);
+    void modifyOrderById(OrderBean orderBean);
 }

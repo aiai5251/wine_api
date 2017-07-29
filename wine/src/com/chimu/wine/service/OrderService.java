@@ -18,8 +18,9 @@ public class OrderService {
     private CouponDao couponDao;
     private PointDao pointDao;
     private UserDao userDao;
+    private MyCouponDao myCouponDao;
 
-    public OrderService(OrderDao orderDao, OrderDetailDao orderDetailDao, ProductDao productDao, AddressDao addressDao, CouponDao couponDao, PointDao pointDao, UserDao userDao) {
+    public OrderService(OrderDao orderDao, OrderDetailDao orderDetailDao, ProductDao productDao, AddressDao addressDao, CouponDao couponDao, PointDao pointDao, UserDao userDao, MyCouponDao myCouponDao) {
         this.orderDao = orderDao;
         this.orderDetailDao = orderDetailDao;
         this.productDao = productDao;
@@ -27,6 +28,7 @@ public class OrderService {
         this.couponDao = couponDao;
         this.pointDao = pointDao;
         this.userDao = userDao;
+        this.myCouponDao = myCouponDao;
     }
 
     public void addOrder(OrderBean orderBean) {
@@ -92,22 +94,24 @@ public class OrderService {
     }
 
     public void modifyOrder(OrderBean orderBean) {
+        System.out.print("modifyOrder - status = " + orderBean.getStatus());
         // 订单完成
         if (orderBean.getStatus() == 1) {
+            System.out.print("status = " + orderBean.getStatus());
             // 先送积分,根据订单总额来送
-            addPointWithModifyUser(orderBean, (int)Math.round((orderBean.getAmount() / 100.0)), true);
+            addPointWithModifyUser(orderBean, (int)Math.round((orderBean.getAmount() / 10.0)), true);
             // 该订单使用了积分
             if (orderBean.getPoint() > 0) {
                 addPointWithModifyUser(orderBean, orderBean.getPoint(), false);
             }
             // 使用了优惠券
             if (orderBean.getCoupon_id() > 0) {
-                CouponBean couponBean = couponDao.getCouponById(orderBean.getCoupon_id());
-                couponBean.setStatus(1);
-                couponDao.modifyCouponById(couponBean);
+                MyCouponBean myCouponBean = myCouponDao.getMyCouponByUidWithCouponId(orderBean.getUid(), orderBean.getCoupon_id());
+                myCouponBean.setStatus(1);
+                myCouponDao.modifyMyCoupon(myCouponBean);
             }
         }
-        orderDao.modifyOrder(orderBean);
+        orderDao.modifyOrderById(orderBean);
     }
 
     private void addPointWithModifyUser(OrderBean orderBean, Integer point, boolean point_add) {
@@ -120,14 +124,16 @@ public class OrderService {
             pointBean.setPoint(point);
             pointBean.setDescription("购买送积分");
             pointBean.setType(0);
+            pointDao.addPoint(pointBean);
             userBean.setPoint(userBean.getPoint() + point);
+            userDao.modifyUser(userBean);
         } else {
             pointBean.setPoint(point);
             pointBean.setDescription("消费使用积分");
             pointBean.setType(1);
+            pointDao.addPoint(pointBean);
             userBean.setPoint(userBean.getPoint() - point);
+            userDao.modifyUser(userBean);
         }
-        pointDao.addPoint(pointBean);
-        userDao.modifyUser(userBean);
     }
 }

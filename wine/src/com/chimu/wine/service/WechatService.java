@@ -62,7 +62,7 @@ public class WechatService {
         wechatPayBean.setAppid(Constant.Appid);
         wechatPayBean.setMch_id("1480904632");
         wechatPayBean.setNonce_str(String.valueOf(new java.util.Random().nextInt(100000000)));
-        wechatPayBean.setBody("赤木");
+        wechatPayBean.setBody("东方酒业");
         wechatPayBean.setOut_trade_no(order_num);
         wechatPayBean.setTotal_fee(amount);
         wechatPayBean.setSpbill_create_ip("127.0.0.1");

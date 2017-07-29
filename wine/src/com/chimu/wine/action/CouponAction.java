@@ -34,20 +34,9 @@ public class CouponAction extends BaseAction {
         if (CMString.isValid(id)) {
             CouponBean couponBean = couponService.getCouponById(Integer.parseInt(id));
             map.put("data", couponBean);
-        } else if (CMString.isValid(pid)) {
-            List<CouponBean> couponList = couponService.getCouponByPid(Integer.parseInt(pid));
+        } else if (CMString.isValid(pid) && CMString.isValid(uid)) {
+            List<CouponBean> couponList = couponService.getCouponByPidWithUid(Integer.parseInt(pid), Integer.parseInt(uid));
             map.put("data", couponList);
-        } else if (CMString.isValid(uid)) {
-            String status = request.getParameter("status");
-            // 查找未使用的优惠券
-            if (CMString.isValid(status)) {
-                List<CouponBean> couponList = couponService.getCouponByUidWithStatus(Integer.parseInt(uid));
-                map.put("data", couponList);
-            } else {
-                // 获取全部我的优惠券
-                List<CouponBean> couponList = couponService.getCouponByUid(Integer.parseInt(uid));
-                map.put("data", couponList);
-            }
         } else {
             List<CouponBean> couponList = couponService.getCouponList();
             map.put("data", couponList);
@@ -81,13 +70,11 @@ public class CouponAction extends BaseAction {
         String price = request.getParameter("price");
         String max_price = request.getParameter("max_price");
         String pid = request.getParameter("pid");
-        String uid = request.getParameter("uid");
         String id = request.getParameter("id");
-        String status = request.getParameter("status");
         CouponBean couponBean;
         if (isAdd) {
             couponBean = new CouponBean();
-            couponBean.setStatus(0);
+            couponBean.setIs_delete(0);
             // 优惠券日期添加起算，修改不修改时间
             Long day = Long.parseLong(request.getParameter("day"));
             Date d = new Date();
@@ -104,10 +91,6 @@ public class CouponAction extends BaseAction {
             couponBean.setMax_price(Integer.parseInt(max_price));
         if (CMString.isValid(pid))
             couponBean.setPid(Integer.parseInt(pid));
-        if (CMString.isValid(uid))
-            couponBean.setUid(Integer.parseInt(uid));
-        if (CMString.isValid(status))
-            couponBean.setStatus(Integer.parseInt(status));
 
         return couponBean;
     }

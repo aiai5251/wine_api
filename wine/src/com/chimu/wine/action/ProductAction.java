@@ -60,7 +60,7 @@ public class ProductAction extends BaseAction {
         productBean.setCouponList(couponList);
 
         // 促销列表
-        List<PromotionBean> promotionList = promotionService.getPromotionList(productBean.getId());
+        List<PromotionBean> promotionList = promotionService.getPromotionListByPid(productBean.getId());
         productBean.setPromotionList(promotionList);
 
         // 评价列表
@@ -111,7 +111,6 @@ public class ProductAction extends BaseAction {
         String description = request.getParameter("description");
         String origprice = request.getParameter("origprice");
         String count = request.getParameter("count");
-        String freight_money = request.getParameter("freight_money");
         String invalid = request.getParameter("invalid");
         List<MultipartFile> files = null;
         try {
@@ -139,7 +138,6 @@ public class ProductAction extends BaseAction {
             productBean.setDescription(description);
             productBean.setOrigprice(Float.parseFloat(origprice));
             productBean.setCount(Integer.parseInt(count));
-            productBean.setFreight_money(Float.parseFloat(freight_money));
             productBean.setInvalid(Integer.parseInt(invalid));
             if (isAdd) {
                 productService.addProduct(productBean, files, files1);
