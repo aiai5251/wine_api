@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chimu.wine.dao.TeamDao">
+    <resultMap id="mainTeamMap" type="com.chimu.wine.bean.TeamBean">
+    </resultMap>
+
+    <insert id="addTeam" parameterType="com.chimu.wine.bean.TeamBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO team(uid, fri_id) VALUES (#{uid}, #{fri_id})
+    </insert>
+
+    <select id="getTeamByUidWithFid" resultMap="mainTeamMap">
+        SELECT * FROM team WHERE uid = #{uid} AND fri_id = #{fri_id}
+    </select>
+
+</mapper>

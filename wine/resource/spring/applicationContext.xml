@@ -11,6 +11,9 @@
         </property>
     </bean>
 
+    <!--<bean id="orderJob" class="com.chimu.wine.job.OrderJob">-->
+    <!--</bean>-->
+
     <import resource="classpath:spring/applicationContext-servlet.xml"/>
     <import resource="classpath:spring/applicationContext-dataSource.xml"/>
 </beans>

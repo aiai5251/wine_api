@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chimu.wine.dao.ProductDao" >
+    <resultMap id="BaseResultMap" type="com.chimu.wine.bean.ProductBean">
+    </resultMap>
+
+    <insert id="addProduct" parameterType="com.chimu.wine.bean.ProductBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product(title, submessage, price, volume, image, description, origprice, count, description_image, sales, invalid) VALUES
+            (#{title}, #{submessage}, #{price}, #{volume}, #{image}, #{description}, #{origprice}, #{count}, #{description_image}, #{sales}, #{invalid})
+    </insert>
+
+    <select id="getProductList" resultMap="BaseResultMap">
+        SELECT * FROM product
+    </select>
+
+    <select id="getProductWithId" resultMap="BaseResultMap">
+        SELECT * FROM product WHERE id = #{id}
+    </select>
+
+    <update id="modifyProduct">
+        UPDATE product SET title = #{title}, submessage = #{submessage}, price = #{price}, volume = #{volume}, description = #{description}, origprice = #{origprice}, count = #{count}, sales = #{sales}, image = #{image}, description_image = #{description_image}, invalid = #{invalid} WHERE id = #{id}
+    </update>
+
+</mapper>
+
+

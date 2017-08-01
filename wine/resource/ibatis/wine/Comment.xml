@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chimu.wine.dao.CommentDao">
+    <resultMap id="mainCommentMap" type="com.chimu.wine.bean.CommentBean">
+    </resultMap>
+
+    <insert id="addComment" parameterType="com.chimu.wine.bean.CommentBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment(pid, title, uid, create_time) VALUES (#{pid}, #{title}, #{uid}, #{create_time})
+    </insert>
+
+    <select id="getCommentByPid" resultMap="mainCommentMap" parameterType="List">
+        SELECT * FROM comment WHERE pid = #{pid}
+    </select>
+
+</mapper>

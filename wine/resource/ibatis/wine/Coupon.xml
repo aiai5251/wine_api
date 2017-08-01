@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chimu.wine.dao.CouponDao">
+    <resultMap id="mainCouponMap" type="com.chimu.wine.bean.CouponBean">
+    </resultMap>
+
+    <insert id="addCoupon" parameterType="com.chimu.wine.bean.CouponBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO coupon(price, pid, build_time, end_time, max_price) VALUES
+            (#{price}, #{pid}, #{build_time}, #{end_time}, #{max_price})
+    </insert>
+
+    <update id="modifyCouponById">
+        UPDATE coupon SET price = #{price}, price = #{price}, pid = #{pid}, build_time = #{build_time}, end_time = #{end_time}, max_price = #{max_price} WHERE id = #{id}
+    </update>
+
+    <select id="getCouponById" resultMap="mainCouponMap">
+        SELECT * FROM coupon WHERE id = #{id}
+    </select>
+
+    <select id="getCouponByPid" resultMap="mainCouponMap">
+        SELECT * FROM coupon WHERE pid = #{pid} OR pid = 0
+    </select>
+
+    <select id="getCouponList" resultMap="mainCouponMap">
+        SELECT * FROM coupon
+    </select>
+
+</mapper>

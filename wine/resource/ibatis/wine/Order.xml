@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chimu.wine.dao.OrderDao">
+    <resultMap id="mainOrderMap" type="com.chimu.wine.bean.OrderBean">
+    </resultMap>
+
+    <insert id="addOrder" parameterType="com.chimu.wine.bean.OrderBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`(uid, order_num, status, count, amount, create_time, modify_time, point) VALUES
+            (#{uid}, #{order_num}, #{status}, #{count}, #{amount}, #{create_time}, #{modify_time}, #{point})
+    </insert>
+
+    <select id="getOrderList" resultMap="mainOrderMap">
+        SELECT * FROM `order` ORDER BY create_time DESC
+    </select>
+
+    <select id="getOrderById" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE id = #{id}
+    </select>
+
+    <select id="getOrderByUid" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE uid = #{uid} ORDER BY create_time DESC
+    </select>
+
+    <select id="getOrderByUidWithStatus" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE uid = #{uid} AND status = #{status} ORDER BY create_time DESC
+    </select>
+
+    <select id="getOrderByOrderNum" resultMap="mainOrderMap">
+        SELECT * FROM `order` WHERE order_num = #{order_num}
+    </select>
+
+    <update id="modifyOrderById" parameterType="com.chimu.wine.bean.OrderBean">
+        UPDATE `order` SET address_id = #{address_id}, coupon_id = #{coupon_id}, status = #{status}, memo = #{memo}, pay = #{pay}, modify_time = #{modify_time}, point = #{point} WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chimu.wine.dao.AddressDao">
+    <resultMap id="mainAddressMap" type="com.chimu.wine.bean.AddressBean">
+    </resultMap>
+    
+    <insert id="addAddress" parameterType="com.chimu.wine.bean.AddressBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO address(name, tel, uid, address, province_city, is_default, is_selected) VALUES
+            (#{name}, #{tel}, #{uid}, #{address}, #{province_city}, #{is_default}, #{is_selected})
+    </insert>
+
+    <!--删除的做标记，但是数据库中存储-->
+    <update id="deleteAddress">
+        UPDATE address SET is_delete = 1 WHERE id = #{id}
+    </update>
+
+    <update id="modifyAddressById" parameterType="com.chimu.wine.bean.AddressBean">
+        UPDATE address SET name = #{name}, tel = #{tel}, address = #{address}, province_city = #{province_city}, is_default = #{is_default}, is_selected = #{is_selected} WHERE id = #{id}
+    </update>
+
+    <select id="getAddressById" resultMap="mainAddressMap">
+        SELECT * FROM address WHERE id = #{id}
+    </select>
+
+    <select id="getAddressByUid" resultMap="mainAddressMap">
+        SELECT * FROM address WHERE uid = #{uid} AND is_delete = 0
+    </select>
+
+    <select id="getAddressSelectedByUid" resultMap="mainAddressMap">
+        SELECT * FROM address WHERE is_selected = 1 AND uid = #{uid}
+    </select>
+
+</mapper>
