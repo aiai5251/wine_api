@@ -10,8 +10,6 @@ import com.chimu.wine.bean.UserBean;
 import com.chimu.wine.bean.WechatPayBean;
 import com.chimu.wine.dao.UserDao;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,30 +105,24 @@ public class WechatService {
         return json.toString();
     }
 
+
+
     // 微信发送消息
     public String sendWechat(String wcid, String message) throws Exception {
-        String url = String.format("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s", getToken());
+        String url = String.format("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s", WeChatGlobal.getToken());
         String body = String.format("{\"touser\":\"%s\",\"msgtype\":\"text\", \"text\":{\"content\":\"%s\"}}", wcid, message);
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         return NetGlobal.HttpPost(url, headers, body, null);
     }
 
-    private String getToken() throws Exception{
-        Date now = new Date();
-        if (WeChatGlobal.date == null || now.getTime() > WeChatGlobal.date.getTime() + 3600000) {
-            synchronized(WeChatGlobal.objectToken) {
-                if (WeChatGlobal.date == null || now.getTime() > WeChatGlobal.date.getTime() + 3600000) {
-                    String url = String.format("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", Constant.Appid, Constant.Appsecret);
-                    String json = NetGlobal.HttpGet(url, null);
-                    if (json != null && json.length() > 0) {
-                        WeChatGlobal.token = JSON.parseObject(json).getString("access_token");
-                        WeChatGlobal.date = now;
-                    }
-                }
-            }
-        }
-        return WeChatGlobal.token;
+    // https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQG88DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQXFRbVplTG5meDIxMDAwMGcwN1QAAgS9zX5ZAwQAAAAA
+    public String getQrcode(String code) throws Exception{
+        String url = String.format("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=%s", WeChatGlobal.getToken());
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        String json = String.format("{\"action_name\": \"QR_LIMIT_STR_SCENE\", \"action_info\": {\"scene\": {\"scene_str\": \"%s\"}}}", code);
+        return NetGlobal.HttpPost(url, headers, json, "utf-8");
     }
 
 }

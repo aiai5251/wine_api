@@ -22,10 +22,6 @@
         SELECT * FROM user WHERE tel = #{tel}
     </select>
 
-    <select id="getUserWithAdmin" resultMap="mainUserMap">
-        SELECT * FROM user WHERE admin = 1
-    </select>
-
     <select id="getUserList" resultMap="mainUserMap">
         SELECT * FROM user
     </select>

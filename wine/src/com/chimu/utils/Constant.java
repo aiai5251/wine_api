@@ -12,5 +12,4 @@ public class Constant {
     public static final String Appsecret = "8720022262e5661fa5def6c20ec876e4";
 
     public static final String AppKey = "chimuwechat000010001000100010001";
-
 }

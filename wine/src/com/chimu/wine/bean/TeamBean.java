@@ -3,8 +3,8 @@ package com.chimu.wine.bean;
 public class TeamBean {
 
     private Integer id;
-    private String uid;
-    private String friId;
+    private Integer uid;
+    private Integer fri_id;
 
     public Integer getId() {
         return this.id;
@@ -14,19 +14,19 @@ public class TeamBean {
         this.id = id;
     }
 
-    public String getUid() {
-        return this.uid;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
-    public String getFriId() {
-        return this.friId;
+    public Integer getFri_id() {
+        return fri_id;
     }
 
-    public void setFriId(String friId) {
-        this.friId = friId;
+    public void setFri_id(Integer fri_id) {
+        this.fri_id = fri_id;
     }
 }

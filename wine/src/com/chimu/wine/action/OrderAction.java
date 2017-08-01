@@ -220,7 +220,7 @@ public class OrderAction extends BaseAction {
     public Map<String, Object> weChatNotifyAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         String xml = IOUtils.toString(request.getInputStream());
-        FileGlobal.AddWeChatFile(xml);
+        FileGlobal.AddWeChatFile(xml, "C:/Notify/");
         String order_num = WeChatGlobal.getOrderNumWithXML(xml, "out_trade_no");
 
         System.out.print("订单order_num：" + order_num);

@@ -6,14 +6,18 @@
       <w>appid</w>
       <w>appsecret</w>
       <w>chimuwechat</w>
+      <w>echostr</w>
       <w>fastjson</w>
       <w>headimgurl</w>
       <w>ibatis</w>
       <w>imgurl</w>
       <w>jsapi</w>
       <w>msgtype</w>
+      <w>noncestr</w>
       <w>origprice</w>
       <w>pids</w>
+      <w>qrcode</w>
+      <w>qrscene</w>
       <w>spbill</w>
       <w>submessage</w>
       <w>touser</w>
