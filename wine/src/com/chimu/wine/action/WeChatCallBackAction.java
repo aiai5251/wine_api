@@ -96,7 +96,9 @@ public class WeChatCallBackAction extends BaseAction {
 
                             System.out.print("推荐的用户id：" + type);
 
-                            resetUser(fromUserName, type);
+                            if (CMString.isValid(type)) {
+                                resetUser(fromUserName, type);
+                            }
                         }
                     }
                 }
@@ -106,8 +108,9 @@ public class WeChatCallBackAction extends BaseAction {
 
             if ("SCAN".equals(event)) {
                 System.out.print("SCAN - eventKey == " + eventKey);
-
-                resetUser(fromUserName, eventKey);
+                if (CMString.isValid(eventKey)) {
+                    resetUser(fromUserName, eventKey);
+                }
                 // 新用户关注
                 response.getWriter().print(weChatCallBackService.ReplyText(fromUserName, toUserName));
             }
@@ -130,7 +133,7 @@ public class WeChatCallBackAction extends BaseAction {
             userBean.setName("东方酒业用户");
             userBean.setOpenid(fromUserName);
             userBean.setAvatar("");
-            userBean.setPoint(10);
+            userBean.setPoint(0);
             userBean.setAward(0);
             userBean.setIsVip(0);
             userBean.setAdmin(0);
@@ -145,7 +148,7 @@ public class WeChatCallBackAction extends BaseAction {
             pointBean.setCreate_time(new Date());
             pointBean.setUid(userBean1.getId());
             pointBean.setPoint(10);
-            pointBean.setDescription("推广团队成功得积分");
+            pointBean.setDescription("发展下级得积分");
             pointBean.setType(0);
             pointService.addPoint(pointBean);
 
@@ -154,45 +157,34 @@ public class WeChatCallBackAction extends BaseAction {
             teamBean.setFri_id(userBean1.getId());
             teamService.addTeam(teamBean);
 
-        } else {
-            if (Objects.equals(userBean.getId(), userBean1.getId())) { // 两个用户相同
-            } else { // 用户不同
-                // 判断是否已经加过积分
-                TeamBean teamBean = teamService.getTeamByUidWithFid(userBean.getId(), userBean1.getId());
-                if (teamBean == null) {
-                    // 没有和该用户绑定过
-                    teamBean = new TeamBean();
-                    teamBean.setUid(userBean.getId());
-                    teamBean.setFri_id(userBean1.getId());
-                    teamService.addTeam(teamBean);
-
-                    userBean.setPoint(userBean.getPoint() + 10);
-                    userService.modifyUser(userBean);
-
-                    userBean1.setPoint(userBean1.getPoint() + 10);
-                    userService.modifyUser(userBean1);
-
-                    // 添加记录
-                    // 被推荐的人
-                    PointBean pointBean = new PointBean();
-                    pointBean.setCreate_time(new Date());
-                    pointBean.setUid(userBean.getId());
-                    pointBean.setPoint(10);
-                    pointBean.setDescription("推广团队成功得积分");
-                    pointBean.setType(0);
-                    pointService.addPoint(pointBean);
-
-                    // 推荐的人
-                    PointBean pointBean1 = new PointBean();
-                    pointBean1.setCreate_time(new Date());
-                    pointBean1.setUid(userBean1.getId());
-                    pointBean1.setPoint(10);
-                    pointBean1.setDescription("推荐成功得积分");
-                    pointBean1.setType(0);
-                    pointService.addPoint(pointBean1);
-                }
-            }
         }
+//        else {
+//            if (Objects.equals(userBean.getId(), userBean1.getId())) { // 两个用户相同
+//            } else { // 用户不同
+//                // 判断是否已经加过积分
+//                TeamBean teamBean = teamService.getTeamFidByUid(userBean.getId());
+//                if (teamBean == null) {
+//                    // 没有和该用户绑定过
+//                    teamBean = new TeamBean();
+//                    teamBean.setUid(userBean.getId());
+//                    teamBean.setFri_id(userBean1.getId());
+//                    teamService.addTeam(teamBean);
+//
+//                    userBean1.setPoint(userBean1.getPoint() + 10);
+//                    userService.modifyUser(userBean1);
+//
+//                    // 添加记录
+//                    // 推荐的人
+//                    PointBean pointBean1 = new PointBean();
+//                    pointBean1.setCreate_time(new Date());
+//                    pointBean1.setUid(userBean1.getId());
+//                    pointBean1.setPoint(10);
+//                    pointBean1.setDescription("推荐成功得积分");
+//                    pointBean1.setType(0);
+//                    pointService.addPoint(pointBean1);
+//                }
+//            }
+//        }
     }
 
 
