@@ -13,4 +13,12 @@
         SELECT * FROM team WHERE uid = #{uid} AND fri_id = #{fri_id}
     </select>
 
+    <select id="getTeamFidByUid" resultMap="mainTeamMap">
+        SELECT * FROM team WHERE uid = #{uid}
+    </select>
+
+    <select id="getTeamUidByFid" resultMap="mainTeamMap">
+        SELECT * FROM team WHERE fri_id = #{fri_id}
+    </select>
+
 </mapper>

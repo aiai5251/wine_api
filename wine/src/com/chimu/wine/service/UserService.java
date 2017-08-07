@@ -24,17 +24,6 @@ public class UserService {
 
     public void addUser(UserBean userBean) {
         userDao.addUser(userBean);
-
-        if (userBean.getPoint() > 0) { // 新用户是扫码推荐进来的
-            PointBean pointBean = new PointBean();
-            pointBean.setCreate_time(new Date());
-            pointBean.setUid(userBean.getId());
-            pointBean.setPoint(userBean.getPoint());
-            pointBean.setDescription("推荐成功得积分");
-            pointBean.setType(0);
-            pointDao.addPoint(pointBean);
-        }
-
     }
 
     public void modifyUser(UserBean userBean) {
