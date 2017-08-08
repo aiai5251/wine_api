@@ -5,6 +5,7 @@ public class TeamBean {
     private Integer id;
     private Integer uid;
     private Integer fri_id;
+    private UserBean userBean;
 
     public Integer getId() {
         return this.id;
@@ -28,5 +29,13 @@ public class TeamBean {
 
     public void setFri_id(Integer fri_id) {
         this.fri_id = fri_id;
+    }
+
+    public UserBean getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
     }
 }

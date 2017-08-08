@@ -28,6 +28,7 @@ public class WechatService {
             url = String.format("https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN", row.getString("access_token"), row.getString("openid"));
             json = NetGlobal.HttpGet(url, null);
             row = JSON.parseObject(json);
+            System.out.print("userInfo---- := " + row);
             if(CMString.isValid(row.getString("openid"))){
                 UserBean userBean = userDao.getUserWithOpenid(row.getString("openid"));
                 if (userBean != null) {
