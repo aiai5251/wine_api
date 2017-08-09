@@ -34,4 +34,8 @@
         SELECT name, avatar FROM user WHERE id = #{id}
     </select>
 
+    <select id="getUserByAdmin" resultType="String">
+        SELECT openid FROM user WHERE admin = 1
+    </select>
+
 </mapper>

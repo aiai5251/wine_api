@@ -6,6 +6,7 @@ import com.chimu.utils.Constant;
 import com.chimu.utils.tools.CMString;
 import com.chimu.utils.tools.NetGlobal;
 import com.chimu.utils.tools.WeChatGlobal;
+import com.chimu.wine.bean.OrderBean;
 import com.chimu.wine.bean.UserBean;
 import com.chimu.wine.bean.WechatPayBean;
 import com.chimu.wine.dao.UserDao;
@@ -106,15 +107,14 @@ public class WechatService {
         return json.toString();
     }
 
-
-
-    // 微信发送消息
-    public String sendWechat(String wcid, String message) throws Exception {
-        String url = String.format("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s", WeChatGlobal.getToken());
-        String body = String.format("{\"touser\":\"%s\",\"msgtype\":\"text\", \"text\":{\"content\":\"%s\"}}", wcid, message);
+    // 微信发送模版消息
+    public String sendWechatTemplate(String wcid, OrderBean orderBean) throws Exception {
+        String url = String.format("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s", WeChatGlobal.getToken());
+        String body = String.format("{\"touser\": \"%s\", \"template_id\": \"kniXC0jnm-eD63ixnY5T2ct-E2xJfuhqqkgHbOc7n0o\", \"url\": \"\",\"topcolor\": \"#000000\", \"data\": {\"first\": {\"value\": \"欢迎您关注东方酒业\", \"color\": \"#000000\"}, \"Day\": {\"value\": \"%s\",\"color\": \"#000000\"},\"orderId\": {\"value\": \"%s\", \"color\": \"#FF0033\"}, \"orderType\": {\"value\": \"消费¥%s\", \"color\": \"#FF0033\"},\"customerName\": {\"value\": \"%s\", \"color\": \"#000000\"}, \"customerPhone\": {\"value\": \"%s\", \"color\": \"#000000\"}, \"remark\": {\"value\": \"有人下单了，快点发货哦！\", \"color\": \"#000000\"}}}",
+                wcid, orderBean.getModify_time(), orderBean.getOrder_num(), orderBean.getPay(), orderBean.getAddressInfo().getName(), orderBean.getAddressInfo().getTel());
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        return NetGlobal.HttpPost(url, headers, body, null);
+        return NetGlobal.HttpPost(url, headers, body, "utf-8");
     }
 
     // https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQG88DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQXFRbVplTG5meDIxMDAwMGcwN1QAAgS9zX5ZAwQAAAAA
