@@ -53,4 +53,7 @@ public class UserService {
         return userDao.getCommentUserById(id);
     }
 
+    public List<String> getUserByAdmin() {
+        return userDao.getUserByAdmin();
+    }
 }

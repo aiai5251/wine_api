@@ -1,17 +1,12 @@
 package com.chimu.wine.action;
 
 import com.chimu.utils.BaseAction;
-import com.chimu.utils.Constant;
 import com.chimu.utils.tools.CMString;
 import com.chimu.utils.tools.FileGlobal;
 import com.chimu.utils.tools.WeChatGlobal;
 import com.chimu.wine.bean.*;
 import com.chimu.wine.service.*;
 import org.apache.commons.io.IOUtils;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -229,6 +224,7 @@ public class OrderAction extends BaseAction {
             OrderBean orderBean = orderService.getOrderByOrderNum(order_num);
             if (orderBean != null && orderBean.getStatus() == 0) {
                 orderBean.setStatus(1);
+                orderBean.setModify_time(new Date());
                 orderService.modifyOrder(orderBean);
 
                 // 删除购物车中的商品
@@ -237,6 +233,10 @@ public class OrderAction extends BaseAction {
                     cartService.deleteCartByPidWithUid(orderDetailBean.getPid(), orderBean.getUid());
                 }
 
+                // 发送模版消息
+                for (String openid : userService.getUserByAdmin()) {
+                    response.getWriter().print(String.format("%s", wechatService.sendWechatTemplate(openid, orderBean)));
+                }
             }
 
             response.getWriter().print(WeChatGlobal.getSucceedXML("SUCCESS", "OK"));
@@ -248,9 +248,12 @@ public class OrderAction extends BaseAction {
     @ResponseBody
     public Map<String, Object> sendWechatAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String wcid = request.getParameter("wcid");
-        String message = request.getParameter("message");
-        response.getWriter().print(String.format("%s", wechatService.sendWechat(wcid, message)));
+        String oid = request.getParameter("oid");
+        OrderBean orderBean = orderService.getOrderById(Integer.parseInt(oid));
+        response.getWriter().print(String.format("%s", wechatService.sendWechatTemplate(wcid, orderBean)));
         return null;
     }
 

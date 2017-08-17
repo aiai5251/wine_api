@@ -19,4 +19,8 @@ public interface UserDao {
 
     // 后台管理系统展示
     List<UserBean> getUserList();
+
+    // 获取全部的管理员
+    List<String> getUserByAdmin();
+
 }
