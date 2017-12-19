@@ -54,7 +54,7 @@ public class WeChatCallBackAction extends BaseAction {
         String eventKey = null;
 
         String xml = IOUtils.toString(request.getInputStream(), "utf-8");
-        FileGlobal.AddWeChatFile(xml, "C:/Callback");
+        FileGlobal.AddWeChatFile(xml, Constant.WXCallbackLocalPath);
 
         if (xml != null) {
             SAXBuilder sb = new SAXBuilder();

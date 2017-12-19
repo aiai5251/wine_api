@@ -1,11 +1,16 @@
 package com.chimu.utils;
 
 public class Constant {
-    // Host
-    public static final String Host = "http://www.main-zha.com/chimu/wine/image?name=";
+    // Images Host
+    public static final String ImageHost = "http://img.main-zha.com/";
+    public static final String StaticHost = "http://static.main-zha.com/";
+    public static final String APIHost = "http://api.main-zha.com/";
 
     // 线上图片保存地址
-    public static final String SaveImagesLocalPath = "C:/uploadImage/";
+    public static final String SaveImagesLocalPath = "/data/images/upload/";
+    
+    public static final String WXCallbackLocalPath = "/data/xml/wx/callback/";
+    public static final String WXNotifyLocalPath = "/data/xml/wx/notify/";
 
     public static final String Appid = "wxa699e71285eee5a1";
 

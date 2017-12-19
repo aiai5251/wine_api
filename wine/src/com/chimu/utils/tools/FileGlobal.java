@@ -14,7 +14,6 @@ public class FileGlobal {
     public static String AddFile(MultipartFile file) throws Exception {
         if(file != null && !file.isEmpty()){
             Date date = new Date();
-            String remote = Constant.Host;
             String local = Constant.SaveImagesLocalPath;
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
@@ -25,7 +24,7 @@ public class FileGlobal {
             File localFile = new File(local + "/" + sdf.format(date) + prefix);
             file.transferTo(localFile);
 
-            return remote + sdf.format(date) + prefix;
+            return Constant.ImageHost + sdf.format(date) + prefix;
         }
         return null;
     }
@@ -43,7 +42,7 @@ public class FileGlobal {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
 
         String name = sdf.format(date) + ".html";
-        File file = new File(local + "/" + name);
+        File file = new File(local + name);
 
         BufferedWriter bw = null;
         try {

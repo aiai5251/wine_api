@@ -1,11 +1,15 @@
 package com.chimu.wine.action;
 
-import com.chimu.utils.BaseAction;
-import com.chimu.utils.tools.CMString;
-import com.chimu.utils.tools.FileGlobal;
-import com.chimu.utils.tools.WeChatGlobal;
-import com.chimu.wine.bean.*;
-import com.chimu.wine.service.*;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.chimu.utils.BaseAction;
+import com.chimu.utils.Constant;
+import com.chimu.utils.tools.CMString;
+import com.chimu.utils.tools.FileGlobal;
+import com.chimu.utils.tools.WeChatGlobal;
+import com.chimu.wine.bean.OrderBean;
+import com.chimu.wine.bean.OrderDetailBean;
+import com.chimu.wine.bean.ProductBean;
+import com.chimu.wine.service.CartService;
+import com.chimu.wine.service.OrderDetailService;
+import com.chimu.wine.service.OrderService;
+import com.chimu.wine.service.ProductService;
+import com.chimu.wine.service.UserService;
+import com.chimu.wine.service.WechatService;
 
 @Controller
 @RequestMapping(value = "/wine")
@@ -200,9 +211,9 @@ public class OrderAction extends BaseAction {
 
         String perPay = wechatService.getPerPayId(order_num, openid, amount);
         System.out.print("------------+++++++++++++ " + perPay + ".....");
-        String url = "\"http://www.main-zha.com/wine/my.html\"";
+        String url = URLEncoder.encode(Constant.StaticHost + "my.html", "UTF-8");
         try {
-            response.sendRedirect("http://www.main-zha.com/WxPay.jsp?data=" + perPay + "&url=" + url);
+            response.sendRedirect(Constant.APIHost + "WxPay.jsp?data=" + perPay + "&url=" + url);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -215,7 +226,7 @@ public class OrderAction extends BaseAction {
     public Map<String, Object> weChatNotifyAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.configResponse(response);
         String xml = IOUtils.toString(request.getInputStream());
-        FileGlobal.AddWeChatFile(xml, "C:/Notify/");
+        FileGlobal.AddWeChatFile(xml, Constant.WXNotifyLocalPath);
         String order_num = WeChatGlobal.getOrderNumWithXML(xml, "out_trade_no");
 
         System.out.print("订单order_num：" + order_num);

@@ -1,6 +1,7 @@
 package com.chimu.wine.action;
 
 import com.chimu.utils.BaseAction;
+import com.chimu.utils.Constant;
 import com.chimu.utils.tools.CMString;
 import com.chimu.wine.bean.UserBean;
 import com.chimu.wine.service.UserService;
@@ -9,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +82,7 @@ public class UserAction extends BaseAction {
         System.out.print("code = " + code + "; url = " + url);
         UserBean userBean = wechatService.getUserByCode(code);
         if (userBean != null) {
-            response.sendRedirect("http://www.main-zha.com/wine/com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
+            response.sendRedirect(Constant.StaticHost + "com/wechat.html?state=" + url + "&wcid=" + userBean.getOpenid() + "&uid=" + userBean.getId());
         }
         return super.configResponseMap(map, 1);
     }

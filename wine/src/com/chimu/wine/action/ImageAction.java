@@ -4,8 +4,6 @@ import com.chimu.utils.BaseAction;
 import com.chimu.utils.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sun.misc.IOUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;

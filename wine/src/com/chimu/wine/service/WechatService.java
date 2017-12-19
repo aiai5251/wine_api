@@ -66,7 +66,7 @@ public class WechatService {
         wechatPayBean.setOut_trade_no(order_num);
         wechatPayBean.setTotal_fee(amount);
         wechatPayBean.setSpbill_create_ip("127.0.0.1");
-        wechatPayBean.setNotify_url("http://www.main-zha.com/chimu/wine/wechat_notify");
+        wechatPayBean.setNotify_url(Constant.APIHost + "/wine/wechat_notify");
         wechatPayBean.setTrade_type("JSAPI");
         wechatPayBean.setOpenid(openid);
         wechatPayBean.buildSign();
